@@ -78,7 +78,7 @@ if (isset($_POST['atualizar'])) {
             <center>
                 <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria" required>
                 <div class="invalid-feedback">
-                   Você deve colocar o NOME da nova Categoria!
+                    Você deve colocar o NOME da nova Categoria!
                 </div>
                 <br>
                 <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
@@ -169,7 +169,10 @@ if (isset($_POST['atualizar'])) {
 
                                                             <?php  } ?>
                                                             <label for="fname">Nome: </label>
-                                                            <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
+                                                            <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> " required>
+                                                            <div class="invalid-feedback">
+                                                                Você deve colocar o NOME da nova Categoria!
+                                                            </div>
                                                             <br>
                                                         </div>
                                                         <div class="modal-footer">
@@ -215,7 +218,7 @@ if (isset($_POST['atualizar'])) {
             }, false);
         })();
 
-        function teste1(tg) {
+        function teste1(tag) {
             let labelStatus = document.getElementById('statuscadastrar');
             if (tag.value == '1') {
                 tag.value = 0;

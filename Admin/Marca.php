@@ -53,8 +53,6 @@ if (isset($_POST['atualizar'])) {
     mysqli_query($conexao, $sql);
 
     mysqli_close($conexao);
-
-    
 }
 ?>
 
@@ -67,12 +65,22 @@ if (isset($_POST['atualizar'])) {
 <body>
     <h1 style="text-align: center; margin-top: 30px;">Marcas</h1>
     <center class="container">
-        <form name="form" method="POST" action="Marca.php">
-            <input type="text" class="form-control" name="nome" style="width: auto; margin-top: 30px;" placeholder="Digite a nova Marca">
+        <form name="form" method="POST" action="Marca.php" class="needs-validation" novalidate>
+            <input type="text" class="form-control" name="nome" style="width: auto; margin-top: 30px;" placeholder="Digite a nova Marca" required>
+            <div class="invalid-feedback">
+                Você deve colocar o NOME da nova Marca!
+            </div>
             <br>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" onchange="teste(this);" checked id="customCheck1" value="1" name="status">
-                <label class="custom-control-label" for="customCheck1" id="labelstatus">Status</label>
+            <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                <div class="input-group" style="width: 200px !important;">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" name="status" value="1" id="status" onclick="teste1(this);" checked>
+                        </div>
+                    </div>
+                    <div class="form-control"><strong class="text-success" id="statuscadastrar">Ativo</strong></div>
+                </div>
+                <span class="help-block"></span>
             </div>
             <button type="submit" class="btn btn-success" style="margin-top: 30px;" name="salvar">Cadastrar</button>
         </form>
@@ -119,27 +127,43 @@ if (isset($_POST['atualizar'])) {
                                                 </div>
                                                 <div class="modal-body">
                                                     <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                                    <?php if ($data['status'] == 1) { ?>
+
+                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                            <div class="input-group" style="width: 200px !important;">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
+                                                            </div>
+                                                        </div>
+                                                    <?php   } else {
+
+                                                    ?>
+                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                            <div class="input-group" style="width: 200px !important;">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                            </div>
+                                                        </div>
+
+                                                    <?php  } ?>
                                                     <label for="fname">Nome: </label>
                                                     <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
                                                     <br>
-                                                    <?php
 
-                                                    if ($data['status'] == 1) {
-                                                        $checagem = 'checked';
-                                                    } else {
-                                                        $checagem = '';
-                                                    }
-
-                                                    ?>
-                                                    <label for="fstatus">Status: </label>
-                                                    <input type="checkbox" name="statusAtualizar" id="status" <?= $checagem ?>>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success"  name="atualizar">Atualizar</button>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </form>
                             </center>
                             <form action="Marca.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
@@ -154,14 +178,50 @@ if (isset($_POST['atualizar'])) {
         </table>
     </center>
     <script>
-        function teste(tag) {
-            let label = document.getElementById('labelstatus');
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        function teste1(tag) {
+            let labelStatus = document.getElementById('statuscadastrar');
             if (tag.value == '1') {
                 tag.value = 0;
-                label.innerHTML = 'Não'
+                labelStatus.className = "text-danger";
+                labelStatus.innerHTML = "Inativo";
+
             } else {
                 tag.value = 1;
-                label.innerHTML = 'Sim'
+                labelStatus.className = "text-success";
+                labelStatus.innerHTML = "Ativo";
+            }
+            console.log(tag.value);
+        }
+
+        function teste(tag, id) {
+            let labelAtivo = document.getElementById('labelstatus' + id);
+            if (tag.value == '1') {
+                tag.value = 0;
+                labelAtivo.className = "text-danger";
+                labelAtivo.innerHTML = "Inativo";
+
+            } else {
+                tag.value = 1;
+                labelAtivo.className = "text-success";
+                labelAtivo.innerHTML = "Ativo";
             }
             console.log(tag.value);
         }

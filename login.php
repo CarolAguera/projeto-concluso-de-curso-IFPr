@@ -55,7 +55,7 @@ if (isset($_POST['entrar'])) {
 						</p>
 						<form name="form" id="frmLogin" method="POST" action="autenticacao.php">
 							<label>Email</label>
-							<input type="text" class="form-control input-sm" name="email" id="email">
+							<input type="email" class="form-control input-sm" name="email" id="email">
 							<label>Senha</label>
 							<input type="password" name="senha" id="senha" class="form-control input-sm">
 							<center style="margin-top: 10px;">
