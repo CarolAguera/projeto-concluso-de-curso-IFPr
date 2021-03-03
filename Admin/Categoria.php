@@ -74,9 +74,12 @@ if (isset($_POST['atualizar'])) {
             </div>
         <?php } ?>
 
-        <form name="form" method="POST" action="Categoria.php">
+        <form name="form" method="POST" action="Categoria.php" class="needs-validation" novalidate>
             <center>
-                <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria">
+                <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria" required>
+                <div class="invalid-feedback">
+                   Você deve colocar o NOME da nova Categoria!
+                </div>
                 <br>
                 <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
                     <div class="input-group" style="width: 200px !important;">
@@ -125,7 +128,7 @@ if (isset($_POST['atualizar'])) {
                                 <td><?= $data['nome']  ?></td>
                                 <td class="actions d-flex" style="width: 120px;">
                                     <center>
-                                        <form action="Categoria.php" method="post">
+                                        <form action="Categoria.php" method="post" class="needs-validation" novalidate>
                                             <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"><?php ?></button>
                                             <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -152,7 +155,7 @@ if (isset($_POST['atualizar'])) {
                                                                 </div>
                                                             <?php   } else {
 
-                                                                 ?>
+                                                            ?>
                                                                 <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
                                                                     <div class="input-group" style="width: 200px !important;">
                                                                         <div class="input-group-prepend">
@@ -194,6 +197,24 @@ if (isset($_POST['atualizar'])) {
         </div>
     </center>
     <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function teste1(tg) {
             let labelStatus = document.getElementById('statuscadastrar');
             if (tag.value == '1') {
