@@ -6,10 +6,10 @@ if (isset($_POST['salvar'])) {
 
     //Pega os valores dos inputs do formulário
     $nome = $_POST['nome'];
-    if (isset($_POST['status'])) {
-        $status = 1;
+    if (isset($_POST['statusAtualizar'])) {
+        $statusAtualizar = 1;
     } else {
-        $status = 0;
+        $statusAtualizar = 0;
     }
 
 
@@ -19,7 +19,7 @@ if (isset($_POST['salvar'])) {
 
     //Gerar a SQL
     $sql = "insert into categoria (nome, status) 
-        values ('{$nome}', '{$status}') ";
+        values ('{$nome}', '{$statusAtualizar}') ";
 
     //Executar a SQL
     mysqli_query($conexao, $sql);
@@ -68,19 +68,26 @@ if (isset($_POST['atualizar'])) {
 <body>
     <h1 style="text-align: center; margin-top: 30px;">Categorias</h1>
     <center class="container">
-        <!--<?php if (isset($mensagem)) { ?>
+        <?php if (isset($mensagem)) { ?>
             <div class="alert alert-success" role="alert">
                 <?php echo $mensagem; ?>
             </div>
-        <?php } ?>-->
+        <?php } ?>
 
         <form name="form" method="POST" action="Categoria.php">
             <center>
                 <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria">
                 <br>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" onchange="teste(this);" checked id="customCheck1" value="1" name="status" id="status">
-                    <label class="custom-control-label" for="customCheck1" id="labelstatus" for="labelstatus">Status</label>
+                <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                    <div class="input-group" style="width: 200px !important;">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" name="statusAtualizar" value="1" id="status" onclick="teste(this);" checked>
+                            </div>
+                        </div>
+                        <div class="form-control"><strong class="text-success" id="statuscadastrar">Ativo</strong></div>
+                    </div>
+                    <span class="help-block"></span>
                 </div>
             </center>
             <button type="submit" id="salvar" name="salvar" class="btn btn-success" style="margin-top: 30px;">Cadastrar </button>
@@ -131,20 +138,36 @@ if (isset($_POST['atualizar'])) {
                                                         </div>
                                                         <div class="modal-body">
                                                             <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                                            <?php if ($data['status'] == 1) { ?>
+
+                                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                                    <div class="input-group" style="width: 200px !important;">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="checkbox" name="status" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php   } else {
+
+                                                            ?>
+                                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                                    <div class="input-group" style="width: 200px !important;">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="checkbox" name="status" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                                    </div>
+                                                                </div>
+
+                                                            <?php  } ?>
                                                             <label for="fname">Nome: </label>
                                                             <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
                                                             <br>
-                                                            <?php
-
-                                                            if ($data['status'] == 1) {
-                                                                $checagem = 'checked';
-                                                            } else {
-                                                                $checagem = '';
-                                                            }
-
-                                                            ?>
-                                                            <label for="fstatus">Status: </label>
-                                                            <input type="checkbox" name="statusAtualizar" id="status" <?= $checagem ?>>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -171,14 +194,32 @@ if (isset($_POST['atualizar'])) {
         </div>
     </center>
     <script>
-        function teste(tag) {
-            let label = document.getElementById('labelstatus');
+        function teste(tg) {
+            let labelStatus = document.getElementById('statuscadastrar');
+            if (tg.value == '1') {
+                tg.value = 0;
+                labelStatus.className = "text-danger";
+                labelStatus.innerHTML = "Inativo";
+
+            } else {
+                tg.value = 1;
+                labelStatus.className = "text-success";
+                labelStatus.innerHTML = "Ativo";
+            }
+            console.log(tg.value);
+        }
+
+        function teste(tag, id) {
+            let labelAtivo = document.getElementById('labelstatus' + id);
             if (tag.value == '1') {
                 tag.value = 0;
-                label.innerHTML = 'Não'
+                labelAtivo.className = "text-danger";
+                labelAtivo.innerHTML = "Inativo";
+
             } else {
                 tag.value = 1;
-                label.innerHTML = 'Sim'
+                labelAtivo.className = "text-success";
+                labelAtivo.innerHTML = "Ativo";
             }
             console.log(tag.value);
         }
