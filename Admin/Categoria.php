@@ -6,7 +6,7 @@ if (isset($_POST['salvar'])) {
 
     //Pega os valores dos inputs do formulário
     $nome = $_POST['nome'];
-    if (isset($_POST['statusAtualizar'])) {
+    if (isset($_POST['status'])) {
         $statusAtualizar = 1;
     } else {
         $statusAtualizar = 0;
@@ -78,11 +78,11 @@ if (isset($_POST['atualizar'])) {
             <center>
                 <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria">
                 <br>
-                <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
                     <div class="input-group" style="width: 200px !important;">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <input type="checkbox" name="statusAtualizar" value="1" id="status" onclick="teste(this);" checked>
+                                <input type="checkbox" name="status" value="1" id="status" onclick="teste(this);" checked>
                             </div>
                         </div>
                         <div class="form-control"><strong class="text-success" id="statuscadastrar">Ativo</strong></div>
@@ -144,7 +144,7 @@ if (isset($_POST['atualizar'])) {
                                                                     <div class="input-group" style="width: 200px !important;">
                                                                         <div class="input-group-prepend">
                                                                             <div class="input-group-text">
-                                                                                <input type="checkbox" name="status" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                                                                <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
@@ -152,12 +152,12 @@ if (isset($_POST['atualizar'])) {
                                                                 </div>
                                                             <?php   } else {
 
-                                                            ?>
+                                                                 ?>
                                                                 <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
                                                                     <div class="input-group" style="width: 200px !important;">
                                                                         <div class="input-group-prepend">
                                                                             <div class="input-group-text">
-                                                                                <input type="checkbox" name="status" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                                <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
@@ -194,19 +194,19 @@ if (isset($_POST['atualizar'])) {
         </div>
     </center>
     <script>
-        function teste(tg) {
+        function teste1(tg) {
             let labelStatus = document.getElementById('statuscadastrar');
-            if (tg.value == '1') {
-                tg.value = 0;
+            if (tag.value == '1') {
+                tag.value = 0;
                 labelStatus.className = "text-danger";
                 labelStatus.innerHTML = "Inativo";
 
             } else {
-                tg.value = 1;
+                tag.value = 1;
                 labelStatus.className = "text-success";
                 labelStatus.innerHTML = "Ativo";
             }
-            console.log(tg.value);
+            console.log(tag.value);
         }
 
         function teste(tag, id) {
