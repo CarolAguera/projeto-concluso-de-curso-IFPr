@@ -26,19 +26,6 @@
 </head>
 
 <body>
-
-    <!-- <?php
-           // $url = (isset($_GET['url'])) ? $_GET['url'] : 'index.php';
-            //$url = array_filter(explode('/', $url));
-            //var_dump($url);
-            // $file = $url[0] . '.php';
-            // if (is_file($file)) {
-            //     include $file;
-            // } else {
-            //     include 'index.php';
-            // }
-
-            ?> -->
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:  rgb(20, 141, 197);">
         <div class="container">
             <a class="navbar-brand"><img class="img-responsive img-thumbnail" src="img/dpbrasillogo.png" alt="" width="100px" height="60px"></a>
@@ -59,15 +46,6 @@
                         <a class="nav-link" href="login.php">Login/Cadastro</a>
                     </li>
                 </ul>
-                <form>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Oque você deseja ?" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                        <div class="input-group-prepend Auto-sizing">
-                            <div class="btn btn-primary butao" style="height:38px;" type="submit"><i class="fas fa-search icone" style="margin-top: 3px;"></i></div>
-                        </div>
-                    </div>
-                </form>
-
             </div>
         </div>
     </nav>

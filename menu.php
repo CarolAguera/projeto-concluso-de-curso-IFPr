@@ -7,7 +7,7 @@ require_once("dependencias.php");
 <html lang="pt-br">
 
 <head>
-   
+
     <style>
         .navbar-dark .navbar-nav .nav-link {
             color: black;
@@ -36,6 +36,17 @@ require_once("dependencias.php");
             }
         }
 
+        .btn-light:hover {
+            color: black;
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .btn-light{
+            color: black;
+            background-color: transparent;
+            border-color: transparent;
+        }
         .flex-container {
             display: flex;
             justify-content: center;
@@ -52,7 +63,7 @@ require_once("dependencias.php");
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="nav navbar-nav card-header">
                     <li class="nav-item"><a href="IndexAdmin.php" type="button" class="btn btn-light"><i class="fas fa-home"></i></span> Inicio</a></li>
