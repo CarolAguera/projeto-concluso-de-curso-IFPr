@@ -156,13 +156,27 @@ if (isset($_POST['atualizar'])) {
                                     <td><?= $data['quantidade']  ?></td>
 
                                     <td class="actions d-flex" style="width: 120px;">
-                                        <button class="btn btn-warning btn-xs mr-1" style="width:53px; height:41px" type="button" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
-
-                                        <form action="Estoque.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                                            <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                                            <button class="btn btn-danger btn-xs" type="submit" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
-                                        </form>
-
+                                        <button class="btn btn-warning btn-xs mr-1" style="height: 46px; width: auto;" type="button" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" style="color: black;" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="Estoque.php" method="post">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="modal fade " id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content bg-dark">
@@ -176,18 +190,33 @@ if (isset($_POST['atualizar'])) {
                                                         <center>
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                                                                <?php
+                                                                <?php if ($data['status'] == 1) { ?>
 
-                                                                if ($data['status'] == 1) {
-                                                                    $checagem = 'checked';
-                                                                } else {
-                                                                    $checagem = '';
-                                                                }
+                                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                                        <div class="input-group" style="width: 200px !important;">
+                                                                            <div class="input-group-prepend">
+                                                                                <div class="input-group-text">
+                                                                                    <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php   } else {
 
                                                                 ?>
-                                                                <label for="fstatus">Status: </label>
-                                                                <input type="checkbox" name="statusAtualizar" id="status" <?= $checagem ?>>
-                                                                <br>
+                                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                                        <div class="input-group" style="width: 200px !important;">
+                                                                            <div class="input-group-prepend">
+                                                                                <div class="input-group-text">
+                                                                                    <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                <?php  } ?> <br>
                                                                 <label for="fname">Nome: </label>
                                                                 <input name="nomeAtualizar" class="form-control" style="width: auto;" value="<?= $data['nome']  ?> ">
 
@@ -219,8 +248,8 @@ if (isset($_POST['atualizar'])) {
                                                                         <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                                                                     <?php  }    ?>
                                                                 </select>
-                                                                <label for="qtd" >Quantidade</label>
-                                                                <input  class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade']  ?>">
+                                                                <label for="qtd">Quantidade</label>
+                                                                <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade']  ?>">
 
                                                                 <label for="inputUnidadedeMedida">Unidade de Medida</label>
                                                                 <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">
@@ -243,6 +272,7 @@ if (isset($_POST['atualizar'])) {
                                                     </form>
                                                 </div>
                                             </div>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -268,7 +298,22 @@ if (isset($_POST['atualizar'])) {
             <button type="button" class="btn btn-secondary">Próximo</button>
         </div>
     </center>
+    <script>
+        function teste(tag, id) {
+            let labelAtivo = document.getElementById('labelstatus' + id);
+            if (tag.value == '1') {
+                tag.value = 0;
+                labelAtivo.className = "text-danger";
+                labelAtivo.innerHTML = "Inativo";
 
+            } else {
+                tag.value = 1;
+                labelAtivo.className = "text-success";
+                labelAtivo.innerHTML = "Ativo";
+            }
+            console.log(tag.value);
+        }
+    </script>
 </body>
 
 </html>
