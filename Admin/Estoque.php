@@ -219,8 +219,8 @@ if (isset($_POST['atualizar'])) {
                                                                         <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                                                                     <?php  }    ?>
                                                                 </select>
-                                                                <label >Quantidade</label>
-                                                                <input type="text" class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?=$data['quantidade']?>">
+                                                                <label for="qtd" >Quantidade</label>
+                                                                <input  class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade']  ?>">
 
                                                                 <label for="inputUnidadedeMedida">Unidade de Medida</label>
                                                                 <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">
