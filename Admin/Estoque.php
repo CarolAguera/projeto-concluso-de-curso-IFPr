@@ -23,7 +23,7 @@ if (isset($_POST['atualizar'])) {
     $categoria = $_POST['categoria'];
     $marca = $_POST['marca'];
     $medida = $_POST['medida'];
-    $quantidade = $_POST['quantidade'];
+    $quantidadeAtualizar = $_POST['quantidadeAtualizar'];
 
 
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
@@ -36,7 +36,7 @@ if (isset($_POST['atualizar'])) {
         Categoria_id = '{$categoria}',
         Marca_id = '{$marca}',
         medida_id = '{$medida}',
-        quantidade = '{$quantidade}'
+        quantidade = '{$quantidadeAtualizar}'
     where id       = {$idAtualizar}";
 
     mysqli_query($conexao, $sql);
@@ -190,7 +190,7 @@ if (isset($_POST['atualizar'])) {
                                                                 <br>
                                                                 <label for="fname">Nome: </label>
                                                                 <input name="nomeAtualizar" class="form-control" style="width: auto;" value="<?= $data['nome']  ?> ">
-                                                                
+
                                                                 <label for="fcodigo">Código: </label>
                                                                 <input name="codigo" class="form-control" style="width: auto;" value="<?= $data['codigo']  ?> ">
                                                                 <label for="fvalorvenda">Valor Venda: </label>
@@ -219,8 +219,8 @@ if (isset($_POST['atualizar'])) {
                                                                         <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                                                                     <?php  }    ?>
                                                                 </select>
-                                                                <label for="inputQuantidade">Quantidade</label>
-                                                                <input type="text" class="form-control" id="inputQuantidade" name="quantidade" style="width: auto;">
+                                                                <label >Quantidade</label>
+                                                                <input type="text" class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?=$data['quantidade']?>">
 
                                                                 <label for="inputUnidadedeMedida">Unidade de Medida</label>
                                                                 <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">
@@ -234,10 +234,7 @@ if (isset($_POST['atualizar'])) {
                                                                         <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                                                                     <?php  }    ?>
                                                                 </select>
-                                                                <label for="inputQuantidade">Quantidade</label>
-                                                                <input type="text" class="form-control" id="inputQuantidade" name="quantidade" style="width:auto;">
                                                                 <br>
-
                                                                 <div class="modal-footer" style="display: block !important;">
                                                                     <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
                                                                 </div>

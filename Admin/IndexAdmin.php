@@ -27,16 +27,8 @@ if (!isset($_SESSION)) {
         }
 
         @media only screen and (max-width: 991.98px) {
-            .col{
+            .col {
                 flex-basis: auto;
-            }
-            .data { 
-                text-align: center;
-            }
-
-            .hora {
-                text-align: center;
-
             }
         }
     </style>
@@ -85,6 +77,7 @@ if (!isset($_SESSION)) {
                     <div class="card-body text-center">
                         <h5 class="card-title">Cliente</h5>
                         <a href="NovoCliente.php" class="btn btn-info">Cadastrar</a>
+                        <a href="clientes.php" class="btn btn-info">Consultar</a>
                     </div>
                 </div>
             </div>
@@ -103,10 +96,14 @@ if (!isset($_SESSION)) {
                     <div class="card-body text-center">
                         <h5 class="card-title">Usuários</h5>
                         <a href="NovoUsuario.php" class="btn btn-info">Cadastrar</a>
+                        <a href="usuarios.php" class="btn btn-info">Consultar</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!--<div class="row" style="margin-top: 10px;">
+            <iframe src="https://open.spotify.com/embed/playlist/6PXGjohvrsyrMIt7ZQMYIr" width="1122" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>-->
     </div>
     <div id="dataHora" class="container" style=" margin-top: 40px; font-size: 32px; color: #000000; font-family: Arial, Helvetica, sans-serif; ">
         <div class="row">
