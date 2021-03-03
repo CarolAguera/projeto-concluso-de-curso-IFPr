@@ -115,7 +115,9 @@ if (isset($_POST['atualizar'])) {
                             <center>
                                 <form action="Medida.php" name="form" method="post">
 
-                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
+                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
+
+
                                     <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">

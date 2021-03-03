@@ -99,8 +99,8 @@ if (isset($_POST['atualizar'])) {
     <center>
         <div class="row container bg-white" style="width: 450px; margin-top: 30px;">
 
-            <div class="table-responsive col-md-12">
-                <table class="table table-striped">
+          
+                <table class=" table-striped table table-hover container">
                     <thead style="color: black;">
                         <tr>
                             <th>ID</th>
@@ -126,11 +126,13 @@ if (isset($_POST['atualizar'])) {
                                 <td><?= $data['id']  ?></td>
                                 <td><?= $statusProduto  ?></td>
                                 <td><?= $data['nome']  ?></td>
-                                <td class="actions d-flex" style="width: 120px;">
-                                    <center>
+                                <td class="actions d-flex" style="margin:0px;" style="width: auto;">
+                                    <!-- <center> -->
                                         <form action="Categoria.php" method="post" class="needs-validation" novalidate>
-                                            <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"><?php ?></button>
-                                            <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                            <!-- <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"><?php ?></button> -->
+                                            <button class="btn btn-warning btn-xs"  type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#ExemploModalCentralizado1<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+
+                                            <div class="modal fade" id="ExemploModalCentralizado1<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -183,11 +185,29 @@ if (isset($_POST['atualizar'])) {
                                                 </div>
                                             </div>
                                         </form>
-                                    </center>
-                                    <form action="Categoria.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                                        <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                                        <button class="btn btn-danger btn-xs" type="submit" id="excluir" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
-                                    </form>
+                               
+
+                                    <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                                    <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="Marca.php" method="post">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                        <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
 
@@ -196,7 +216,7 @@ if (isset($_POST['atualizar'])) {
 
                     </tbody>
                 </table>
-            </div>
+        
         </div>
     </center>
     <script>

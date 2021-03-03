@@ -112,64 +112,86 @@ if (isset($_POST['atualizar'])) {
                         <td><?= $data['nome']  ?></td>
 
                         <td class="actions d-flex" style="width: 120px;">
-                            <center>
-                                <form action="Marca.php" name="form" method="post">
 
-                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
-                                    <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Alterar Marca</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                                                    <?php if ($data['status'] == 1) { ?>
+                            <form action="Marca.php" name="form" method="post">
 
-                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                            <div class="input-group" style="width: 200px !important;">
-                                                                <div class="input-group-prepend">
-                                                                    <div class="input-group-text">
-                                                                        <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
-                                                                    </div>
+                                <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
+
+
+
+                                <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Alterar Marca</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                                <?php if ($data['status'] == 1) { ?>
+
+                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                        <div class="input-group" style="width: 200px !important;">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
                                                                 </div>
-                                                                <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
                                                             </div>
+                                                            <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
                                                         </div>
-                                                    <?php   } else {
-
-                                                    ?>
-                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                            <div class="input-group" style="width: 200px !important;">
-                                                                <div class="input-group-prepend">
-                                                                    <div class="input-group-text">
-                                                                        <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
-                                                            </div>
-                                                        </div>
-
-                                                    <?php  } ?>
-                                                    <label for="fname">Nome: </label>
-                                                    <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
-                                                    <br>
-
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
                                                     </div>
+                                                <?php   } else {
+
+                                                ?>
+                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                        <div class="input-group" style="width: 200px !important;">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                        </div>
+                                                    </div>
+
+                                                <?php  } ?>
+                                                <label for="fname">Nome: </label>
+                                                <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
+                                                <br>
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
                                                 </div>
                                             </div>
                                         </div>
-                                </form>
-                            </center>
-                            <form action="Marca.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                                <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                                <button class="btn btn-danger btn-xs" type="submit" id="excluir" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
+                                    </div>
+                                </div>
                             </form>
+
+                            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado1<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <div class="modal fade" id="ExemploModalCentralizado1<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="Marca.php" method="post">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </td>
                     </tr>
 

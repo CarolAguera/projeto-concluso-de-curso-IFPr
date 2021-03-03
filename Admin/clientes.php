@@ -113,9 +113,7 @@ if (isset($_POST['atualizar'])) {
                 } ?>
 
                 <tr>
-                    <td><?= $data['
-                    
-                    ']  ?></td>
+                    <td><?= $data['id']  ?></td>
                     <td><?= $statuscliente  ?></td>
                     <td><?= $data['nome_completo']  ?></td>
                     <td><?= $data['email']  ?></td>
