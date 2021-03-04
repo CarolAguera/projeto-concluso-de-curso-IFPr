@@ -3,14 +3,7 @@
 <?php
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
-require_once("../menu.php");
 
-if (isset($_POST['excluir'])) {
-    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-    $sql = "delete from usuario where id = " . $_POST['id'];
-    mysqli_query($conexao, $sql);
-    mysqli_close($conexao);
-}
 if (isset($_POST['atualizar'])) {
     $idAtualizar = $_POST['idAtualizar'];
     $nome_completo = $_POST['nome_completo'];
@@ -43,7 +36,25 @@ if (isset($_POST['atualizar'])) {
     mysqli_query($conexao, $sql);
 
     mysqli_close($conexao);
+
+    
+    session_unset();
+    session_destroy();
+    header('location: ../login.php');
+    exit();
 }
+
+
+
+require_once("../menu.php");
+
+if (isset($_POST['excluir'])) {
+    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+    $sql = "delete from usuario where id = " . $_POST['id'];
+    mysqli_query($conexao, $sql);
+    mysqli_close($conexao);
+}
+
 ?>
 
 
@@ -52,11 +63,12 @@ if (isset($_POST['atualizar'])) {
     <title>Gestão de Usuário</title>
     <style>
         @media only screen and (max-width: 991.98px) {
-            .d-flex{
+            .d-flex {
                 display: block !important;
-               
+
             }
-            .butao{
+
+            .butao {
                 margin-top: 2px;
             }
         }
@@ -98,7 +110,7 @@ if (isset($_POST['atualizar'])) {
                         <center>
                             <form action="usuarios.php" name="form" method="post">
 
-                                <button class="btn btn-warning btn-xs butao" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt=""  srcset="" width="27px" height="27px"></button>
+                                <button class="btn btn-warning btn-xs butao" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
                                 <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -182,7 +194,7 @@ if (isset($_POST['atualizar'])) {
                         </center>
                         <form action="usuarios.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
                             <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                            <button class="btn btn-danger btn-xs butao" type="submit"  name="excluir"><img src="../img/excluir.png" alt="" srcset=""  width="27px" height="27px"></button>
+                            <button class="btn btn-danger btn-xs butao" type="submit" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
                         </form>
                     </td>
                 </tr>

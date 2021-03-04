@@ -33,3 +33,8 @@ Para comentar tudo de uma vez use: Ctrl + ;
 	$obj= new vendas();
 
 	echo json_encode($obj->obterDadosProduto($_POST['idproduto']));
+
+
+
+
+Quando mudar o nome do usuário ele inicia a sessão novamente

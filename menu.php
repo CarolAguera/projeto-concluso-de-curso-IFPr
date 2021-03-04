@@ -3,7 +3,6 @@ require_once("../verificaSessao.php");
 require_once("dependencias.php");
 
 ?>
-<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
