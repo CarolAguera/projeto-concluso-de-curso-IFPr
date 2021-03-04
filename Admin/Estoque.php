@@ -81,16 +81,13 @@ if (isset($_POST['atualizar'])) {
                             <?php echo $mensagem; ?>
                         </div>
                     <?php } ?>
-
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Pesquisar Itens">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" style="padding: 10px !important; margin-left: 10px;" type="submit" style="margin-left:30px;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-
+                    
+                    <form action="Estoque.php" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Pesquisar por Nome">
+                            <button class="btn btn-primary" type="submit" name="pesquisar"><i class="fas fa-search"></i><b> Pesquisar</b></button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-sm-3">
                     <a href="Produto.php" class="btn btn-primary " style="padding: 11px !important;">
@@ -248,8 +245,8 @@ if (isset($_POST['atualizar'])) {
                                                                         <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                                                                     <?php  }    ?>
                                                                 </select>
-                                                                <label for="qtd">Quantidade</label>
-                                                                <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade']  ?>">
+                                                                <label for="inputQuantidade">Quantidade</label>
+                                                                <input class="form-control" id="inputQuantidade" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade']  ?>">
 
                                                                 <label for="inputUnidadedeMedida">Unidade de Medida</label>
                                                                 <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">

@@ -174,7 +174,6 @@ if (isset($_POST['atualizar'])) {
                             </form>
                         </td>
                     </tr>
-
                 <?php  }    ?>
             </tbody>
         </table>

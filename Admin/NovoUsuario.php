@@ -99,11 +99,11 @@ if (isset($_POST['salvar'])) {
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputAdmissao">Data de Admissão</label>
-                    <input type="date" class="form-control" id="inputAdmissao" name="data_admissao" style="width: auto !important;" value="<?= $data['data_admissao']  ?>">
+                    <input type="date" class="form-control" id="inputAdmissao" name="data_admissao"  value="<?= $data['data_admissao']  ?>">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputDemissao">Data de Demissão</label>
-                    <input type="date" class="form-control" id="inputDemissao" name="data_demissao" style="width: auto !important;" value="<?= $data['data_demissao']  ?>">
+                    <input type="date" class="form-control" id="inputDemissao" name="data_demissao" value="<?= $data['data_demissao']  ?>">
                 </div>
 
             </div>
