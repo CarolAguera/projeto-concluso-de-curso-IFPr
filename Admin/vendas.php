@@ -10,11 +10,21 @@ require_once("../menu.php");
     <title>Vendas</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <style>
+        .pt-5,
+        .py-5 {
+            padding-top: 0rem !important;
+        }
+    </style>
 </head>
 
 <body>
+
     <div class="container">
-        <h4>Vender Produto</h4>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="../img/dpbrasillogo.png" alt="" width="auto" height="auto">
+            <h2>Venda</h2>
+        </div>
         <div class="row">
             <div class="col-sm-4">
                 <form name="form" method="POST" action="vendas.php">

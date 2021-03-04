@@ -42,7 +42,7 @@ if (isset($_POST['atualizar'])) {
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
     $sql = "update cliente
-    set nome_completo     = '{$nome_completo}',
+    set nome_completo     = '{$nome}',
         status    = '{$statusAtualizar}',
         email = '{$email}',
         data_nascimento = '{$data_nascimento}',

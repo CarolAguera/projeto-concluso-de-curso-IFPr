@@ -8,7 +8,14 @@ require_once("../menu.php");
 <html lang="pt-br">
 
 <head>
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <style>
+        .pt-5,
+        .py-5 {
+            padding-top: 0rem !important;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -47,6 +54,7 @@ require_once("../menu.php");
                         </div>
                         <span class="text-muted">R$5</span>
                     </li>
+                    <!-- Isso aqui serve para se for aplicado algum desconto -->
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
                             <h6 class="my-0">Código de promoção</h6>
@@ -54,155 +62,137 @@ require_once("../menu.php");
                         </div>
                         <span class="text-success">-R$5</span>
                     </li>
+
+
+
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (BRL)</span>
                         <strong>R$20</strong>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Endereço de cobrança</h4>
-                <form class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="primeiroNome">Nome</label>
-                            <input type="text" class="form-control" id="primeiroNome" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                É obrigatório inserir um nome válido.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="sobrenome">Sobrenome</label>
-                            <input type="text" class="form-control" id="sobrenome" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                É obrigatório inserir um sobre nome válido.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="nickname">Nickname</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@</span>
-                            </div>
-                            <input type="text" class="form-control" id="nickname" placeholder="Nickname" required>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Seu nickname é obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email">Email <span class="text-muted">(Opcional)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="fulano@exemplo.com">
-                        <div class="invalid-feedback">
-                            Por favor, insira um endereço de e-mail válido, para atualizações de entrega.
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="endereco">Endereço</label>
-                        <input type="text" class="form-control" id="endereco" placeholder="Rua dos bobos, nº 0" required>
-                        <div class="invalid-feedback">
-                            Por favor, insira seu endereço de entrega.
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="endereco2">Endereço 2 <span class="text-muted">(Opcional)</span></label>
-                        <input type="text" class="form-control" id="endereco2" placeholder="Apartamento ou casa">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="pais">País</label>
-                            <select class="custom-select d-block w-100" id="pais" required>
-                                <option value="">Escolha...</option>
-                                <option>Brasil</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, escolha um país válido.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="estado">Estado</label>
-                            <select class="custom-select d-block w-100" id="estado" required>
-                                <option value="">Escolha...</option>
-                                <option>Acre</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, insira um estado válido.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="cep">CEP</label>
-                            <input type="text" class="form-control" id="cep" placeholder="" required>
-                            <div class="invalid-feedback">
-                                É obrigatório inserir um CEP.
-                            </div>
-                        </div>
-                    </div>
+            <?php
+            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+            $sql = "select * from cliente  ";
+            $clientes = mysqli_query($conexao, $sql);
+            mysqli_close($conexao);
+            while ($data = mysqli_fetch_array($clientes)) {
+            ?>
+                <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3">Seleciona Cliente</h4>
+                    <form name="form" method="POST" action="finalizarVenda.php">
+                        <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
+                            <?php
+                            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                            $sql = "select id,nome_completo from cliente ";
+                            $cliente = mysqli_query($conexao, $sql);
+                            mysqli_close($conexao); ?>
+                            <option value="" disabled="disabled" selected>Escolher...</option>
+                            <?php
+                            while ($data = mysqli_fetch_array($cliente)) { ?>
+                                <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
+                            <?php  }    ?>
+                        </select>
+                        <br>
+                        <br>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="adicionarCliente">Adicionar Cliente</button>
+                    </form>
                     <hr class="mb-4">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="mesmo-endereco">
-                        <label class="custom-control-label" for="mesmo-endereco">Endereço de entrega é o mesmo que o de cobrança.</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="salvar-info">
-                        <label class="custom-control-label" for="salvar-info">Lembrar desta informação, na próxima vez.</label>
-                    </div>
+                    <h4 class="mb-3">Seleciona Produtos</h4>
+                    <form name="form" method="POST" action="finalizarVenda.php" class="needs-validation" novalidate>
+                        <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%">
+                            <?php
+                            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                            $sql = "select id,nome,quantidade from produto ";
+                            $produto = mysqli_query($conexao, $sql);
+                            mysqli_close($conexao); ?>
+                            <option value="" disabled="disabled" selected>Escolher...</option>
+                            <?php
+                            while ($data = mysqli_fetch_array($produto)) { ?>
+                                <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
+                            <?php  }    ?>
+                        </select>
+                        <label>Quantidade Estoque</label>
+                        <input readonly="" type="text" class="form-control input-sm" id="quantidade" name="quantidade">
+                        <label>Preço</label>
+                        <input readonly="" type="text" class="form-control input-sm" id="preco" name="preco">
+                        <label>Quantidade Vendida</label>
+                        <input type="text" class="form-control input-sm" id="quantV" name="quantV" required>
+                        <br>
+                        <button class="btn btn-warning btn-lg btn-block" type="submit" id="adicionarProdutos">Adicionar Produto</button>
+                    </form>
+
                     <hr class="mb-4">
 
-                    <h4 class="mb-3">Pagamento</h4>
+                    <form class="needs-validation" novalidate>
+                        <h4 class="mb-3">Pagamento</h4>
 
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
-                            <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-nome">Nome no cartão</label>
-                            <input type="text" class="form-control" id="cc-nome" placeholder="" required>
-                            <small class="text-muted">Nome completo, como mostrado no cartão.</small>
-                            <div class="invalid-feedback">
-                                O nome que está no cartão é obrigatório.
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
+                                <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
                             </div>
                         </div>
-                        
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b>  Finalizar Venda</b></button>
-                </form>
-            </div>
+                        <hr class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+
+                                <!-- Mostra o total da compra -->
+                                <label for="cc-nome">Total da Venda</label>
+                                <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <!-- Colocar valor de desconto-->
+                                <label for="cc-nome">Desconto</label>
+                                <input type="text" class="form-control" id="cc-nome" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <!-- Digita o valor que o cliente pagou -->
+                                <label for="cc-nome">Valor Recebido</label>
+                                <input type="text" class="form-control" id="cc-nome" placeholder="" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <!--Mostra o valor que falta para receber do cliente -->
+                                <label for="cc-nome">Saldo a Receber</label>
+                                <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
+                    </form>
+                </div>
+            <?php  }    ?>
         </div>
-    </div>
 
- 
-    <script>
-        // Exemplo de JavaScript para desativar o envio do formulário, se tiver algum campo inválido.
-        (function() {
-            'use strict';
 
-            window.addEventListener('load', function() {
-                // Selecione todos os campos que nós queremos aplicar estilos Bootstrap de validação customizados.
-                var forms = document.getElementsByClassName('needs-validation');
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+            (function() {
+                'use strict';
 
-                // Faz um loop neles e previne envio
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+                window.addEventListener('load', function() {
+                    // Selecione todos os campos que nós queremos aplicar estilos Bootstrap de validação customizados.
+                    var forms = document.getElementsByClassName('needs-validation');
+
+                    // Faz um loop neles e previne envio
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
 </body>
 
 </html>
