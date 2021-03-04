@@ -11,7 +11,6 @@ if (isset($_POST['salvar'])) {
     $senha = $_POST['senha'];
     $data_nascimento = $_POST['data_nascimento'];
     $sexo = $_POST['sexo'];
-    $data_admissao = $_POST['data_admissao'];
     $data_demissao = $_POST['data_demissao'];
 
     if (isset($_POST['statusAtualizar'])) {
@@ -27,8 +26,8 @@ if (isset($_POST['salvar'])) {
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
     //Gerar a SQL
-    $sql = "insert into usuario (nome_completo,status,email,senha,data_nascimento,sexo,data_admissao,data_demissao) 
-        values ('{$nome_completo}','{$statusAtualizar}', '{$email}', '{$senhaCriptografada}', '{$data_nascimento}', '{$sexo}', '{$data_admissao}','{$data_demissao}') ";
+    $sql = "insert into usuario (nome_completo,status,email,senha,data_nascimento,sexo,data_demissao) 
+        values ('{$nome_completo}','{$statusAtualizar}', '{$email}', '{$senhaCriptografada}', '{$data_nascimento}', '{$sexo}', '{$data_demissao}') ";
 
     //Executar a SQL
     mysqli_query($conexao, $sql);
@@ -69,60 +68,57 @@ if (isset($_POST['salvar'])) {
                 <?php echo $mensagem; ?>
             </div>
         <?php } ?>
-        <form name="form" id="form" method="post">
+        <form name="form" id="form" method="post" class="needs-validation" novalidate>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputNome">Nome Completo</label>
-                    <input type="text" class="form-control" name="nome_completo" placeholder="Digite seu Nome Completo">
+                    <input type="text" class="form-control" name="nome_completo" placeholder="Digite seu Nome Completo" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Digite a Email">
+                    <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Digite a Email" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputPassword4">Senha</label>
-                    <input type="password" class="form-control" id="inputPassword4" name="senha" placeholder="Digite a Senha">
+                    <input type="password" class="form-control" id="inputPassword4" name="senha" placeholder="Digite a Senha" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputNasc">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="inputNasc" name="data_nascimento">
+                    <input type="date" class="form-control" id="inputNasc" name="data_nascimento" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputSexo">Sexo</label>
-                    <select name="sexo" id="sexo" class="form-control">
+                    <select name="sexo" id="sexo" class="form-control" required>
                         <option value="" disabled="disabled" selected>Escolher...</option>
                         <option value="1">Masculino</option>
                         <option value="2">Feminino</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="inputAdmissao">Data de Admissão</label>
-                    <input type="date" class="form-control" id="inputAdmissao" name="data_admissao"  value="<?= $data['data_admissao']  ?>">
-                </div>
-                <div class="form-group col-md-3">
                     <label for="inputDemissao">Data de Demissão</label>
                     <input type="date" class="form-control" id="inputDemissao" name="data_demissao" value="<?= $data['data_demissao']  ?>">
                 </div>
-
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
-                    <div class="input-group" style="width: 200px !important;">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="statusAtualizar" value="1" id="status" onclick="teste(this);" checked>
+                <div class="form-group col-md-3">
+                    <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                        <div class="input-group" style="width: 200px !important;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" name="statusAtualizar" value="1" id="status" onclick="teste(this);" checked>
+                                </div>
                             </div>
+                            <div class="form-control"><strong class="text-success" id="labelstatus">Ativo</strong></div>
                         </div>
-                        <div class="form-control"><strong class="text-success" id="labelstatus">Ativo</strong></div>
+                        <span class="help-block"></span>
                     </div>
-                    <span class="help-block"></span>
-                </div>
 
+                </div>
             </div>
+
             <center>
                 <button type="submit" class="btn btn-success" name="salvar">Cadastrar</button>
+                <a type="button" class="btn btn-warning" href="usuarios.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Gestão de Usuários</b></a>
             </center>
         </form>
         <br>
@@ -130,6 +126,24 @@ if (isset($_POST['salvar'])) {
     </div>
 
     <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function teste(tag) {
             let labelAtivo = document.getElementById('labelstatus');
             if (tag.value == '1') {

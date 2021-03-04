@@ -111,7 +111,7 @@ CREATE TABLE `produto` (
   `quantidade` int(11) NOT NULL,
   `Categoria_id` int(11) NOT NULL,
   `Marca_id` int(11) NOT NULL,
-  `medida_id` int(11) NOT NULL
+  `Medida_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -200,7 +200,7 @@ ALTER TABLE `produto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_Produto_Categoria1_idx` (`Categoria_id`),
   ADD KEY `fk_Produto_Marca1_idx` (`Marca_id`),
-  ADD KEY `fk_Produto_medida1_idx` (`medida_id`);
+  ADD KEY `fk_Produto_Medida1_idx` (`medida_id`);
 
 --
 -- Índices de tabela `usuario`

@@ -45,7 +45,7 @@ if (isset($_POST['salvar'])) {
         '{$telefone_residencial}',
         '{$cpf}', 
         '{$statusAtualizar}')";
-    
+
     //Executar a SQL
     mysqli_query($conexao, $sql);
 
@@ -54,10 +54,6 @@ if (isset($_POST['salvar'])) {
 
     //Mensagem de sucesso
     $mensagem = "Registro salvo com sucesso.";
-
-    
-
-
 }
 
 
@@ -84,45 +80,45 @@ if (isset($_POST['salvar'])) {
                 <?php echo $mensagem; ?>
             </div>
         <?php } ?>
-        <form name="form" id="form" method="post" action="NovoCliente.php">
+        <form name="form" id="form" method="post" action="NovoCliente.php" class="needs-validation" novalidate>
             <div class="form-row">
 
                 <div class="form-group col-md-6">
                     <label for="inputNome">Nome Completo</label>
-                    <input type="text" class="form-control" name="nome_completo" placeholder="Digite seu Nome Completo">
+                    <input type="text" class="form-control" name="nome_completo" placeholder="Digite seu Nome Completo" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Digite a Email" name="email">
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Digite a Email" name="email" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Endereço</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Digite seu Endereço" name="endereco">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Digite seu Endereço" name="endereco" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCEP">CEP</label>
-                    <input type="text" class="form-control" id="inputCEP" placeholder="Ex.: 00000-000" maxlength="8" name="cep">
+                    <input type="text" class="form-control" id="inputCEP" placeholder="Ex.: 00000-000" maxlength="8" name="cep" required>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNumero">Número</label>
-                    <input type="text" class="form-control" id="inputNumero" name="numero">
+                    <input type="text" class="form-control" id="inputNumero" name="numero" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputtrabalho">Local de Trabalho</label>
-                    <input type="text" class="form-control" id="inputtrabalho" name="local_trabalho" placeholder="Digite seu local de trabalho">
+                    <input type="text" class="form-control" id="inputtrabalho" name="local_trabalho" placeholder="Digite seu local de trabalho" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputtrabalhotelefone">Telefone Trabalho</label>
-                    <input type="text" class="form-control" id="inputtrabalhotelefone" name="telefone_trabalho" placeholder="Digite o Telefone do seu trabalho ">
+                    <input type="text" class="form-control" id="inputtrabalhotelefone" name="telefone_trabalho" placeholder="Digite o Telefone do seu trabalho " required>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="inputSexo">Sexo</label>
-                    <select name="sexo" id="inputSexo" class="form-control ls-select">
+                    <select name="sexo" id="inputSexo" class="form-control ls-select" required>
                         <option value="" disabled="disabled" selected>Escolher...</option>
                         <option value="1">Feminino</option>
                         <option value="2">Masculino</option>
@@ -132,12 +128,12 @@ if (isset($_POST['salvar'])) {
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Cidade</label>
-                    <input type="text" class="form-control" placeholder="Digite a Cidade" name="cidade" id="inputCity">
+                    <input type="text" class="form-control" placeholder="Digite a Cidade" name="cidade" id="inputCity" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputEstado">Estado</label>
-                    <select id="inputEstado" class="form-control" name="estado">
-                        <option value="" disabled="disabled">Escolher...</option>
+                    <select id="inputEstado" class="form-control" name="estado" required>
+                        <option value="" disabled="disabled" selected>Escolher...</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -170,21 +166,21 @@ if (isset($_POST['salvar'])) {
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNasc">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="inputNasc" name="data_nascimento">
+                    <input type="date" class="form-control" id="inputNasc" name="data_nascimento" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputCel">Celular</label>
-                    <input type="text" class="form-control phone-ddd-mask" name="telefone_celular" id="inputCel">
+                    <input type="text" class="form-control " name="telefone_celular" id="inputCel" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputTelefone">Telefone</label>
-                    <input type="text" class="form-control" id="inputTelefone  phone-ddd-mask" name="telefone_residencial">
+                    <input type="text" class="form-control" id="inputTelefone  " name="telefone_residencial" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCPF">CPF</label>
-                    <input type="cpf" class="form-control" id="inputCPF" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="11">
+                    <input type="cpf" class="form-control" id="inputCPF" name="cpf" maxlength="11" required>
                 </div>
                 <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
                     <div class="input-group" style="width: 200px !important;">
@@ -199,15 +195,33 @@ if (isset($_POST['salvar'])) {
                 </div>
             </div>
 
-
             <center>
-                <button type="submit" class="btn btn-success" name="salvar">Enviar</button>
+                <button type="submit" class="btn btn-success" name="salvar">Cadastrar</button>
+                <a type="button" class="btn btn-warning" href="clientes.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Gestão de Clientess</b></a>
             </center>
         </form>
         <br>
         <br>
     </div>
     <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function teste(tag) {
             let labelAtivo = document.getElementById('labelstatus');
             if (tag.value == '1') {
