@@ -52,7 +52,6 @@ if (!empty($_POST['nomePesquisar'])) {
     $where = " where nome like '%" . $_POST['nomePesquisar'] . "%'";
 }
 $sql = "select * from produto" . $where;
-echo $sql;
 $estoque = mysqli_query($conexao, $sql);
 mysqli_close($conexao);
 ?>
@@ -103,8 +102,8 @@ mysqli_close($conexao);
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <a href="Produto.php" class="btn btn-primary " style="padding: 11px !important;">
-                        <i class="far fa-plus-square"></i>
+                    <a href="Produto.php" type="button" style="padding-top: 7px; padding-bottom: 6px;" class="btn btn-outline-warning" >
+                        <i class="far fa-plus-square"></i> Cadastrar Produto
                     </a>
                 </div>
             </div>

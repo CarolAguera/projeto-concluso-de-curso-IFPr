@@ -84,7 +84,7 @@ if (isset($_POST['atualizar'])) {
 </head>
 
 <body>
-    <h1 style="text-align: center; margin-top: 30px;">Gestão de Usuários</h1>
+    <h1 style="text-align: center; margin-top: 30px;">Consulta de Clientes</h1>
 
 
     <table class="table table-hover container" style="margin-top: 40px; width: 100%;">

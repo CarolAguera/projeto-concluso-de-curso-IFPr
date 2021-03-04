@@ -36,5 +36,4 @@ Para comentar tudo de uma vez use: Ctrl + ;
 
 
 
-
-Quando mudar o nome do usuário ele inicia a sessão novamente
+Falta mudar botão excluir e botão alterar no GESTÃO DE USUÁRIO e Consultar Clientes

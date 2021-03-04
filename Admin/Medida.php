@@ -113,10 +113,9 @@ if (isset($_POST['atualizar'])) {
 
                         <td class="actions d-flex" style="width: 120px;">
                             <center>
-                                <form action="Medida.php" name="form" method="post">
+                                <form action="Medida.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
-
+                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
 
                                     <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -157,10 +156,14 @@ if (isset($_POST['atualizar'])) {
 
                                                     <?php  } ?>
                                                     <label for="fname">Nome: </label>
-                                                    <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> ">
+                                                    <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> " required>
+                                                    <div class="invalid-feedback">
+                                                        Você deve colocar o NOME da nova Medida!
+                                                    </div>
                                                     <br>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <div class="modal-footer" style="display: block;">
+
                                                     <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
                                                 </div>
                                             </div>
@@ -168,10 +171,27 @@ if (isset($_POST['atualizar'])) {
                                     </div>
                                 </form>
                             </center>
-                            <form action="Medida.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                                <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                                <button class="btn btn-danger btn-xs" type="submit" id="excluir" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
-                            </form>
+                            <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="Medida.php" method="post">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 <?php  }    ?>

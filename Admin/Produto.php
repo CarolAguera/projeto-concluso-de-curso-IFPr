@@ -137,6 +137,7 @@ if (isset($_POST['salvar'])) {
             </div>
             <center>
                 <button type="submit" class="btn btn-success" name="salvar">Cadastrar</button>
+                <a type="button" class="btn btn-warning" href="Estoque.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Estoque</b></a>
             </center>
         </form>
 
