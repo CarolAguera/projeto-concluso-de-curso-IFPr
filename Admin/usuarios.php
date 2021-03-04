@@ -37,7 +37,7 @@ if (isset($_POST['atualizar'])) {
 
     mysqli_close($conexao);
 
-    
+
     session_unset();
     session_destroy();
     header('location: ../login.php');
@@ -108,9 +108,9 @@ if (isset($_POST['excluir'])) {
 
                     <td class="actions d-flex" style="width: 100%;">
                         <center>
-                            <form action="usuarios.php" name="form" method="post">
+                            <form action="usuarios.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                <button class="btn btn-warning btn-xs butao" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
+                                <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
                                 <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -152,25 +152,25 @@ if (isset($_POST['excluir'])) {
 
                                                 <br>
                                                 <label>Nome: </label>
-                                                <input name="nome_completo" class="form-control" style="width: auto !important;" value="<?= $data['nome_completo']  ?> ">
+                                                <input name="nome_completo" class="form-control" style="width: auto !important;" value="<?= $data['nome_completo']  ?> " required>
 
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" style="width: auto !important;" value="<?= $data['email']  ?>" name="email" placeholder="Digite a Email">
+                                                <input type="text" class="form-control" style="width: auto !important;" value="<?= $data['email']  ?>" name="email" placeholder="Digite a Email" required>
 
 
                                                 <label>Senha</label>
-                                                <input type="password" class="form-control" name="senha" style="width: auto !important;" value="<?= $data['senha'] ?>" placeholder="Digite a Senha">
+                                                <input type="password" class="form-control" name="senha" style="width: auto !important;" value="<?= $data['senha'] ?>" placeholder="Digite a Senha" required>
 
 
                                                 <label>Data de Nascimento</label>
-                                                <input type="date" class="form-control" name="data_nascimento" style="width: auto !important;" value="<?= $data['data_nascimento']  ?>">
+                                                <input type="date" class="form-control" name="data_nascimento" style="width: auto !important;" value="<?= $data['data_nascimento']  ?>" required>
 
                                                 <label>Data de Admissão</label>
-                                                <input type="date" class="form-control" name="data_admissao" style="width: auto !important;" value="<?= $data['data_admissao']  ?>">
+                                                <input type="date" class="form-control" name="data_admissao" style="width: auto !important;" value="<?= $data['data_admissao']  ?>" required>
                                                 <label>Data de Demissão</label>
                                                 <input type="date" class="form-control" name="data_demissao" style="width: auto !important;" value="<?= $data['data_demissao']  ?>">
                                                 <label>Sexo</label>
-                                                <select name="sexo" class="form-control" style="width: auto !important;">
+                                                <select name="sexo" class="form-control" style="width: auto !important;" required>
                                                     <option value="" disabled="disabled">Escolher...</option>
 
                                                     <?php if ($data['sexo'] == 1) { ?>
@@ -192,10 +192,27 @@ if (isset($_POST['excluir'])) {
                                 </div>
                             </form>
                         </center>
-                        <form action="usuarios.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                            <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                            <button class="btn btn-danger btn-xs butao" type="submit" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
-                        </form>
+                        <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="usuarios.php" method="post">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
 
@@ -204,6 +221,24 @@ if (isset($_POST['excluir'])) {
     </table>
 
     <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function teste(tag, id) {
             let labelAtivo = document.getElementById('labelstatus' + id);
             if (tag.value == '1') {

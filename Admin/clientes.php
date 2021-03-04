@@ -123,9 +123,9 @@ if (isset($_POST['atualizar'])) {
 
                     <td class="actions d-flex" style="width: 100%;">
                         <center>
-                            <form action="clientes.php" name="form" method="post">
+                            <form action="clientes.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                <button class="btn btn-warning btn-xs butao" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"></button>
+                                <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
                                 <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -165,18 +165,17 @@ if (isset($_POST['atualizar'])) {
 
                                                 <?php  } ?>
 
-                                                <br>
                                                 <label>Nome: </label>
-                                                <input name="nome_completo" class="form-control" style="width: auto !important;" value="<?= $data['nome_completo']  ?> ">
+                                                <input name="nome_completo" class="form-control" value="<?= $data['nome_completo']  ?> " required>
 
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" style="width: auto !important;" value="<?= $data['email']  ?>" name="email" placeholder="Digite a Email">
+                                                <input type="text" class="form-control" value="<?= $data['email']  ?>" name="email" placeholder="Digite a Email" required>
 
                                                 <label>Data de Nascimento</label>
-                                                <input type="date" class="form-control" name="data_nascimento" style="width: auto !important;" value="<?= $data['data_nascimento']  ?>">
+                                                <input type="date" class="form-control" name="data_nascimento" value="<?= $data['data_nascimento']  ?>" required>
 
                                                 <label>Sexo</label>
-                                                <select name="sexo" class="form-control" style="width: auto !important;">
+                                                <select name="sexo" class="form-control">
                                                     <option value="" disabled="disabled">Escolher...</option>
 
                                                     <?php if ($data['sexo'] == 1) { ?>
@@ -190,18 +189,18 @@ if (isset($_POST['atualizar'])) {
                                                 </select>
 
                                                 <label for="inputCel">Celular</label>
-                                                <input type="text" class="form-control phone-ddd-mask" name="telefone_celular" id="inputCel" value="<?= $data['telefone_celular']  ?>">
+                                                <input type="text" class="form-control phone-ddd-mask" name="telefone_celular" id="inputCel" value="<?= $data['telefone_celular']  ?>" required>
 
 
                                                 <label for="inputTelefone">Telefone</label>
-                                                <input type="text" class="form-control" id="inputTelefone  phone-ddd-mask" value="<?= $data['telefone_residencial']  ?>" name="telefone_residencial">
+                                                <input type="text" class="form-control" id="inputTelefone  phone-ddd-mask" value="<?= $data['telefone_residencial']  ?>" name="telefone_residencial" required>
 
 
                                                 <label for="inputCPF">CPF</label>
-                                                <input type="cpf" class="form-control" id="inputCPF" name="cpf" value="<?= $data['cpf']  ?>" placeholder="Ex.: 000.000.000-00" maxlength="11">
+                                                <input type="cpf" class="form-control" id="inputCPF" name="cpf" value="<?= $data['cpf']  ?>" maxlength="11" required>
 
                                                 <label for="inputCity">Cidade</label>
-                                                <input type="text" class="form-control" placeholder="Digite a Cidade" value="<?= $data['cidade']  ?>" name="cidade" id="inputCity">
+                                                <input type="text" class="form-control" placeholder="Digite a Cidade" value="<?= $data['cidade']  ?>" name="cidade" id="inputCity" required>
 
                                                 <label for="inputEstado">Estado</label>
                                                 <select id="inputEstado" class="form-control" name="estado">
@@ -227,20 +226,20 @@ if (isset($_POST['atualizar'])) {
                                                 </select>
 
                                                 <label for="inputtrabalhotelefone">Telefone Trabalho</label>
-                                                <input type="text" class="form-control" id="inputtrabalhotelefone" value="<?= $data['telefone_trabalho']  ?>" name="telefone_trabalho" placeholder="Digite o Telefone do seu trabalho ">
+                                                <input type="text" class="form-control" id="inputtrabalhotelefone" value="<?= $data['telefone_trabalho']  ?>" name="telefone_trabalho" placeholder="Digite o Telefone do seu trabalho " required>
 
                                                 <label for="inputtrabalho">Local de Trabalho</label>
-                                                <input type="text" class="form-control" id="inputtrabalho" name="local_trabalho" value="<?= $data['local_trabalho']  ?>" placeholder="Digite seu local de trabalho">
+                                                <input type="text" class="form-control" id="inputtrabalho" name="local_trabalho" value="<?= $data['local_trabalho']  ?>" placeholder="Digite seu local de trabalho" required>
 
                                                 <label for="inputAddress">Endereço</label>
-                                                <input type="text" class="form-control" id="inputAddress" value="<?= $data['endereco']  ?>" placeholder="Digite seu Endereço" name="endereco">
+                                                <input type="text" class="form-control" id="inputAddress" value="<?= $data['endereco']  ?>" placeholder="Digite seu Endereço" name="endereco" required>
 
 
                                                 <label for="inputCEP">CEP</label>
-                                                <input type="text" class="form-control" id="inputCEP" value="<?= $data['cep']  ?>" placeholder="Ex.: 00000-000" maxlength="8" name="cep">
+                                                <input type="text" class="form-control" id="inputCEP" value="<?= $data['cep']  ?>" maxlength="8" name="cep" required>
 
                                                 <label for="inputNumero">Número</label>
-                                                <input type="text" class="form-control" id="inputNumero" value="<?= $data['numero']  ?>" name="numero">
+                                                <input type="text" class="form-control" id="inputNumero" value="<?= $data['numero']  ?>" name="numero" required>
 
 
                                             </div>
@@ -252,10 +251,27 @@ if (isset($_POST['atualizar'])) {
                                 </div>
                             </form>
                         </center>
-                        <form action="clientes.php" method="post" onsubmit="return confirm('Confirma exclusão?')">
-                            <input type="hidden" name="id" value="<?= $data['id']  ?> ">
-                            <button class="btn btn-danger btn-xs butao" type="submit" name="excluir"><img src="../img/excluir.png" alt="" srcset="" width="27px" height="27px"></button>
-                        </form>
+                        <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="clientes.php" method="post">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
 
@@ -264,6 +280,24 @@ if (isset($_POST['atualizar'])) {
     </table>
 
     <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function teste(tag, id) {
             let labelAtivo = document.getElementById('labelstatus' + id);
             if (tag.value == '1') {

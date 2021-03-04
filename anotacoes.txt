@@ -27,7 +27,6 @@ Para comentar tudo de uma vez use: Ctrl + ;
                                 </div>
                             </div>
 
-
                 
 // Obter dados dos produtos -->
 	$obj= new vendas();
@@ -36,4 +35,4 @@ Para comentar tudo de uma vez use: Ctrl + ;
 
 
 
-Falta mudar botão excluir e botão alterar no GESTÃO DE USUÁRIO e Consultar Clientes
+//Falta mudar botão excluir e botão alterar no GESTÃO DE USUÁRIO e Consultar Clientes
