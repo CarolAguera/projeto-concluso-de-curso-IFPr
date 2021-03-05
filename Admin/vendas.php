@@ -62,11 +62,8 @@ require_once("../menu.php");
                         </div>
                         <span class="text-success">-R$5</span>
                     </li>
-
-
-
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (BRL)</span>
+                        <span>Total da Venda</span>
                         <strong>R$20</strong>
                     </li>
                 </ul>
@@ -81,7 +78,7 @@ require_once("../menu.php");
                 <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Seleciona Cliente</h4>
-                    <form name="form" method="POST" action="finalizarVenda.php">
+                    <form name="form" method="POST" action="vendas.php">
                         <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
                             <?php
                             $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
@@ -100,8 +97,8 @@ require_once("../menu.php");
                     </form>
                     <hr class="mb-4">
                     <h4 class="mb-3">Seleciona Produtos</h4>
-                    <form name="form" method="POST" action="finalizarVenda.php" class="needs-validation" novalidate>
-                        <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%">
+                    <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
+                        <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%" required>
                             <?php
                             $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                             $sql = "select id,nome,quantidade from produto ";
