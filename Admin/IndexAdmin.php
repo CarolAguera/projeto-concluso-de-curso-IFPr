@@ -34,7 +34,7 @@ if (!isset($_SESSION)) {
     </style>
 </head>
 
-<body>
+<body style="height: 100%;">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Bem-Vindo(a) <?= $_SESSION['nome_completo']; ?></h1>
@@ -147,14 +147,14 @@ if (!isset($_SESSION)) {
                 </script>
 
 
-                <body onload="startTime()">
+                <body onload="startTime()" style="height: 100%;">
                     <div class="col hora w-100" id="txt"></div>
                 </body>
             </div>
         </div>
     </div>
-
-
 </body>
-
+<?php
+require_once("rodape.php");
+?>
 </html>

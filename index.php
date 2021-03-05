@@ -25,7 +25,7 @@
     </style>
 </head>
 
-<body>
+<body style="height: 100%;">
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:  rgb(20, 141, 197);">
         <div class="container">
             <a class="navbar-brand"><img class="img-responsive img-thumbnail" src="img/dpbrasillogo.png" alt="" width="100px" height="60px"></a>

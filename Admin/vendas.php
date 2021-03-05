@@ -193,6 +193,9 @@ require_once("../menu.php");
                 }, false);
             })();
         </script>
+        <?php
+        require_once("rodape.php");
+        ?>
 </body>
 
 </html>

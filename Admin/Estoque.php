@@ -42,7 +42,6 @@ if (isset($_POST['atualizar'])) {
     mysqli_query($conexao, $sql);
 
     mysqli_close($conexao);
-    
 }
 
 
@@ -102,7 +101,7 @@ mysqli_close($conexao);
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <a href="Produto.php" type="button" style="padding-top: 7px; padding-bottom: 6px;" class="btn btn-outline-warning" >
+                    <a href="Produto.php" type="button" style="padding-top: 7px; padding-bottom: 6px;" class="btn btn-outline-warning">
                         <i class="far fa-plus-square"></i> Cadastrar Produto
                     </a>
                 </div>
@@ -128,12 +127,12 @@ mysqli_close($conexao);
                     <tbody>
 
                         <?php
-                            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                        $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         // if (isset($valorRetornadoSql)) {
                         //     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         //     $estoque = $valorRetornadoSql;
-        
-                        
+
+
                         // } else {
                         //     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         //     $sqlEstoque = "select * from produto ";
@@ -323,6 +322,9 @@ mysqli_close($conexao);
             console.log(tag.value);
         }
     </script>
+    <?php
+    require_once("rodape.php");
+    ?>
 </body>
 
 </html>

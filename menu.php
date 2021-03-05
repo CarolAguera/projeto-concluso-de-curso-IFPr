@@ -36,13 +36,13 @@ require_once("dependencias.php");
         }
 
         .btn-light:hover {
-            color: black;
+            color: #000000;
             background-color: transparent;
             border-color: transparent;
         }
 
         .btn-light{
-            color: black;
+            color: #000000;
             background-color: transparent;
             border-color: transparent;
         }

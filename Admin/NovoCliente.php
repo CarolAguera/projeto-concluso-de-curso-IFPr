@@ -237,6 +237,9 @@ if (isset($_POST['salvar'])) {
             console.log(tag.value);
         }
     </script>
+    <?php
+    require_once("rodape.php");
+    ?>
 </body>
 
 </html>

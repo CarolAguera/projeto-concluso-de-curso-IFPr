@@ -267,6 +267,9 @@ if (isset($_POST['excluir'])) {
             console.log(tag.value);
         }
     </script>
+    <?php
+    require_once("rodape.php");
+    ?>
 </body>
 
 </html>

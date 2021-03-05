@@ -132,7 +132,7 @@ if (isset($_POST['atualizar'])) {
                             <td><?= $data['cpf']  ?></td>
 
 
-                            <td class="actions d-flex" >
+                            <td class="actions d-flex">
                                 <center>
                                     <form action="clientes.php" name="form" method="post" class="needs-validation" novalidate>
 
@@ -325,6 +325,9 @@ if (isset($_POST['atualizar'])) {
             console.log(tag.value);
         }
     </script>
+    <?php
+    require_once("rodape.php");
+    ?>
 </body>
 
 </html>
