@@ -1,4 +1,14 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    $mensagem = "Sessão Expirada. Faça login novamente! ";
+    header("location: login.php?mensagem={$mensagem}");
+    die();
+}
+
+
 include("mpdf60/mpdf.php");
 require_once __DIR__ . '../../vendor/autoload.php';
 
