@@ -3,7 +3,6 @@
 <?php
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
-require_once("../menu.php");
 
 if (isset($_POST['salvar'])) {
     $nome = $_POST['nome_completo'];
@@ -54,8 +53,9 @@ if (isset($_POST['salvar'])) {
 
     //Mensagem de sucesso
     $mensagem = "Registro salvo com sucesso.";
+    //header("Refresh:5");
 }
-
+require_once("../menu.php");
 
 ?>
 
