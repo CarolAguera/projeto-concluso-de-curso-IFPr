@@ -72,9 +72,9 @@ require_once("dependencias.php");
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="Categoria.php">Categorias</a></li>
-                            <li><a class="dropdown-item" href="Produto.php">Produtos</a></li>
                             <li><a class="dropdown-item" href="Marca.php">Marcas</a></li>
                             <li><a class="dropdown-item" href="Medida.php">Unidade de Medida</a></li>
+                            <li><a class="dropdown-item" href="Produto.php">Produtos</a></li>
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="Estoque.php"><strong>Estoque</strong></a></li>
                         </ul>

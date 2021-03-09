@@ -11,15 +11,13 @@ require_once("../menu.php");
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <style>
-        .pt-5,
-        .py-5 {
+        .pt-5,.py-5 {
             padding-top: 0rem !important;
         }
     </style>
 </head>
 
 <body class="bg-light">
-
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="../img/dpbrasillogo.png" alt="" width="auto" height="auto">
@@ -68,26 +66,18 @@ require_once("../menu.php");
                     </li>
                 </ul>
             </div>
-            <?php
-            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-            $sql = "select * from cliente  ";
-            $clientes = mysqli_query($conexao, $sql);
-            mysqli_close($conexao);
-            while ($data = mysqli_fetch_array($clientes)) {
-            ?>
-                <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                <div class="col-md-8 order-md-1">
+            <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Seleciona Cliente</h4>
                     <form name="form" method="POST" action="vendas.php">
                         <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
                             <?php
-                            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                            $sql = "select id,nome_completo from cliente ";
-                            $cliente = mysqli_query($conexao, $sql);
-                            mysqli_close($conexao); ?>
+                                $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                                $sql = "select id,nome_completo from cliente ";
+                                $cliente = mysqli_query($conexao, $sql);
+                                mysqli_close($conexao); ?>
                             <option value="" disabled="disabled" selected>Escolher...</option>
                             <?php
-                            while ($data = mysqli_fetch_array($cliente)) { ?>
+                                while ($data = mysqli_fetch_array($cliente)) { ?>
                                 <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
                             <?php  }    ?>
                         </select>
@@ -100,13 +90,13 @@ require_once("../menu.php");
                     <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
                         <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%" required>
                             <?php
-                            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                            $sql = "select id,nome,quantidade from produto ";
-                            $produto = mysqli_query($conexao, $sql);
-                            mysqli_close($conexao); ?>
+                                $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                                $sql = "select id,nome,quantidade from produto ";
+                                $produto = mysqli_query($conexao, $sql);
+                                mysqli_close($conexao); ?>
                             <option value="" disabled="disabled" selected>Escolher...</option>
                             <?php
-                            while ($data = mysqli_fetch_array($produto)) { ?>
+                                while ($data = mysqli_fetch_array($produto)) { ?>
                                 <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
                             <?php  }    ?>
                         </select>
@@ -161,38 +151,37 @@ require_once("../menu.php");
                         <hr class="mb-4">
                         <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
                     </form>
-                </div>
-            <?php  }    ?>
+            </div>
         </div>
+    </div>
 
 
-        <script>
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
-            (function() {
-                'use strict';
 
-                window.addEventListener('load', function() {
-                    // Selecione todos os campos que nós queremos aplicar estilos Bootstrap de validação customizados.
-                    var forms = document.getElementsByClassName('needs-validation');
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+        (function() {
+            'use strict';
 
-                    // Faz um loop neles e previne envio
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-        </script>
-        <?php
-        require_once("rodape.php");
-        ?>
+            window.addEventListener('load', function() {
+                // Selecione todos os campos que nós queremos aplicar estilos Bootstrap de validação customizados.
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Faz um loop neles e previne envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
 </body>
 
 </html>
