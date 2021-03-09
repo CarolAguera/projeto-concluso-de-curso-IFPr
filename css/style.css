@@ -2,15 +2,12 @@ body {
     background-color: #e3f2fd;
 }
 
-.footer {
-    background-color: rgb(20, 141, 197);
-}
 fieldset{
     width: 750px;
     margin: 10px auto;
     color: #444;
     border: 5px solid rgb(20, 141, 197);
-    font-family: Helvetica;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 15px;
    }
    

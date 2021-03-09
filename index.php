@@ -22,10 +22,15 @@
             width: 100% !important;
             height: 90%;
         }
+
+        .teste {
+          
+            background-image: url(img/textura.jpeg);
+        }
     </style>
 </head>
 
-<body style="height: 100%;">
+<body style="height: 100%;" class="teste">
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:  rgb(20, 141, 197);">
         <div class="container">
             <a class="navbar-brand"><img class="img-responsive img-thumbnail" src="img/dpbrasillogo.png" alt="" width="100px" height="60px"></a>
@@ -115,7 +120,7 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <footer style="background-color: rgb(20, 141, 197);">
         <div class="mt-4 p-4">
             <div class="container">
                 <div class="row justify-content-center">

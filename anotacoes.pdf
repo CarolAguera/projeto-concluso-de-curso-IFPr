@@ -1,8 +1,0 @@
-Para comentar tudo de uma vez use: Ctrl + ;
-
-Perguntar para o professor porque meu menu quando resolução muda ele buga;
-
-### Comando para regarregar a página em 5 segundos;
-header("Refresh:5");
-
-
