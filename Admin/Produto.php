@@ -42,17 +42,22 @@ if (isset($_POST['salvar'])) {
 <head>
     <title>Cadastrar Produto</title>
     <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+    <style>
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
+    </style>
 </head>
 
-<body>
+<body class="teste">
     <center style="margin-top: 100px;">
         <strong style="margin-top: 30px; font-size: 40px;">Cadastro de Produto</strong>
     </center>
     <div class="container" style="margin-top: 30px;">
         <?php if (isset($mensagem)) { ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $mensagem; ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <?php echo $mensagem; ?>
+        </div>
         <?php } ?>
         <form name="form" method="POST" action="Produto.php">
             <div class="form-row">
@@ -81,7 +86,7 @@ if (isset($_POST['salvar'])) {
                         mysqli_close($conexao);
                         while ($data = mysqli_fetch_array($categorias)) { ?>
 
-                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                        <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                         <?php  }    ?>
                     </select>
                 </div>
@@ -95,7 +100,7 @@ if (isset($_POST['salvar'])) {
                         mysqli_close($conexao);
                         while ($data = mysqli_fetch_array($marcas)) { ?>
 
-                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                        <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                         <?php  }    ?>
                     </select>
                 </div>
@@ -113,7 +118,7 @@ if (isset($_POST['salvar'])) {
                         mysqli_close($conexao);
                         while ($data = mysqli_fetch_array($categorias)) { ?>
 
-                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                        <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
                         <?php  }    ?>
                     </select>
                 </div>

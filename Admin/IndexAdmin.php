@@ -31,11 +31,15 @@ if (!isset($_SESSION)) {
                 flex-basis: auto;
             }
         }
+        
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
     </style>
 </head>
 
-<body style="height: 100%;">
-    <div class="jumbotron jumbotron-fluid">
+<body style="height: 100%;" class="teste">
+    <div class="jumbotron jumbotron-fluid" style="background: transparent;">
         <div class="container">
             <h1 class="display-4" style="text-align: center;">Bem-Vindo(a) <?= $_SESSION['nome_completo']; ?></h1>
 

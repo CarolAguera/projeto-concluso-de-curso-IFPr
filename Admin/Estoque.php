@@ -73,12 +73,13 @@ mysqli_close($conexao);
         .actions {
             width: 300px;
         }
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
     </style>
 </head>
 
-<body>
-
-    <br>
+<body class="teste">
     <center>
         <div class="container" style="margin-top: 30px">
             <div class="row">

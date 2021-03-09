@@ -15,10 +15,14 @@ require_once("../menu.php");
         .py-5 {
             padding-top: 0rem !important;
         }
+
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
     </style>
 </head>
 
-<body class="bg-light">
+<body class="teste">
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="../img/dpbrasillogo.png" alt="" width="auto" height="auto">
@@ -37,7 +41,7 @@ require_once("../menu.php");
                             <h6 class="my-0">Nome do produto</h6>
                             <small class="text-muted">Breve descrição</small>
                         </div>
-<!--                         
+                        <!--                         
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         $sql = "select id,valor_venda from produto ";
@@ -88,7 +92,7 @@ require_once("../menu.php");
                         <option value="" disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($cliente)) { ?>
-                            <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
+                        <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
                         <?php  }    ?>
                     </select>
                     <br>
@@ -107,7 +111,7 @@ require_once("../menu.php");
                         <option value="" disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($produto)) { ?>
-                            <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
+                        <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
                         <?php  }    ?>
                     </select>
                     <label>Quantidade Estoque</label>

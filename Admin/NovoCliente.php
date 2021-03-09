@@ -65,20 +65,23 @@ require_once("../menu.php");
         .centr {
             margin-left: 60px;
         }
+
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
     </style>
 </head>
 
-<body>
-    <br>
-    <div class="container display-4">
+<body class="teste">
+    <div class="container display-4" style="margin-top: 25px;">
         <h3>Novo Cliente</h3>
     </div>
     <hr width="74%" />
     <div class="container">
         <?php if (isset($mensagem)) { ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $mensagem; ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <?php echo $mensagem; ?>
+        </div>
         <?php } ?>
         <form name="form" id="form" method="post" action="NovoCliente.php" class="needs-validation" novalidate>
             <div class="form-row">
