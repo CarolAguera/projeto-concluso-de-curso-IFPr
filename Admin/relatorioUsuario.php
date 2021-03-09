@@ -1,41 +1,58 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION['id'])) {
-    $mensagem = "Sessão Expirada. Faça login novamente! ";
-    header("location: login.php?mensagem={$mensagem}");
-    die();
-}
-
-
+require_once("../verificaSessao.php");
 include("../mpdf60/mpdf.php");
 require_once __DIR__ . '../../../vendor/autoload.php';
 
-$id = "1";
-$result_usuario = "SELECT * FROM usuarios WHERE id = '$id' LIMIT 1";
-$resultado_usuario = mysqli_query($conn, $result_usuario);
-$row_usuario = mysqli_fetch_assoc($resultado_usuario);
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+if (!$conexao) {
+	die("Falha na conexao: " . mysqli_connect_error());
+} else {
+	//echo "Conexao realizada com sucesso";
+}
 
-$html =
-    "<html>
-			<body>
-				<h1>Informações do Usuário</h1>
-				Id: " . $row_usuario['id'] . "<br>
-				Nome: " . $row_usuario['nome_completo'] . "<br>
-				E-mail: " . $row_usuario['email'] . "<br>
-				Senha: " . $row_usuario['senha'] . "<br>
-				<h4>http://www.celke.com.br</h4>
-			</body>
-		</html>
-		";
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+$sql = "select * from usuario  ";
+$usuarios = mysqli_query($conexao, $sql);
 
+$html = "
+<html>
 
+<body>
+<h1>Relatório do Usuário</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Status</th>
+				<th>Usuário</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			";
+
+while ($data = mysqli_fetch_array($usuarios)) {
+	$opa = (string) $data['id'];
+	"
+			<tr>
+				<td> " .  $opa  . " </td>
+				<td> " .  $data['nome_completo'] . " </td>
+				<td> " . $data['email']  . "</td>
+			</tr>
+				";
+}
+" 
+
+		</tbody>
+	</table>
+</body>
+
+</html>
+";
 $mpdf = new \Mpdf\mPDF();
 $mpdf->SetDisplayMode('fullpage');
-$css = file_get_contents("style.css");
+$css = file_get_contents("../css/estilo.css");
 $mpdf->WriteHTML($css, 1);
 $mpdf->WriteHTML($html);
 $mpdf->Output();
-
 exit;
