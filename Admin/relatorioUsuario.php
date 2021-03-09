@@ -23,7 +23,8 @@ function getTabela()
 		 <tr class='header'>  
 			 <th>ID</th>
 		 	<th>Nome Completo</th>
-		 	<th>E-mail</th>
+		 	<th>Data de Nascimento</th>
+			 <th>E-mail</th>
 		 </tr>";
 
 	$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
@@ -34,6 +35,7 @@ function getTabela()
 		$retorno .= "<tr class=\"zebra\">";
 		$retorno .=	"<td class='destaque'>{$data['id']} </td>";
 		$retorno .= "<td>{$data['nome_completo']} </td>";
+		$retorno .= "<td>{$data['data_nascimento']} </td>";
 		$retorno .= "<td>{$data['email']} </td>";
 	}
 	$retorno .= "</table>";

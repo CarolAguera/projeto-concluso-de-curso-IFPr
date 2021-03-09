@@ -41,11 +41,12 @@ require_once("dependencias.php");
             border-color: transparent;
         }
 
-        .btn-light{
+        .btn-light {
             color: #000000;
             background-color: transparent;
             border-color: transparent;
         }
+
         .flex-container {
             display: flex;
             justify-content: center;
@@ -90,7 +91,14 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="clientes.php">Consultar Clientes</a></li>
                         </ul>
                     </li>
-
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-list-alt"></i>
+                            Relatórios
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php">Relatório de Usuários</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a type="button" class="btn btn-light" href="vendas.php"><i class='fas fa-calculator'></i></span> Vendas</a>
                     </li>
