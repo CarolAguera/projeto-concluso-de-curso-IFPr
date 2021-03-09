@@ -1,4 +1,30 @@
 table, th, td {
-    border: 1px solid black;
+    border: 2px solid black;
     border-collapse: collapse;
   }
+ /* Fonte para as tags table e h2 */  
+ table, h2{  
+   font-family: Arial;  
+ }  
+ 
+ /* Estilização para tag h2 */  
+ h2{  
+   color: blue;  
+   text-shadow: 2px darkgray;  
+ }  
+ 
+ /* Classe para o estilo do cabeçalho da Tabela */  
+ .header{  
+   background: rgb(20, 141, 197);  
+ } 
+ 
+ /* Classe coloca a cor de fundo para zebrar as linhas */  
+ .zebra{  
+   background: lightgray;  
+ } 
+ 
+ /* Classe para destacar o conteúdo da coluna */  
+ .destaque{  
+   color: red;  
+   font-weight: bold;  
+ }  
