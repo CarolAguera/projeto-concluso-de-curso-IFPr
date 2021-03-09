@@ -11,7 +11,8 @@ require_once("../menu.php");
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <style>
-        .pt-5,.py-5 {
+        .pt-5,
+        .py-5 {
             padding-top: 0rem !important;
         }
     </style>
@@ -36,7 +37,16 @@ require_once("../menu.php");
                             <h6 class="my-0">Nome do produto</h6>
                             <small class="text-muted">Breve descrição</small>
                         </div>
-                        <span class="text-muted">R$12</span>
+<!--                         
+                        <?php
+                        $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                        $sql = "select id,valor_venda from produto ";
+                        $produto = mysqli_query($conexao, $sql);
+                        ?>
+                        <span class="text-muted" value="<?= $data['id'] ?> "><?= $data['valor_venda']  ?>R$</span>
+                        <?php
+                        mysqli_close($conexao);
+                        ?> -->
                     </li>
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
@@ -67,90 +77,90 @@ require_once("../menu.php");
                 </ul>
             </div>
             <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3">Seleciona Cliente</h4>
-                    <form name="form" method="POST" action="vendas.php">
-                        <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
-                            <?php
-                                $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                                $sql = "select id,nome_completo from cliente ";
-                                $cliente = mysqli_query($conexao, $sql);
-                                mysqli_close($conexao); ?>
-                            <option value="" disabled="disabled" selected>Escolher...</option>
-                            <?php
-                                while ($data = mysqli_fetch_array($cliente)) { ?>
-                                <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
-                            <?php  }    ?>
-                        </select>
-                        <br>
-                        <br>
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="adicionarCliente">Adicionar Cliente</button>
-                    </form>
+                <h4 class="mb-3">Seleciona Cliente</h4>
+                <form name="form" method="POST" action="vendas.php">
+                    <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
+                        <?php
+                        $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                        $sql = "select id,nome_completo from cliente ";
+                        $cliente = mysqli_query($conexao, $sql);
+                        mysqli_close($conexao); ?>
+                        <option value="" disabled="disabled" selected>Escolher...</option>
+                        <?php
+                        while ($data = mysqli_fetch_array($cliente)) { ?>
+                            <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
+                        <?php  }    ?>
+                    </select>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="adicionarCliente">Adicionar Cliente</button>
+                </form>
+                <hr class="mb-4">
+                <h4 class="mb-3">Seleciona Produtos</h4>
+                <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
+                    <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%" required>
+                        <?php
+                        $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                        $sql = "select id,nome,quantidade from produto ";
+                        $produto = mysqli_query($conexao, $sql);
+                        mysqli_close($conexao); ?>
+                        <option value="" disabled="disabled" selected>Escolher...</option>
+                        <?php
+                        while ($data = mysqli_fetch_array($produto)) { ?>
+                            <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
+                        <?php  }    ?>
+                    </select>
+                    <label>Quantidade Estoque</label>
+                    <input readonly="" type="text" class="form-control input-sm" id="quantidade" name="quantidade">
+                    <label>Preço</label>
+                    <input readonly="" type="text" class="form-control input-sm" id="preco" name="preco">
+                    <label>Quantidade Vendida</label>
+                    <input type="text" class="form-control input-sm" id="quantV" name="quantV" required>
+                    <br>
+                    <button class="btn btn-warning btn-lg btn-block" type="submit" id="adicionarProdutos">Adicionar Produto</button>
+                </form>
+
+                <hr class="mb-4">
+
+                <form class="needs-validation" novalidate>
+                    <h4 class="mb-3">Pagamento</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
+                            <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
+                        </div>
+                    </div>
                     <hr class="mb-4">
-                    <h4 class="mb-3">Seleciona Produtos</h4>
-                    <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
-                        <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%" required>
-                            <?php
-                                $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                                $sql = "select id,nome,quantidade from produto ";
-                                $produto = mysqli_query($conexao, $sql);
-                                mysqli_close($conexao); ?>
-                            <option value="" disabled="disabled" selected>Escolher...</option>
-                            <?php
-                                while ($data = mysqli_fetch_array($produto)) { ?>
-                                <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
-                            <?php  }    ?>
-                        </select>
-                        <label>Quantidade Estoque</label>
-                        <input readonly="" type="text" class="form-control input-sm" id="quantidade" name="quantidade">
-                        <label>Preço</label>
-                        <input readonly="" type="text" class="form-control input-sm" id="preco" name="preco">
-                        <label>Quantidade Vendida</label>
-                        <input type="text" class="form-control input-sm" id="quantV" name="quantV" required>
-                        <br>
-                        <button class="btn btn-warning btn-lg btn-block" type="submit" id="adicionarProdutos">Adicionar Produto</button>
-                    </form>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
 
+                            <!-- Mostra o total da compra -->
+                            <label for="cc-nome">Total da Venda</label>
+                            <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <!-- Colocar valor de desconto-->
+                            <label for="cc-nome">Desconto</label>
+                            <input type="text" class="form-control" id="cc-nome" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <!-- Digita o valor que o cliente pagou -->
+                            <label for="cc-nome">Valor Recebido</label>
+                            <input type="text" class="form-control" id="cc-nome" placeholder="" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <!--Mostra o valor que falta para receber do cliente -->
+                            <label for="cc-nome">Saldo a Receber</label>
+                            <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
+                        </div>
+                    </div>
                     <hr class="mb-4">
-
-                    <form class="needs-validation" novalidate>
-                        <h4 class="mb-3">Pagamento</h4>
-
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
-                                <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-
-                                <!-- Mostra o total da compra -->
-                                <label for="cc-nome">Total da Venda</label>
-                                <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <!-- Colocar valor de desconto-->
-                                <label for="cc-nome">Desconto</label>
-                                <input type="text" class="form-control" id="cc-nome" placeholder="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <!-- Digita o valor que o cliente pagou -->
-                                <label for="cc-nome">Valor Recebido</label>
-                                <input type="text" class="form-control" id="cc-nome" placeholder="" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <!--Mostra o valor que falta para receber do cliente -->
-                                <label for="cc-nome">Saldo a Receber</label>
-                                <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
-                    </form>
+                    <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
+                </form>
             </div>
         </div>
     </div>

@@ -9,8 +9,8 @@ if (!isset($_SESSION['id'])) {
 }
 
 
-include("mpdf60/mpdf.php");
-require_once __DIR__ . '../../vendor/autoload.php';
+include("../mpdf60/mpdf.php");
+require_once __DIR__ . '../../../vendor/autoload.php';
 
 $html = "
  <fieldset>
@@ -33,7 +33,7 @@ $html = "
 
 $mpdf = new \Mpdf\mPDF();
 $mpdf->SetDisplayMode('fullpage');
-$css = file_get_contents("css/style.css");
+$css = file_get_contents("../css/style.css");
 $mpdf->WriteHTML($css, 1);
 $mpdf->WriteHTML($html);
 $mpdf->Output();
