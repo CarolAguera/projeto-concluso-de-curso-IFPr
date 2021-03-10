@@ -4,7 +4,78 @@
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
 require_once("../menu.php");
+?>
 
+<head>
+
+    <script>
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('uf').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+    </script>
+</head>
+<?php
 function formataData($data)
 {
     return substr($data, 8, 2) . "/" .
@@ -22,19 +93,20 @@ if (isset($_POST['atualizar'])) {
     $idAtualizar = $_POST['idAtualizar'];
     $nome = $_POST['nome_completo'];
     $email = $_POST['email'];
-    $endereco = $_POST['endereco'];
+    $rua = $_POST['rua'];
     $cep = $_POST['cep'];
     $numero = $_POST['numero'];
+    $bairro = $_POST['bairro'];
     $local_trabalho = $_POST['local_trabalho'];
     $telefone_trabalho = $_POST['telefone_trabalho'];
     $sexo = $_POST['sexo'];
     $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
+    $uf = $_POST['uf'];
     $data_nascimento = $_POST['data_nascimento'];
     $telefone_celular = $_POST['telefone_celular'];
     $telefone_residencial = $_POST['telefone_residencial'];
     $cpf = $_POST['cpf'];
-    if (isset($_POST['statusAtualizar'])) {
+    if (isset($_POST['status'])) {
         $statusAtualizar = 1;
     } else {
         $statusAtualizar = 0;
@@ -47,13 +119,14 @@ if (isset($_POST['atualizar'])) {
         email = '{$email}',
         data_nascimento = '{$data_nascimento}',
         sexo = '{$sexo}',
-        endereco = '{$endereco}', 
+        rua = '{$rua}',
+        bairro = '{$bairro}', 
         cep =  '{$cep}', 
         numero = '{$numero}',
         local_trabalho = '{$local_trabalho}', 
         telefone_trabalho = '{$telefone_trabalho}', 
         cidade = '{$cidade}',
-        estado = '{$estado}',
+        uf = '{$uf}',
         telefone_celular = '{$telefone_celular}',
         telefone_residencial = '{$telefone_residencial}',
         cpf = '{$cpf}'
@@ -212,440 +285,29 @@ if (isset($_POST['atualizar'])) {
                                                     <label for="inputCPF">CPF</label>
                                                     <input type="cpf" class="form-control" id="inputCPF" name="cpf" value="<?= $data['cpf']  ?>" maxlength="11" required>
 
+                                                    <label for="inputCEP">CEP</label>
+                                                    <input name="cep" type="text" id="cep" class="form-control"  size="10" maxlength="9" onchange="pesquisacep(this.value);"  value="<?= $data['cep']  ?>"required >
+
                                                     <label for="inputCity">Cidade</label>
-                                                    <input type="text" class="form-control" placeholder="Digite a Cidade" value="<?= $data['cidade']  ?>" name="cidade" id="inputCity" required>
+                                                    <input name="cidade" type="text" id="cidade" class="form-control" size="40" required value="<?= $data['cidade']  ?>" required>
 
-                                                    <label for="inputEstado">Estado</label>
-                                                    <select id="inputEstado" class="form-control" name="estado">
-                                                        <option value="" disabled="disabled">Escolher...</option>
+                                                    <label>Estado</label>
+                                                    <input name="uf" class="form-control" type="text" value="<?= $data['uf']  ?>" id="uf" size="2" required />
 
+                                                    <label>Rua</label>
+                                                    <input type="text" class="form-control" id="rua" size="60" placeholder="Digite seu Rua" name="rua" value="<?= $data['rua']  ?>" required>
 
-                                                        <?php echo $data['estado'];
-                                                            if ($data['estado'] == "AC") { ?>
-                                                        <option selected value="AC">Acre</option>
-                                                        <option value="AL">Alagoas</option>
-                                                        <option value="AP">Amapá</option>
-                                                        <option value="AM">Amazonas</option>
-                                                        <option value="BA">Bahia</option>
-                                                        <option value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "AL") { ?>
-                                                        <option selected value="AL">Alagoas</option>
-                                                        <option value="AP">Amapá</option>
-                                                        <option value="AM">Amazonas</option>
-                                                        <option value="BA">Bahia</option>
-                                                        <option value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "AP") { ?>
-                                                        <option selected value="AP">Amapá</option>
-                                                        <option value="AM">Amazonas</option>
-                                                        <option value="BA">Bahia</option>
-                                                        <option value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "AM") { ?>
-                                                        <option selected value="AM">Amazonas</option>
-                                                        <option value="BA">Bahia</option>
-                                                        <option value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>?>
-                                                        <?php } else if ($data['estado'] == "BA") { ?>
-                                                        <option selected value="BA">Bahia</option>
-                                                        <option value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "CE") { ?>
-                                                        <option selected value="CE">Ceará</option>
-                                                        <option value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>?>
-                                                        <?php } else if ($data['estado'] == "DF") { ?>
-                                                        <option selected value="DF">Distrito Federal</option>
-                                                        <option value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "ES") { ?>
-                                                        <option selected value="ES">Espírito Santo</option>
-                                                        <option value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option> ?>
-                                                        <?php } else if ($data['estado'] == "GO") { ?>
-                                                        <option selected value="GO">Goiás</option>
-                                                        <option value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option> ?>
-                                                        <?php } else if ($data['estado'] == "MA") { ?>
-                                                        <option selected value="MA">Maranhão</option>
-                                                        <option value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "MT") { ?>
-                                                        <option selected value="MT">Mato Grosso</option>
-                                                        <option value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "MS") { ?>
-                                                        <option selected value="MS">Mato Grosso do Sul</option>
-                                                        <option value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "MG") { ?>
-                                                        <option selected value="MG">Minas Gerais</option>
-                                                        <option value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "PA") { ?>
-                                                        <option selected value="PA">Pará</option>
-                                                        <option value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "PB") { ?>
-                                                        <option selected value="PB">Paraíba</option>
-                                                        <option value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "PR") { ?>
-                                                        <option selected value="PR">Paraná</option>
-                                                        <option value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "PE") { ?>
-                                                        <option selected value="PE">Pernambuco</option>
-                                                        <option value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "PI") { ?>
-                                                        <option selected value="PI">Piauí</option>
-                                                        <option value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "RJ") { ?>
-                                                        <option selected value="RJ">Rio de Janeiro</option>
-                                                        <option value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "RN") { ?>
-                                                        <option selected value="RN">Rio Grande do Norte</option>
-                                                        <option value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "RS") { ?>
-                                                        <option selected value="RS">Rio Grande do Sul</option>
-                                                        <option value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "RO") { ?>
-                                                        <option selected value="RO">Rondônia</option>
-                                                        <option value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "RR") { ?>
-                                                        <option selected value="RR">Roraima</option>
-                                                        <option value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "SC") { ?>
-                                                        <option selected value="SC">Santa Catarina</option>
-                                                        <option value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "SP") { ?>
-                                                        <option selected value="SP">São Paulo</option>
-                                                        <option value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "SE") { ?>
-                                                        <option selected value="SE">Sergipe</option>
-                                                        <option value="TO">Tocantins</option>
-                                                        <?php } else if ($data['estado'] == "TO") { ?>
-                                                        <option selected value="TO">Tocantins</option>
-                                                        <?php } ?>
-                                                        </option>
-                                                    </select>
+                                                    <label >Bairro</label>
+                                                    <input type="text" class="form-control" id="bairro" value="<?= $data['bairro']  ?>" placeholder="Digite seu Bairro" name="bairro" required>
+
+                                                    <label for="inputNumero">Número</label>
+                                                    <input type="text" class="form-control" id="inputNumero" value="<?= $data['numero']  ?>" name="numero" required>
 
                                                     <label for="inputtrabalhotelefone">Telefone Trabalho</label>
                                                     <input type="text" class="form-control" id="inputtrabalhotelefone" value="<?= $data['telefone_trabalho']  ?>" name="telefone_trabalho" placeholder="Digite o Telefone do seu trabalho " required>
 
                                                     <label for="inputtrabalho">Local de Trabalho</label>
                                                     <input type="text" class="form-control" id="inputtrabalho" name="local_trabalho" value="<?= $data['local_trabalho']  ?>" placeholder="Digite seu local de trabalho" required>
-
-                                                    <label for="inputAddress">Endereço</label>
-                                                    <input type="text" class="form-control" id="inputAddress" value="<?= $data['endereco']  ?>" placeholder="Digite seu Endereço" name="endereco" required>
-
-
-                                                    <label for="inputCEP">CEP</label>
-                                                    <input type="text" class="form-control" id="inputCEP" value="<?= $data['cep']  ?>" maxlength="8" name="cep" required>
-
-                                                    <label for="inputNumero">Número</label>
-                                                    <input type="text" class="form-control" id="inputNumero" value="<?= $data['numero']  ?>" name="numero" required>
-
 
                                                 </div>
                                                 <div class="modal-footer" style="display: block !important;">

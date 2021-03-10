@@ -1,13 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
+
 <?php
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
+?>
 
+<head>
+    <script>
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('uf').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+    </script>
+</head>
+<?php
 if (isset($_POST['salvar'])) {
     $nome = $_POST['nome_completo'];
     $email = $_POST['email'];
-    $endereco = $_POST['endereco'];
+    $rua = $_POST['rua'];
     $cep = $_POST['cep'];
     $numero = $_POST['numero'];
     $local_trabalho = $_POST['local_trabalho'];
@@ -28,10 +100,10 @@ if (isset($_POST['salvar'])) {
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
 
-    $sql = "insert into cliente (nome_completo,email,endereco,cep,numero,local_trabalho,telefone_trabalho,sexo,cidade,estado,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
+    $sql = "insert into cliente (nome_completo,email,rua,cep,numero,local_trabalho,telefone_trabalho,sexo,cidade,estado,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
         values ('{$nome}',
         '{$email}', 
-        '{$endereco}', 
+        '{$rua}', 
         '{$cep}', 
         '{$numero}', 
         '{$local_trabalho}', 
@@ -96,15 +168,19 @@ require_once("../menu.php");
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputAddress">Endereço</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Digite seu Endereço" name="endereco" required>
+                <div class="form-group col-md-3">
+                    <label>CEP</label>
+                    <input name="cep" type="text" id="cep" class="form-control" value="" size="10" maxlength="9" onchange="pesquisacep(this.value);" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputCEP">CEP</label>
-                    <input type="text" class="form-control" id="inputCEP" placeholder="Ex.: 00000-000" maxlength="8" name="cep" required>
+                <div class="form-group col-md-6">
+                    <label>Rua</label>
+                    <input type="text" class="form-control" id="rua" size="60" placeholder="Digite seu Rua" name="rua" required>
                 </div>
                 <div class="form-group col-md-2">
+                    <label>Bairro</label>
+                    <input name="bairro" type="text" class="form-control" id="bairro" size="40" required>
+                </div>
+                <div class="form-group col-md-1">
                     <label for="inputNumero">Número</label>
                     <input type="text" class="form-control" id="inputNumero" name="numero" required>
                 </div>
@@ -131,41 +207,11 @@ require_once("../menu.php");
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Cidade</label>
-                    <input type="text" class="form-control" placeholder="Digite a Cidade" name="cidade" id="inputCity" required>
+                    <input name="cidade" type="text" id="cidade" class="form-control" size="40" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="inputEstado">Estado</label>
-                    <select id="inputEstado" class="form-control" name="estado" required>
-                        <option value="" disabled="disabled" selected>Escolher...</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                        </option>
-                    </select>
+                    <label>Estado</label>
+                    <input name="uf" class="form-control" type="text" id="uf" size="2" required />
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNasc">Data de Nascimento</label>
