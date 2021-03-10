@@ -168,7 +168,7 @@ if (isset($_POST['atualizar'])) {
                     <h3>Gestão de Clientes</h3>
                 </div>
                 <div class="col-sm-6">
-                    <a href="NovoCliente.php" type="button" class="btn btn-outline-warning">
+                    <a href="NovoCliente.php" type="button" class="btn  btn-success">
                         <i class="far fa-plus-square"></i> Cadastrar Cliente
                     </a>
                 </div>

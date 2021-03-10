@@ -77,7 +77,7 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="Medida.php">Unidade de Medida</a></li>
                             <li><a class="dropdown-item" href="Produto.php">Produtos</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="Estoque.php"><strong>Estoque</strong></a></li>
+                            <li><a class="dropdown-item" href="Estoque.php"><strong><i class="fas fa-boxes"></i> Estoque</strong></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -96,7 +96,8 @@ require_once("dependencias.php");
                             Relatórios
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php">Relatório de Usuários</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php"><i class='fas fa-user'></i> Relatório de Usuários</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioEstoque.php"><i class="fas fa-clipboard-list"></i> Relatório de Produtos</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -137,30 +137,32 @@ require_once("../menu.php");
                     </div>
                     <hr class="mb-4">
                     <div class="row">
-                        <div class="col-md-6 mb-3">
 
-                            <!-- Mostra o total da compra -->
-                            <label for="cc-nome">Total da Venda</label>
-                            <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
-                        </div>
+                        <!-- Mostra o total da compra -->
+                        <label for="cc-nome">Total da Venda</label>
+                        <input type="text" class="form-control" id="cc-nome" placeholder="Total da Venda" disabled>
 
-                        <div class="col-md-6 mb-3">
-                            <!-- Colocar valor de desconto-->
-                            <label for="cc-nome">Desconto</label>
-                            <input type="text" class="form-control" id="cc-nome" placeholder="">
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <!-- Digita o valor que o cliente pagou -->
-                            <label for="cc-nome">Valor Recebido</label>
-                            <input type="text" class="form-control" id="cc-nome" placeholder="" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <!--Mostra o valor que falta para receber do cliente -->
-                            <label for="cc-nome">Saldo a Receber</label>
-                            <input type="text" class="form-control" id="cc-nome" placeholder="" disabled>
-                        </div>
+
+                        <!-- Colocar valor de desconto-->
+                        <label for="cc-nome">Desconto</label>
+                        <input type="text" class="form-control" id="cc-nome" placeholder="Desconto" >
+
+                    </div>
+                    <div class="row">
+
+                        <!-- Digita o valor que o cliente pagou -->
+                        <label for="cc-nome">Valor Recebido</label>
+                        <input type="text" class="form-control" id="cc-nome" placeholder="Valor Recebido do Cliente" required>
+
+                    </div>
+                    <div class="row">
+
+                        <!--Mostra o valor que falta para receber do cliente -->
+                        <label for="cc-nome">Saldo a Receber</label>
+                        <input type="text" class="form-control" id="cc-nome" placeholder="Saldo a Receber" required>
+
                     </div>
                     <hr class="mb-4">
                     <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>

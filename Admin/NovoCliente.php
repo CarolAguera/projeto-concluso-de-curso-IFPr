@@ -246,7 +246,7 @@ require_once("../menu.php");
 
             <center>
                 <button type="submit" class="btn btn-success" name="salvar">Cadastrar</button>
-                <a type="button" class="btn btn-warning" href="clientes.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Gestão de Clientess</b></a>
+                <a type="button" class="btn btn-warning" href="clientes.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Gestão de Clientes</b></a>
             </center>
         </form>
         <br>

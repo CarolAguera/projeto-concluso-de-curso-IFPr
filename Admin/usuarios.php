@@ -87,7 +87,7 @@ if (isset($_POST['excluir'])) {
                     <h3>Gestão de Usuários</h3>
                 </div>
                 <div class="col-sm-6">
-                    <a href="NovoUsuario.php" type="button" class="btn btn-outline-warning">
+                    <a href="NovoUsuario.php" type="button" class="btn btn-success">
                         <i class="far fa-plus-square"></i> Cadastrar Usuário
                     </a>
                 </div>

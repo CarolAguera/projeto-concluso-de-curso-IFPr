@@ -102,7 +102,7 @@ mysqli_close($conexao);
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <a href="Produto.php" type="button" style="padding-top: 7px; padding-bottom: 6px;" class="btn btn-outline-warning">
+                    <a href="Produto.php" type="button" style="padding-top: 7px; padding-bottom: 6px;" class="btn  btn-success">
                         <i class="far fa-plus-square"></i> Cadastrar Produto
                     </a>
                 </div>
