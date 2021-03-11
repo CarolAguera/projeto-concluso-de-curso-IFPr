@@ -28,3 +28,6 @@ table, th, td {
    color: red;  
    font-weight: bold;  
  }  
+ .imagem{
+   border-radius: 10%;
+ }

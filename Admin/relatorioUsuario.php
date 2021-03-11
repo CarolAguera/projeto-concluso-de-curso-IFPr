@@ -25,7 +25,7 @@ function getTabela($mpdf)
 {
 
 	$retorno = "";
-	$retorno = "<img src=\"../img/dpbrasillogo.png\"> ";
+	$retorno = "<img class='imagem' src=\"../img/dpbrasillogo.png\"> ";
 	//$retorno = $mpdf->Image('../img/dpbrasillogo.png', 0, 0, 210, 297, 'png', '', true, false);;
 	//$retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
 	$retorno .= "<h4 style=\"text-align:center\">Relatório de Usuário</h4>";
