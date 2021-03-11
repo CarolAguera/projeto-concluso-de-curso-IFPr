@@ -147,7 +147,7 @@ if (isset($_POST['salvar'])) {
 
     </div>
     <script>
-        $('.dinheiro').mask('#.##0.00', {
+        $('.dinheiro').mask('#.##0,00', {
             reverse: true
         });
 

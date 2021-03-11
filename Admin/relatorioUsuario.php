@@ -3,21 +3,31 @@ require_once("../verificaSessao.php");
 include("../mpdf60/mpdf.php");
 require_once __DIR__ . '../../../vendor/autoload.php';
 
-function getFooter(){  
+function formataData($data)
+{
+	return substr($data, 8, 2) . "/" .
+		substr($data, 5, 2) . "/" .
+		substr($data, 0, 4);
+}
+function getFooter()
+{
 	$retorno = "<table class=\"tbl_footer\" width=\"1000\">  
 			<tr> 
 			  <td align=\"left\"><a href='malito:carolaguerabr@gmail.com'>carolaguerabr@gmail.com</a></td>  
 			  <td align=\"right\">Página: {PAGENO}</td>  
 			</tr>  
-		  </table>";  
-	return $retorno;  
-  }  
+		  </table>";
+	return $retorno;
+}
 
 
-function getTabela()
+function getTabela($mpdf)
 {
+
 	$retorno = "";
-	$retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
+	$retorno = "<img src=\"../img/dpbrasillogo.png\"> ";
+	//$retorno = $mpdf->Image('../img/dpbrasillogo.png', 0, 0, 210, 297, 'png', '', true, false);;
+	//$retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
 	$retorno .= "<h4 style=\"text-align:center\">Relatório de Usuário</h4>";
 	$retorno .= "<table border='1' width='1000' align='center'>  
 		 <tr class='header'>  
@@ -35,7 +45,7 @@ function getTabela()
 		$retorno .= "<tr class=\"zebra\">";
 		$retorno .=	"<td class='destaque'>{$data['id']} </td>";
 		$retorno .= "<td>{$data['nome_completo']} </td>";
-		$retorno .= "<td>{$data['data_nascimento']} </td>";
+		$retorno .= " <td>" . formataData($data['data_nascimento']) . "</td>";
 		$retorno .= "<td>{$data['email']} </td>";
 	}
 	$retorno .= "</table>";
@@ -46,7 +56,7 @@ $mpdf = new \Mpdf\mPDF();
 $mpdf->SetDisplayMode('fullpage');
 $css = file_get_contents("../css/estilo.css");
 $mpdf->WriteHTML($css, 1);
-$mpdf->SetHTMLFooter(getFooter());  
-$mpdf->WriteHTML(getTabela());
+$mpdf->SetHTMLFooter(getFooter());
+$mpdf->WriteHTML(getTabela($mpdf));
 $mpdf->Output();
 exit;
