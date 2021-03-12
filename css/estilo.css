@@ -28,6 +28,9 @@ table, th, td {
    color: red;  
    font-weight: bold;  
  }  
- .imagem{
-   border-radius: 10%;
- }
+ .imagem {
+  display: block;
+  margin-left: 210px;
+  margin-right: 200px;
+  width: 40%;
+}

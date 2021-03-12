@@ -8,6 +8,7 @@ if (isset($_POST['salvar'])) {
     $nome = $_POST['nome'];
     $codigo = $_POST['codigo'];
     $valorvenda = $_POST['valorvenda'];
+    str_replace(",",".",str_replace(".","",$valorvenda));
     $categoria = $_POST['categoria'];
     $marca = $_POST['marca'];
     $medida = $_POST['medida'];

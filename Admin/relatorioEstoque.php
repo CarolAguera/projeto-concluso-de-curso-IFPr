@@ -18,7 +18,8 @@ function getFooter()
 function getTabela()
 {
   $retorno = "";
-  $retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
+  $retorno = "<img class='imagem' src=\"../img/dpbrasillogo.png\"> ";
+  //$retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
   $retorno .= "<h4 style=\"text-align:center\">Relatório de Produtos</h4>";
   $retorno .= "<table border='1' width='1000' align='center'>  
 		 <tr class='header'>  
