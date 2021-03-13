@@ -71,7 +71,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `local_trabalho`, `telefone_trabalho`, `nome_completo`, `data_nascimento`, `cpf`, `email`, `sexo`, `telefone_residencial`, `telefone_celular`, `rua`, `bairro`, `cep`, `numero`, `cidade`, `uf`, `status`) VALUES
-(1, 'Depósito Brasil', '36397282', 'Flavio Fedechen Aguiar                 ', '2002-01-12', '10628065906', 'flavio@gmail.com', 2, '4436398933', '44984594973', 'Rua Treze de Maio', 'Jardim Colibri', '87506340', 1829, 'Umuarama', 'PR', 1);
+(1, 'Depósito Brasil', '36397282', 'Flavio Fedechen Aguiar', '2002-01-12', '10628065906', 'flavio@gmail.com', 2, '4436398933', '44984594973', 'Rua Treze de Maio', 'Jardim Colibri', '87506340', 1829, 'Umuarama', 'PR', 1);
 
 -- --------------------------------------------------------
 

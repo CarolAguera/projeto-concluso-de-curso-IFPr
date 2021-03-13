@@ -8,7 +8,7 @@ if (isset($_POST['salvar'])) {
     $nome = $_POST['nome'];
     $codigo = $_POST['codigo'];
     $valorvenda = $_POST['valorvenda'];
-    str_replace(",",".",str_replace(".","",$valorvenda));
+    $venda = str_replace(",",".",str_replace(".","",$valorvenda));
     $categoria = $_POST['categoria'];
     $marca = $_POST['marca'];
     $medida = $_POST['medida'];
@@ -25,7 +25,7 @@ if (isset($_POST['salvar'])) {
 
     //Gerar a SQL
     $sql = "insert into produto (nome,codigo,valor_venda,Categoria_id,Marca_id,medida_id,status,quantidade) 
-        values ('{$nome}','{$codigo}', '{$valorvenda}', '{$categoria}', '{$marca}', '{$medida}', '{$status}', '{$quantidade}') ";
+        values ('{$nome}','{$codigo}', '{$venda}', '{$categoria}', '{$marca}', '{$medida}', '{$status}', '{$quantidade}') ";
 
     //Executar a SQL
     mysqli_query($conexao, $sql);

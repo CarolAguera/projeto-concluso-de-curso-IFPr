@@ -32,57 +32,31 @@ require_once("../menu.php");
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Seu carrinho</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
+                    <span class="text-muted">Resumo: </span>
                 </h4>
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 class="my-0">Nome do produto</h6>
-                            <small class="text-muted">Breve descrição</small>
+                            <h6 class="my-0">TOTAL: </h6>
                         </div>
-                        <!--                         
-                        <?php
-                        $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                        $sql = "select id,valor_venda from produto ";
-                        $produto = mysqli_query($conexao, $sql);
-                        ?>
-                        <span class="text-muted" value="<?= $data['id'] ?> "><?= $data['valor_venda']  ?>R$</span>
-                        <?php
-                        mysqli_close($conexao);
-                        ?> -->
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Segundo produto</h6>
-                            <small class="text-muted">Breve descrição</small>
-                        </div>
-                        <span class="text-muted">R$8</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Terceiro item</h6>
-                            <small class="text-muted">Breve descrição</small>
-                        </div>
-                        <span class="text-muted">R$5</span>
+                        <span class="text-muted">R$60</span>
                     </li>
                     <!-- Isso aqui serve para se for aplicado algum desconto -->
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
-                            <h6 class="my-0">Código de promoção</h6>
-                            <small>CODIGOEXEMEPLO</small>
+                            <h6 class="my-0">Desconto: </h6>
                         </div>
                         <span class="text-success">-R$5</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total da Venda</span>
-                        <strong>R$20</strong>
+                        <span>Total da Venda: </span>
+                        <strong>R$55</strong>
                     </li>
                 </ul>
             </div>
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Seleciona Cliente</h4>
-                <form name="form" method="POST" action="vendas.php">
+                <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
+                    <h4 class="mb-3">Seleciona Cliente</h4>
                     <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
@@ -95,13 +69,9 @@ require_once("../menu.php");
                         <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
                         <?php  }    ?>
                     </select>
-                    <br>
-                    <br>
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="adicionarCliente">Adicionar Cliente</button>
-                </form>
-                <hr class="mb-4">
-                <h4 class="mb-3">Seleciona Produtos</h4>
-                <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Seleciona Produtos</h4>
+
                     <select class="js-example-basic-single js-states form-control" name="produto" style="width: 100%" required>
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
@@ -114,10 +84,16 @@ require_once("../menu.php");
                         <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
                         <?php  }    ?>
                     </select>
-                    <label>Quantidade Estoque</label>
-                    <input readonly="" type="text" class="form-control input-sm" id="quantidade" name="quantidade">
-                    <label>Preço</label>
-                    <input readonly="" type="text" class="form-control input-sm" id="preco" name="preco">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Quantidade Estoque</label>
+                            <input readonly="" type="text" class="form-control" id="quantidade" name="quantidade">
+                        </div>
+                        <div class="col-6">
+                            <label>Preço</label>
+                            <input readonly="" type="text" class="form-control" id="preco" name="preco">
+                        </div>
+                    </div>
                     <label>Quantidade Vendida</label>
                     <input type="text" class="form-control input-sm" id="quantV" name="quantV" required>
                     <br>
@@ -125,48 +101,87 @@ require_once("../menu.php");
                 </form>
 
                 <hr class="mb-4">
+                <h4 class="mb-3">Pagamento</h4>
 
-                <form class="needs-validation" novalidate>
-                    <h4 class="mb-3">Pagamento</h4>
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
+                        <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <h4 class="mb-3">Lista de Produtos</h4>
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered table-striped">
+                            <thead style="background-color: white;">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Produto</th>
+                                    <th scope="col">Quantidade</th>
+                                    <th scope="col">Preço Un.</th>
+                                    <th scope="col">Preço Total</th>
+                                    <th scope="col">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><b>1</b></th>
+                                    <td>Cimento</td>
+                                    <td>2</td>
+                                    <td>30,00</td>
+                                    <td>60,00</td>
+                                    <td class="actions d-flex">
+                                        <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="vendas.php" method="post">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked required>
-                            <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
+                <div class="row">
+                    <div class="col">
+                        <form action="vendas.php" method="post">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Desconto R$ </div>
+                                </div>
+                                <input type="text" class="form-control" name="desconto" id="desconto" placeholder="Desconto">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><b>TOTAL R$ </b></div>
+                            </div>
+                            <input type="text" class="form-control" name="desconto" id="total" disabled>
                         </div>
                     </div>
-                    <hr class="mb-4">
-                    <div class="row">
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-success btn-lg btn-block" style="margin-bottom: 50px;" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
 
-                        <!-- Mostra o total da compra -->
-                        <label for="cc-nome">Total da Venda</label>
-                        <input type="text" class="form-control" id="cc-nome" placeholder="Total da Venda" disabled>
-
-                    </div>
-                    <div class="row">
-
-                        <!-- Colocar valor de desconto-->
-                        <label for="cc-nome">Desconto</label>
-                        <input type="text" class="form-control" id="cc-nome" placeholder="Desconto" >
-
-                    </div>
-                    <div class="row">
-
-                        <!-- Digita o valor que o cliente pagou -->
-                        <label for="cc-nome">Valor Recebido</label>
-                        <input type="text" class="form-control" id="cc-nome" placeholder="Valor Recebido do Cliente" required>
-
-                    </div>
-                    <div class="row">
-
-                        <!--Mostra o valor que falta para receber do cliente -->
-                        <label for="cc-nome">Saldo a Receber</label>
-                        <input type="text" class="form-control" id="cc-nome" placeholder="Saldo a Receber" required>
-
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-success btn-lg btn-block" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
-                </form>
             </div>
         </div>
     </div>
@@ -197,7 +212,6 @@ require_once("../menu.php");
             }, false);
         })();
     </script>
-
 </body>
 
 </html>
