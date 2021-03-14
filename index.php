@@ -6,8 +6,6 @@
 <head>
     <link rel="icon" href="img/iconPNG.png" type="image/png" sizes="16x16">
     <a href='https://br.freepik.com/fotos/fundo'></a>
-
-    <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         @media only screen and (max-width: 986px) {
             form {
@@ -24,6 +22,86 @@
             background-image: url("img/textura2.jpg");
         }
 
+        .banner_btn {
+            display: inline-block;
+            padding: 6px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background: rgb(20, 141, 197);
+            color: #fff;
+            font-weight: 500;
+            text-decoration: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .banner_btn:hover {
+            background: #22967c;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer_bottom {
+            margin-top: 20px;
+            padding: 2em 0;
+            /* background: #2ABB9B; */
+            background: rgb(20, 141, 197);
+        }
+
+        .follow-us {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .social-icon {
+            padding-top: 6px;
+            font-size: 16px;
+            text-align: center;
+            width: 32px;
+            height: 32px;
+            border: 2px solid #d5f1eb;
+            border-radius: 50%;
+            color: #d5f1eb;
+            margin: 5px;
+        }
+
+        a.social-icon:hover,
+        a.social-icon:active,
+        a.social-icon:focus {
+            text-decoration: none;
+            color: #e5e52d;
+            border-color: #e5e52d;
+        }
+
+        .copy {
+            text-align: center;
+        }
+
+        .copy p {
+            font-size: 1em;
+            color: #fff;
+        }
+
+        .copy p a {
+            color: #fff;
+            border-bottom: 1px dotted;
+        }
+
+        .copy p a:hover {
+            color: #e5e52d;
+            border-bottom: 1px solid;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -43,10 +121,10 @@
                             <a class="nav-link" href="index.php">Início<span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="Orcamento.php"><b> Orçamento</b><span class="sr-only"></span></a>
+                            <a class="nav-link" href="Orcamento.php"> Orçamento</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">Login/Cadastro</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="login.php"><i class="fas fa-users-cog"></i><b> Login/Cadastro</b></a>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +134,6 @@
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -64,13 +141,7 @@
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Visite a nossa Loja</h5>
                             <p>Os melhores preços de Umuarama</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/ferragens.jpg" class="d-block w-100 imagem-carrossel img-fluid" alt="Imagem de ferragens para fazer propaganda dos produtos">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Orçamento</h5>
-                            <p>Os melhores produtos para atender a sua necessidade, com os melhores preços! </p>
+                            <a class="banner_btn" href="Orcamento.php">Faça Já Seu Orçamento!</a>
                         </div>
                     </div>
                 </div>
@@ -96,7 +167,7 @@
                     </div>
                     <div class="card-footer">
                         <center>
-                            <a href="Orcamento.php" class="btn btn-primary">Saber Mais</a>
+                            <a href="Orcamento.php" class="btn btn-warning">Saber Mais</a>
                         </center>
                     </div>
                 </div>
