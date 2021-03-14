@@ -6,6 +6,8 @@
 <head>
     <link rel="icon" href="img/iconPNG.png" type="image/png" sizes="16x16">
     <a href='https://br.freepik.com/fotos/fundo'></a>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         @media only screen and (max-width: 986px) {
             form {
@@ -21,6 +23,7 @@
         .teste {
             background-image: url("img/textura2.jpg");
         }
+
     </style>
 </head>
 
@@ -111,8 +114,7 @@
                 </div>
             </div>
         </div>
-
-        <footer style="background-color: rgb(20, 141, 197);">
+        <!-- <footer style="background-color: rgb(20, 141, 197);">
             <div class="mt-4 p-4">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -132,7 +134,18 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
+
+        <div class="footer">
+            <div class="footer_bottom">
+                <div class="follow-us"> <a class="fa fa-facebook social-icon" href="#"></a> <a class="fa fa-twitter social-icon" href="#"></a> <a class="fa fa-linkedin social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
+                <div class="copy">
+                    <p>Copyright &copy; Depósito Brasil - Materiais para Construcão - 1994 - 2021</p>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </body>
 

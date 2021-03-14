@@ -37,21 +37,10 @@ require_once("dependencias.php");
             <a class="nav-link" href="login.php">Login/Cadastro</a>
           </li>
         </ul>
-        <form>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Oque você deseja ?" aria-label="Input group example" aria-describedby="btnGroupAddon">
-            <div class="input-group-prepend Auto-sizing">
-              <div class="btn btn-primary butao" style="height:38px;" type="submit"><i class="fas fa-search icone" style="margin-top: 3px;"></i></div>
-            </div>
-          </div>
-        </form>
-
       </div>
     </div>
   </nav>
-  <br>
-  <br>
-  <center>
+  <center style="margin-top: 10px;">
     <h1><strong> Orçamento</strong></h1>
   </center>
   <br>
