@@ -1,14 +1,13 @@
 <?php
-require_once("../dependencias.php");
-require_once("../verificaSessao.php");
+require_once("dependencias.php");
+
 ?>
 
 <head>
     <style>
         .footer_bottom {
             margin-top: 20px;
-            padding-top: 0.4em;
-            padding-bottom: 0.1rem;
+            padding: 2em 0;
             /* background: #2ABB9B; */
             background: rgb(20, 141, 197);
         }
@@ -21,6 +20,7 @@ require_once("../verificaSessao.php");
 
         .fa {
             display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
             font-size: inherit;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
@@ -68,7 +68,7 @@ require_once("../verificaSessao.php");
         }
     </style>
 </head>
-<div class="footer fixed-bottom">
+<div class="footer">
     <div class="footer_bottom">
         <div class="follow-us"> <a class="fa fa-facebook social-icon" href="https://www.facebook.com/elias.aguera.7"></a> <a class="fa fa-twitter social-icon" href="#"></a> <a class="fa fa-linkedin social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
         <div class="copy">

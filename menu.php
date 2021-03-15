@@ -92,7 +92,7 @@ require_once("dependencias.php");
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-list-alt"></i>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-file-pdf"></i>
                             Relatórios
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
