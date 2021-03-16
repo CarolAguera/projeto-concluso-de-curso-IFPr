@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-
 <?php
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
@@ -86,10 +84,11 @@ if (isset($_POST['salvar'])) {
     $telefone_trabalho = $_POST['telefone_trabalho'];
     $sexo = $_POST['sexo'];
     $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
+    $uf = $_POST['uf'];
     $data_nascimento = $_POST['data_nascimento'];
     $telefone_celular = $_POST['telefone_celular'];
     $telefone_residencial = $_POST['telefone_residencial'];
+    $bairro = $_POST['bairro'];
     $cpf = $_POST['cpf'];
     if (isset($_POST['statusAtualizar'])) {
         $statusAtualizar = 1;
@@ -100,17 +99,18 @@ if (isset($_POST['salvar'])) {
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
 
-    $sql = "insert into cliente (nome_completo,email,rua,cep,numero,local_trabalho,telefone_trabalho,sexo,cidade,estado,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
+    $sql = "insert into cliente (nome_completo,email,rua,cep,bairro,numero,local_trabalho,telefone_trabalho,sexo,cidade,uf,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
         values ('{$nome}',
         '{$email}', 
         '{$rua}', 
         '{$cep}', 
+        '{$bairro}',
         '{$numero}', 
         '{$local_trabalho}', 
         '{$telefone_trabalho}', 
         '{$sexo}',
         '{$cidade}',
-        '{$estado}',
+        '{$uf}',
         '{$data_nascimento}',
         '{$telefone_celular}',
         '{$telefone_residencial}',
@@ -178,7 +178,7 @@ require_once("../menu.php");
                 </div>
                 <div class="form-group col-md-2">
                     <label>Bairro</label>
-                    <input name="bairro" type="text" class="form-control" id="bairro" size="40" required>
+                    <input name="bairro" type="text" class="form-control" id="bairro"  required>
                 </div>
                 <div class="form-group col-md-1">
                     <label for="inputNumero">Número</label>
@@ -211,7 +211,7 @@ require_once("../menu.php");
                 </div>
                 <div class="form-group col-md-4">
                     <label>Estado</label>
-                    <input name="uf" class="form-control" type="text" id="uf" size="2" required />
+                    <input name="uf" class="form-control" type="text" id="uf" required />
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNasc">Data de Nascimento</label>

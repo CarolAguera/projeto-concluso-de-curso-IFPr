@@ -7,7 +7,6 @@ require_once("../menu.php");
 ?>
 
 <head>
-
     <script>
         function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
@@ -56,7 +55,7 @@ require_once("../menu.php");
                     var script = document.createElement('script');
 
                     //Sincroniza com o callback.
-                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+                    script.src = 'https://viacep.com.br/ws/' + cep +'/json/?callback=meu_callback';
 
                     //Insere script no documento e carrega o conteúdo.
                     document.body.appendChild(script);
@@ -286,7 +285,7 @@ if (isset($_POST['atualizar'])) {
                                                     <input type="cpf" class="form-control" id="inputCPF" name="cpf" value="<?= $data['cpf']  ?>" maxlength="11" required>
 
                                                     <label for="inputCEP">CEP</label>
-                                                    <input name="cep" type="text" id="cep" class="form-control"  size="10" maxlength="9" onchange="pesquisacep(this.value);"  value="<?= $data['cep']  ?>"required >
+                                                    <input name="cep" type="text" id="cep" class="form-control" size="10" maxlength="9" onchange="pesquisacep(this.value);" value="<?= $data['cep']  ?>" required>
 
                                                     <label for="inputCity">Cidade</label>
                                                     <input name="cidade" type="text" id="cidade" class="form-control" size="40" required value="<?= $data['cidade']  ?>" required>
@@ -297,7 +296,7 @@ if (isset($_POST['atualizar'])) {
                                                     <label>Rua</label>
                                                     <input type="text" class="form-control" id="rua" size="60" placeholder="Digite seu Rua" name="rua" value="<?= $data['rua']  ?>" required>
 
-                                                    <label >Bairro</label>
+                                                    <label>Bairro</label>
                                                     <input type="text" class="form-control" id="bairro" value="<?= $data['bairro']  ?>" placeholder="Digite seu Bairro" name="bairro" required>
 
                                                     <label for="inputNumero">Número</label>
