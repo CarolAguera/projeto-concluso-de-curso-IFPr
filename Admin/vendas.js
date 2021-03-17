@@ -10,10 +10,10 @@ $(function() {
         }
         
         var produto_id        = $("#produto_id").val() //form.produto_id.value
-        var produto_descricao = $("#produto_id option:selected").text()
-        var quantidade        = Number($("#quantidade").val())
+        var produto_nome = $("#produto_id option:selected").text()
+        var quantV        = Number($("#quantV").val())
         var valorUnitario     = Number($("#valorUnitario").val().replace(',', '.'))
-        var valorTotalDoItem  = quantidade * valorUnitario
+        var valorTotalDoItem  = quantV * valorUnitario
 
         //Troca de ponto pra vírgula para exibir os decimais no valor
         var valorUnitarioStr  = formataValorStr(valorUnitario)
@@ -24,15 +24,15 @@ $(function() {
 		$("#tabela").append(
         "<tr>"+
             "<input type=\"hidden\" name=\"produto_id[]\" value='"+ produto_id +"' />" + 
-            "<input type=\"hidden\" name=\"quantidade[]\" value='"+ quantidade +"' />" + 
+            "<input type=\"hidden\" name=\"quantV[]\" value='"+ quantV +"' />" + 
             "<input type=\"hidden\" name=\"valor[]\" value='"+ valorUnitario +"' />" +
 
-            "<td>"+ produto_descricao +"</td>"+ //"+ $produto_id +"
-            "<td class=\"text-right\" id=\"quantidade\">"+ quantidade +"</td>"+ //"+ $quantidade +"
+            "<td>"+ produto_nome +"</td>"+ //"+ $produto_id +"
+            "<td class=\"text-right\" id=\"quantV\">"+ quantV +"</td>"+ //"+ $quantV +"
             "<td class=\"text-right\" id=\"valorUnitario\">"+ valorUnitarioStr +"</td>"+ //"+ $valor +"
             "<td class=\"text-right\" id=\"valorTotalItem\">"+ valorTotalItemStr +"</td>"+
             "<td class=\"text-center\">"+
-                "<button type=\"button\" class=\"btn btn-danger btn-sm btnExcluir\">"+
+                "<button type=\"button\" class=\"btn btn-danger btn-sm excluir\">"+
                     "<i class=\"far fa-trash-alt\"></i>"+
                 "</button>"+
             "</td>"+
@@ -65,22 +65,22 @@ $(function() {
             alert('O campo produto é obrigatório.')
             form.produto_id.focus()
             return false
-        } else if (form.quantidade.value == '') {
-            alert('O campo quantidade é obrigatório.')
-            form.quantidade.focus()
+        } else if (form.quantV.value == '') {
+            alert('O campo quantV é obrigatório.')
+            form.quantV.focus()
             return false
-        } else if (form.valorUnitario.value == '') {
-            alert('O campo valor unitário é obrigatório.')
-            form.valorUnitario.focus()
-            return false
-        }
+        } //else if (form.valorUnitario.value == '') {
+        //     alert('O campo valor unitário é obrigatório.')
+        //     form.valorUnitario.focus()
+        //     return false
+        // }
 
         return true
     }
 
     function limpaCampos() {
         form.produto_id.value = ''
-        form.quantidade.value = '1'
+        form.quantV.value = '1'
         form.valorUnitario.value = ''
     }
     
@@ -105,7 +105,7 @@ $(function() {
     }
 
 
-    $(".btnExcluir").bind("click", Excluir);
-	$("#btnAdicionar").bind("click", Adicionar);
+    $(".excluir").bind("click", Excluir);
+	$("#adicionarProdutos").bind("click", Adicionar);
 	$("#btnAplicarDesconto").bind("click", AplicarDesconto);
 });

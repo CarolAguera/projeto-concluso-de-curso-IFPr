@@ -10,7 +10,7 @@ require_once("../menu.php");
 <head>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script type="text/javascript" src="../compra-venda.js"></script>
+    <script type="text/javascript" src="vendas.js"></script>
     <style>
         .pt-5,
         .py-5 {
@@ -40,20 +40,32 @@ require_once("../menu.php");
                         <div>
                             <h6 class="my-0">TOTAL: </h6>
                         </div>
-                        <span class="text-muted">R$60</span>
+                        <span class="text-muted">
+                            <div id="resumoSoma">0,00</div>
+                        </span>
                     </li>
                     <!-- Isso aqui serve para se for aplicado algum desconto -->
                     <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Desconto: </h6>
+                        <div class="input-group text-right">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text font-weight-bold text-success">Desconto R$</div>
+                            </div>
+                            <input type="text" class="form-control text-right" name="desconto" value="0,00">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" id="btnAplicarDesconto"><i class="fas fa-check"></i></button>
+                            </div>
                         </div>
-                        <span class="text-success">-R$5</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total da Venda: </span>
-                        <strong>R$55</strong>
+                        <strong>
+                            <div id="resumoValorTotal">0,00</div>
+                        </strong>
                     </li>
                 </ul>
+                <div class="input-group">
+                    <button class="btn btn-success btn-lg btn-block" style="margin-bottom: 50px;" name="finalizar" value="finalizar"  type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
+                </div>
             </div>
             <div class="col-md-8 order-md-1">
                 <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
@@ -114,7 +126,7 @@ require_once("../menu.php");
                 <h4 class="mb-3">Lista de Produtos</h4>
                 <div class="row">
                     <div class="col">
-                        <table class="table table-bordered table-striped">
+                        <table id="tabela" class="table table-striped table-bordered table-hover table-sm">
                             <thead style="background-color: white;">
                                 <tr>
                                     <th scope="col">#</th>
@@ -126,63 +138,11 @@ require_once("../menu.php");
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row"><b>1</b></th>
-                                    <td>Cimento</td>
-                                    <td>2</td>
-                                    <td>30,00</td>
-                                    <td>60,00</td>
-                                    <td class="actions d-flex">
-                                        <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
-                                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="vendas.php" method="post">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <!-- Conteúdo -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <form action="vendas.php" method="post">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">Desconto R$ </div>
-                                </div>
-                                <input type="text" class="form-control" name="desconto" id="desconto" placeholder="Desconto">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><b>TOTAL R$ </b></div>
-                            </div>
-                            <input type="text" class="form-control" name="desconto" id="total" disabled>
-                        </div>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <button class="btn btn-success btn-lg btn-block" style="margin-bottom: 50px;" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
-
             </div>
         </div>
     </div>
