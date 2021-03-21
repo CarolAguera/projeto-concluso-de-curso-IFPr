@@ -57,7 +57,7 @@ require_once("dependencias.php");
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark flex-container " style="background-color:  rgb(20, 141, 197);">
+    <nav class="navbar navbar-expand-lg navbar-dark flex-container" style="background-color:  rgb(20, 141, 197);">
         <div>
             <a class=" navbar-brand float" href="../Admin/IndexAdmin.php"><img class="img-responsive img-thumbnail" src="../img/dpbrasillogo.png" alt="" width="100px" height="60px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

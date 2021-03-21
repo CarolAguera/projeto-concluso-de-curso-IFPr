@@ -9,8 +9,13 @@ require_once("../verificaSessao.php");
             margin-top: 20px;
             padding-top: 0.4em;
             padding-bottom: 0.1rem;
-            /* background: #2ABB9B; */
             background: rgb(20, 141, 197);
+        }
+
+        @media screen and (max-width: 960px) {
+            .fixed-bottom {
+                position: relative !important;
+            }
         }
 
         .follow-us {
@@ -68,11 +73,11 @@ require_once("../verificaSessao.php");
         }
     </style>
 </head>
-<div class="footer fixed-bottom">
+<footer class="footer fixed-bottom">
     <div class="footer_bottom">
-        <div class="follow-us"> <a class="fa fa-facebook social-icon" href="https://www.facebook.com/elias.aguera.7"></a> <a class="fa fa-twitter social-icon" href="#"></a> <a class="fa fa-linkedin social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
+        <div class="follow-us"> <a class="fa fa-facebook social-icon" href="https://www.facebook.com/elias.aguera.7"></a> <a class="fab fa-whatsapp social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
         <div class="copy">
             <p>Copyright &copy; Depósito Brasil - Materiais para Construcão - 1994 - 2021</p>
         </div>
     </div>
-</div>
+</footer>
