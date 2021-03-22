@@ -101,7 +101,7 @@ require_once("../menu.php");
                     <div class="row">
                         <div class="col-6">
                             <label>Quantidade Estoque</label>
-                            <input readonly="" type="text" class="form-control" id="quantidade" name="quantidade" >
+                            <input readonly="" type="text" class="form-control" id="quantidade" name="quantidade">
                         </div>
                         <div class="col-6">
                             <label>Preço</label>
@@ -111,7 +111,7 @@ require_once("../menu.php");
                     <label>Quantidade Vendida</label>
                     <input type="number" class="form-control input-sm" id="quantV" name="quantV">
                     <br>
-                    <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos">Adicionar Produto</button>
+                    <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">
                     <h4 class="mb-3">Lista de Produtos</h4>
                     <div class="row">
@@ -150,15 +150,12 @@ require_once("../menu.php");
             </div>
         </form>
     </div>
-
-
-
-
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
     </script>
+    
 </body>
 
 </html>

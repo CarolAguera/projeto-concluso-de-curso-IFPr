@@ -173,7 +173,7 @@ if (isset($_POST['atualizar'])) {
                 </div>
             </div>
         </center>
-        <div class="row container" style="background: transparent;">
+        <div class="table-responsive" style="background: transparent;">
             <table class="table table-striped" style="margin-top: 20px; ">
                 <thead>
                     <tr>
@@ -212,7 +212,7 @@ if (isset($_POST['atualizar'])) {
                             <center>
                                 <form action="clientes.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
                                     <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -317,7 +317,7 @@ if (isset($_POST['atualizar'])) {
                                     </div>
                                 </form>
                             </center>
-                            <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <button class="btn btn-danger btn-xs" style="height: 46px;" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
                             <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">

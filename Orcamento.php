@@ -131,7 +131,7 @@ require_once("dependencias.php");
 
 
 
-  <footer class="footer fixed-bottom">
+  <footer class="footer ">
     <div class="footer_bottom">
       <div class="follow-us"> <a class="fa fa-facebook social-icon" href="https://www.facebook.com/elias.aguera.7"></a> <a class="fab fa-whatsapp social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
       <div class="copy">

@@ -159,6 +159,6 @@ if (!isset($_SESSION)) {
     </div>
 </body>
 <?php
-require_once("rodape.php");
+require_once("./rodape.php");
 ?>
 </html>

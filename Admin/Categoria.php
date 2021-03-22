@@ -102,10 +102,8 @@ if (isset($_POST['atualizar'])) {
         </form>
     </center>
     <center>
-        <div class="row container" style="width: 450px; margin-top: 30px; background: transparent;">
-
-
-            <table class=" table-striped table table-hover container">
+        <div class="table-responsive">
+            <table class=" table-striped table table-hover container" style="width: auto;">
                 <thead style="color: black;">
                     <tr>
                         <th>ID</th>
@@ -131,11 +129,10 @@ if (isset($_POST['atualizar'])) {
                         <td><?= $data['id']  ?></td>
                         <td><?= $statusProduto  ?></td>
                         <td><?= $data['nome']  ?></td>
-                        <td class="actions d-flex" style="margin:0px;" style="width: auto;">
+                        <td class="actions d-flex">
                             <!-- <center> -->
                             <form action="Categoria.php" method="post" class="needs-validation" novalidate>
-                                <!-- <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px;" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><img src="../img/editar.png" alt="" srcset="" width="27px" height="27px"><?php ?></button> -->
-                                <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#ExemploModalCentralizado1<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-warning btn-xs" style="height: 46px; margin-right: 2px;" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado1<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
 
                                 <div class="modal fade" id="ExemploModalCentralizado1<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -192,7 +189,7 @@ if (isset($_POST['atualizar'])) {
                             </form>
 
 
-                            <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <button class="btn btn-danger btn-xs" style="height: 46px;" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
                             <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">

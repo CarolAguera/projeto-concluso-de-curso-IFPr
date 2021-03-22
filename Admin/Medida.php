@@ -89,119 +89,122 @@ if (isset($_POST['atualizar'])) {
             </div>
             <button type="submit" class="btn btn-success" style="margin-top: 30px;" name="salvar">Cadastrar</button>
         </form>
-        <table class="table table-hover" style="margin-top: 40px; width: auto;">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Medida</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody style="color: black;">
-                <?php
-                $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                $sql = "select * from medida ";
-                $medidas = mysqli_query($conexao, $sql);
-                mysqli_close($conexao);
-                while ($data = mysqli_fetch_array($medidas)) {
-                    if ($data['status'] == 1) {
-                        $statusProduto = 'Ativo';
-                    } else {
-                        $statusProduto = 'Inativo';
-                    } ?>
+        <div class="table-responsive">
 
-                <tr>
-                    <td><?= $data['id']  ?></td>
-                    <td><?= $statusProduto  ?></td>
-                    <td><?= $data['nome']  ?></td>
+            <table class="table table-hover" style="margin-top: 40px; width: auto;">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Medida</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody style="color: black;">
+                    <?php
+                    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+                    $sql = "select * from medida ";
+                    $medidas = mysqli_query($conexao, $sql);
+                    mysqli_close($conexao);
+                    while ($data = mysqli_fetch_array($medidas)) {
+                        if ($data['status'] == 1) {
+                            $statusProduto = 'Ativo';
+                        } else {
+                            $statusProduto = 'Inativo';
+                        } ?>
 
-                    <td class="actions d-flex" style="width: 120px;">
-                        <center>
-                            <form action="Medida.php" name="form" method="post" class="needs-validation" novalidate>
+                    <tr>
+                        <td><?= $data['id']  ?></td>
+                        <td><?= $statusProduto  ?></td>
+                        <td><?= $data['nome']  ?></td>
 
-                                <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                        <td class="actions d-flex" style="width: 120px;">
+                            <center>
+                                <form action="Medida.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Alterar medida</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                                                <?php if ($data['status'] == 1) { ?>
+                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
 
-                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                    <div class="input-group" style="width: 200px !important;">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                    <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Alterar medida</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                                    <?php if ($data['status'] == 1) { ?>
+
+                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                        <div class="input-group" style="width: 200px !important;">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
+                                                                </div>
                                                             </div>
+                                                            <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
                                                         </div>
-                                                        <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
                                                     </div>
-                                                </div>
-                                                <?php   } else {
+                                                    <?php   } else {
 
-                                                        ?>
-                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                    <div class="input-group" style="width: 200px !important;">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                            ?>
+                                                    <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                        <div class="input-group" style="width: 200px !important;">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
+                                                                </div>
                                                             </div>
+                                                            <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
                                                         </div>
-                                                        <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
                                                     </div>
-                                                </div>
 
-                                                <?php  } ?>
-                                                <label for="fname">Nome: </label>
-                                                <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> " required>
-                                                <div class="invalid-feedback">
-                                                    Você deve colocar o NOME da nova Medida!
+                                                    <?php  } ?>
+                                                    <label for="fname">Nome: </label>
+                                                    <input name="nomeAtualizar" class="form-control" style="width: 300px !important;" value="<?= $data['nome']  ?> " required>
+                                                    <div class="invalid-feedback">
+                                                        Você deve colocar o NOME da nova Medida!
+                                                    </div>
+                                                    <br>
                                                 </div>
-                                                <br>
-                                            </div>
-                                            <div class="modal-footer" style="display: block;">
+                                                <div class="modal-footer" style="display: block;">
 
-                                                <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
+                                                    <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </center>
-                        <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
-                        <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="Medida.php" method="post">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                                            <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
-                                        </form>
+                                </form>
+                            </center>
+                            <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="Medida.php" method="post">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <?php  }    ?>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    <?php  }    ?>
+                </tbody>
+            </table>
+        </div>
     </center>
     <script>
         (function() {

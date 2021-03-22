@@ -5,17 +5,25 @@ require_once("../verificaSessao.php");
 
 <head>
     <style>
+        .fixed-final {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        @media (max-width: 768.99px) {
+            .fixed-final {
+                position: relative !important;
+            }
+        }
+
         .footer_bottom {
             margin-top: 20px;
             padding-top: 0.4em;
             padding-bottom: 0.1rem;
             background: rgb(20, 141, 197);
-        }
-
-        @media screen and (max-width: 960px) {
-            .fixed-bottom {
-                position: relative !important;
-            }
         }
 
         .follow-us {
@@ -73,7 +81,7 @@ require_once("../verificaSessao.php");
         }
     </style>
 </head>
-<footer class="footer fixed-bottom">
+<footer class="fixed-final">
     <div class="footer_bottom">
         <div class="follow-us"> <a class="fa fa-facebook social-icon" href="https://www.facebook.com/elias.aguera.7"></a> <a class="fab fa-whatsapp social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
         <div class="copy">

@@ -168,7 +168,7 @@ if (isset($_POST['salvar'])) {
         }
     </script>
     <?php
-    require_once("rodape.php");
+    require_once("./rodape.php");
     ?>
 </body>
 

@@ -62,6 +62,10 @@ mysqli_close($conexao);
     <meta charset="UTF-8">
     <title>Estoque</title>
     <style>
+        .teste {
+            background-image: url("../img/textura2.jpg");
+        }
+
         .centr {
             margin-left: 60px;
         }
@@ -72,9 +76,6 @@ mysqli_close($conexao);
 
         .actions {
             width: 300px;
-        }
-        .teste {
-            background-image: url("../img/textura2.jpg");
         }
     </style>
 </head>
@@ -88,9 +89,9 @@ mysqli_close($conexao);
                 </div>
                 <div class="col-sm-6">
                     <?php if (isset($mensagem)) { ?>
-                        <div class="alert alert-success" role="alert">
-                            <?php echo $mensagem; ?>
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $mensagem; ?>
+                    </div>
                     <?php } ?>
                     <div class="container">
                         <form action="Estoque.php" method="post">
@@ -109,7 +110,7 @@ mysqli_close($conexao);
             </div>
             <br>
             <br>
-            <div class="row container">
+            <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -141,7 +142,7 @@ mysqli_close($conexao);
                         // }
 
                         while ($data = mysqli_fetch_array($estoque)) { ?>
-                            <?php
+                        <?php
                             $sqlCategoria = "select * from categoria where id = '{$data['Categoria_id']}' ";
                             $categoria = mysqli_query($conexao, $sqlCategoria);
                             $buscaCategoria = mysqli_fetch_array($categoria);
@@ -161,138 +162,138 @@ mysqli_close($conexao);
                             }
                             ?>
 
-                            <tr>
-                                <td><?= $data['id']  ?></td>
-                                <td><?= $statusProduto  ?></td>
-                                <td><?= $data['nome']  ?></td>
-                                <td><?= $data['codigo']  ?></td>
-                                <td><?= $data['valor_venda']  ?></td>
-                                <td> <?= $buscaCategoria['nome']  ?></td>
-                                <td><?= $buscaMarca['nome']  ?></td>
-                                <td><?= $buscaMedida['nome']  ?></td>
-                                <td><?= $data['quantidade']  ?></td>
+                        <tr>
+                            <td><?= $data['id']  ?></td>
+                            <td><?= $statusProduto  ?></td>
+                            <td><?= $data['nome']  ?></td>
+                            <td><?= $data['codigo']  ?></td>
+                            <td><?= $data['valor_venda']  ?></td>
+                            <td> <?= $buscaCategoria['nome']  ?></td>
+                            <td><?= $buscaMarca['nome']  ?></td>
+                            <td><?= $buscaMedida['nome']  ?></td>
+                            <td><?= $data['quantidade']  ?></td>
 
 
 
-                                <td class="actions d-flex" style="width: 120px;">
-                                    <button class="btn btn-warning btn-xs mr-1" style="height: 46px; width: auto;" type="button" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
-                                    <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
-                                    <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
+                            <td class="actions d-flex" style="width: 120px;">
+                                <button class="btn btn-warning btn-xs mr-1" style="height: 46px; width: auto;" type="button" data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                                <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" style="color: black;" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="Estoque.php" method="post">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                    <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                                    <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade " id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content ">
+                                            <form action="Estoque.php" name="form" method="post">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" style="color: black;" id="TituloModalCentralizado">Confirma a Exclusão ?</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Alterar Produto</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <form action="Estoque.php" method="post">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                                                        <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade " id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content ">
-                                                <form action="Estoque.php" name="form" method="post">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Alterar Produto</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <center>
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                                                            <?php if ($data['status'] == 1) { ?>
+                                                <center>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                                        <?php if ($data['status'] == 1) { ?>
 
-                                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                                    <div class="input-group" style="width: 200px !important;">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">
-                                                                                <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
+                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                            <div class="input-group" style="width: 200px !important;">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        <input type="checkbox" name="statusAtualizar" value="1" onclick="teste(this, <?= $data['id'] ?>);" checked>
                                                                     </div>
                                                                 </div>
-                                                            <?php   } else { ?>
-                                                                <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
-                                                                    <div class="input-group" style="width: 200px !important;">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">
-                                                                                <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                                <div class="form-control"><strong class="text-success" id="labelstatus<?= $data['id'] ?>">Ativo</strong></div>
+                                                            </div>
+                                                        </div>
+                                                        <?php   } else { ?>
+                                                        <div class="form-group"><label class="control-label" style="width: 200px !important;">Status</label>
+                                                            <div class="input-group" style="width: 200px !important;">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        <input type="checkbox" name="statusAtualizar" value="0" onclick="teste(this, <?= $data['id'] ?>);">
                                                                     </div>
                                                                 </div>
+                                                                <div class="form-control"><strong class="text-danger" id="labelstatus<?= $data['id'] ?>">Inativo</strong></div>
+                                                            </div>
+                                                        </div>
 
-                                                            <?php  } ?>
+                                                        <?php  } ?>
 
-                                                            <label for="fname">Nome: </label>
-                                                            <input name="nomeAtualizar" class="form-control" style="width: auto;" value="<?= $data['nome']  ?> ">
+                                                        <label for="fname">Nome: </label>
+                                                        <input name="nomeAtualizar" class="form-control" style="width: auto;" value="<?= $data['nome']  ?> ">
 
-                                                            <label for="fcodigo">Código: </label>
-                                                            <input name="codigo" class="form-control" style="width: auto;" value="<?= $data['codigo']  ?> ">
-                                                            <label for="fvalorvenda">Valor Venda: </label>
-                                                            <input name="valorvenda" class="form-control" style="width: auto;" value="<?= $data['valor_venda']  ?> ">
-                                                            <label>Quantidade</label>
-                                                            <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade'] ?>">
+                                                        <label for="fcodigo">Código: </label>
+                                                        <input name="codigo" class="form-control" style="width: auto;" value="<?= $data['codigo']  ?> ">
+                                                        <label for="fvalorvenda">Valor Venda: </label>
+                                                        <input name="valorvenda" class="form-control" style="width: auto;" value="<?= $data['valor_venda']  ?> ">
+                                                        <label>Quantidade</label>
+                                                        <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade'] ?>">
 
-                                                            <label for="inputCategoria">Categoria: </label>
-                                                            <select id="inputCategoria" class="form-control" name="categoria" style="width: auto;">
-                                                                <?php
+                                                        <label for="inputCategoria">Categoria: </label>
+                                                        <select id="inputCategoria" class="form-control" name="categoria" style="width: auto;">
+                                                            <?php
 
                                                                 $sql = "select * from categoria ";
                                                                 $categorias = mysqli_query($conexao, $sql);
 
                                                                 while ($data = mysqli_fetch_array($categorias)) { ?>
 
-                                                                    <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
-                                                                <?php  }    ?>
-                                                            </select>
-                                                            <label for="inputMarca">Marca: </label>
-                                                            <select id="inputMarca" class="form-control" name="marca" style="width: auto;">
-                                                                <?php
+                                                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                                                            <?php  }    ?>
+                                                        </select>
+                                                        <label for="inputMarca">Marca: </label>
+                                                        <select id="inputMarca" class="form-control" name="marca" style="width: auto;">
+                                                            <?php
 
                                                                 $sql = "select * from marca ";
                                                                 $marcas = mysqli_query($conexao, $sql);
 
                                                                 while ($data = mysqli_fetch_array($marcas)) { ?>
 
-                                                                    <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
-                                                                <?php  }    ?>
-                                                            </select>
-                                                            <label for="inputUnidadedeMedida">Unidade de Medida</label>
-                                                            <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">
-                                                                <?php
+                                                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                                                            <?php  }    ?>
+                                                        </select>
+                                                        <label for="inputUnidadedeMedida">Unidade de Medida</label>
+                                                        <select id="inputUnidadeMedida" class="form-control" name="medida" style="width: auto;">
+                                                            <?php
 
                                                                 $sql = "select * from medida ";
                                                                 $categorias = mysqli_query($conexao, $sql);
 
                                                                 while ($data = mysqli_fetch_array($categorias)) { ?>
 
-                                                                    <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
-                                                                <?php  }    ?>
-                                                            </select>
-                                                            <br>
-                                                            <div class="modal-footer" style="display: block !important;">
-                                                                <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
-                                                            </div>
+                                                            <option value="<?= $data['id']  ?> "><?= $data['nome']  ?></option>
+                                                            <?php  }    ?>
+                                                        </select>
+                                                        <br>
+                                                        <div class="modal-footer" style="display: block !important;">
+                                                            <button type="submit" class="btn btn-success" name="atualizar">Atualizar</button>
                                                         </div>
-                                                    </center>
-                                                </form>
-                                            </div>
+                                                    </div>
+                                                </center>
+                                            </form>
                                         </div>
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
                         <?php  }
 

@@ -93,7 +93,8 @@ if (isset($_POST['excluir'])) {
                 </div>
             </div>
         </center>
-        <div class="row container">
+        <div class="table-responsive">
+
             <table class="table table-striped" style="margin-top: 20px; ">
 
                 <thead>
@@ -122,11 +123,11 @@ if (isset($_POST['excluir'])) {
                         <td><?= $statusUsuario  ?></td>
                         <td><?= $data['nome_completo']  ?></td>
 
-                        <td class="actions d-flex" style="width: 100%;">
+                        <td class="actions d-flex">
                             <center>
                                 <form action="usuarios.php" name="form" method="post" class="needs-validation" novalidate>
 
-                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; width: auto; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-warning btn-xs" type="button" style="margin-right: 4px; height: 46px; " data-toggle="modal" data-target="#modalExemplo<?= $data['id'] ?>"><i class="far fa-edit"></i></button>
                                     <div class="modal fade" id="modalExemplo<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -207,7 +208,7 @@ if (isset($_POST['excluir'])) {
                                     </div>
                                 </form>
                             </center>
-                            <button class="btn btn-danger btn-xs" style="height: 46px; width: auto; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
+                            <button class="btn btn-danger btn-xs" style="height: 46px; " type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
                             <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -272,7 +273,7 @@ if (isset($_POST['excluir'])) {
         }
     </script>
     <?php
-    require_once("rodape.php");
+    require_once("./rodape.php");
     ?>
 </body>
 
