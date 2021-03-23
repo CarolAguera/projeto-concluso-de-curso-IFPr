@@ -12,7 +12,6 @@ if (isset($_POST['salvar'])) {
     $categoria = $_POST['categoria'];
     $marca = $_POST['marca'];
     $medida = $_POST['medida'];
-    //$status = $_POST['status'];
     $quantidade = $_POST['quantidade'];
     if (isset($_POST['status'])) {
         $status = 1;
@@ -74,7 +73,7 @@ if (isset($_POST['salvar'])) {
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputValorVenda">Valor Venda</label>
-                    <input type="double" id="dinheiro" name="valorvenda" class="dinheiro form-control" style="display:inline-block" />
+                    <input type="text" id="dinheiro" name="valorvenda" class="dinheiro form-control" style="display:inline-block" />
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCategoria">Categoria do Produto</label>

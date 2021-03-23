@@ -2,6 +2,35 @@
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
 require_once("../menu.php");
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_POST['finalizar'])) {
+    $valorTotal = $_POST['resumoSoma'];
+    $desconto = $_POST['desconto'];
+    $desconto1 = str_replace(",", ".", str_replace(".", "", $desconto));
+    $Usuario_id = $_SESSION['id'];
+    $Cliente_id = $_POST['cliente'];
+
+    //Iniciar a conexão com o BD
+    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+
+    //Gerar a SQL
+    $sql = "insert into venda (valorTotal,desconto,Usuario_id,Cliente_id) 
+         values ('{$valorTotal}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
+
+    // // //Executar a SQL
+    mysqli_query($conexao, $sql);
+
+    // //Fechar a conexão com o BD
+    mysqli_close($conexao);
+    // //Mensagem de sucesso
+    $mensagem = "Registro salvo com sucesso.";
+}
+
+
 ?>
 
 <!doctype html>
@@ -12,6 +41,7 @@ require_once("../menu.php");
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="../Admin/venda.js"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <style>
         .pt-5,
         .py-5 {
@@ -30,6 +60,11 @@ require_once("../menu.php");
             <img class="d-block mx-auto mb-4" src="../img/dpbrasillogo.png" alt="" width="auto" height="auto">
             <h2>Fechar Venda</h2>
         </div>
+        <?php if (isset($mensagem)) { ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $mensagem; ?>
+        </div>
+        <?php } ?>
         <form name="form" method="POST" action="vendas.php">
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
@@ -42,7 +77,7 @@ require_once("../menu.php");
                                 <h6 class="my-0">TOTAL: </h6>
                             </div>
                             <span class="text-muted">
-                                <div id="resumoSoma">0,00</div>
+                                <input class="disabled" id="resumoSoma" type="text" name="resumoSoma" value="0,00">
                             </span>
                         </li>
                         <!-- Isso aqui serve para se for aplicado algum desconto -->
@@ -51,7 +86,7 @@ require_once("../menu.php");
                                 <div class="input-group-prepend">
                                     <div class="input-group-text font-weight-bold text-success">Desconto R$</div>
                                 </div>
-                                <input type="text" class="form-control text-right" name="desconto" value="0,00">
+                                <input type="text" class="form-control text-right" name="desconto" id="desconto">
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-secondary" id="btnAplicarDesconto"><i class="fas fa-check"></i></button>
                                 </div>
@@ -101,15 +136,15 @@ require_once("../menu.php");
                     <div class="row">
                         <div class="col-6">
                             <label>Quantidade Estoque</label>
-                            <input readonly="" type="text" class="form-control" id="quantidade" name="quantidade">
+                            <input disabled type="text" class="form-control" id="quantidade" name="quantidade">
                         </div>
                         <div class="col-6">
                             <label>Preço</label>
-                            <input type="text" class="form-control" id="preco" name="preco">
+                            <input disabled type="number" class="form-control" id="preco" name="preco">
                         </div>
                     </div>
                     <label>Quantidade Vendida</label>
-                    <input type="number" class="form-control input-sm" id="quantV" name="quantV">
+                    <input type="text" class="form-control input-sm" id="quantV" name="quantV">
                     <br>
                     <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">
@@ -154,8 +189,11 @@ require_once("../menu.php");
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        $('#desconto').mask('#.##0,00', {
+            reverse: true
+        });
     </script>
-    
+
 </body>
 
 </html>
