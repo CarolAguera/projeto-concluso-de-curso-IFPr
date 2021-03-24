@@ -6,3 +6,6 @@ Perguntar para o professor porque meu menu quando resolução muda ele buga;
 header("Refresh:5");
 
 
+Colocar Validações no CPF
+Colocar Validações no Vendas para Quantidade
+

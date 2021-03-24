@@ -73,7 +73,9 @@ $(function () {
         }
 
         //document.getElementById("resumoSoma").textContent = formataValorStr(somaProdutos)
+        
         $("#resumoSoma").val(formataValorStr(somaProdutos)) //Substitui a linha acima, porém agora usando jQuery
+        $("#resumoSomaSpan").text(formataValorStr(somaProdutos))
         var desconto = Number(form.desconto.value.replace(',', '.'))
         var valorTotal = somaProdutos - desconto
         $("#resumoValorTotal").text(formataValorStr(valorTotal))

@@ -9,24 +9,49 @@ if (!isset($_SESSION)) {
 
 if (isset($_POST['finalizar'])) {
     $valorTotal = $_POST['resumoSoma'];
+    $valorTotal1 = str_replace(",", ".", str_replace(".", "", $valorTotal));
     $desconto = $_POST['desconto'];
     $desconto1 = str_replace(",", ".", str_replace(".", "", $desconto));
     $Usuario_id = $_SESSION['id'];
     $Cliente_id = $_POST['cliente'];
 
-    //Iniciar a conexão com o BD
+
+    //Array ( [resumoSoma] => 1517,10 [desconto] => 17,10 [finalizar] => finalizar [cliente] => 1 
+    //[Produto_id] => Array ( [0] => 8  [1] =>     7 ) 
+    //[quantV] =>     Array ( [0] => 30 [1] =>    30 ) 
+    //[valor] =>      Array ( [0] => 30 [1] => 20.57 ) )
+
+
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
-    //Gerar a SQL
-    $sql = "insert into venda (valorTotal,desconto,Usuario_id,Cliente_id) 
-         values ('{$valorTotal}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
-
-    // // //Executar a SQL
+    // Criacao de Venda
+    $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
+         VALUES ('{$valorTotal1}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
+    
     mysqli_query($conexao, $sql);
+    
+    // Obter o ultimo ID
+    $sqlID = "SELECT LAST_INSERT_ID()";
+    $ID = mysqli_query($conexao, $sqlID);
+    
+    // Obter os dados dos Itens das Venda em Array
+    $idProduto = $_POST['Produto_id'];
+    $quantV = $_POST['quantV'];
+    $valor = $_POST['valor'];
 
-    // //Fechar a conexão com o BD
+    // Obter o Ultimo ID do formato Mysql para a Variavel
+    $idDaVendaCriada = mysqli_fetch_array($ID)['LAST_INSERT_ID()'];
+
+    // Criacao de Itens de Venda
+    for ($i = 0; $i < count($idProduto); $i++) {
+        $valorTotalItensVenda = $valor[$i] * $quantV[$i];
+        $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
+        VALUES ('{$idDaVendaCriada}','{$idProduto[$i]}', '{$quantV[$i]}','{$valorTotalItensVenda}') ";
+        mysqli_query($conexao,$sql1);
+    }
+    
     mysqli_close($conexao);
-    // //Mensagem de sucesso
+
     $mensagem = "Registro salvo com sucesso.";
 }
 
@@ -76,8 +101,9 @@ if (isset($_POST['finalizar'])) {
                             <div>
                                 <h6 class="my-0">TOTAL: </h6>
                             </div>
-                            <span class="text-muted">
-                                <input class="disabled" id="resumoSoma" type="text" name="resumoSoma" value="0,00">
+                            <input type="hidden" id="resumoSoma" name="resumoSoma">
+                            <span id="resumoSomaSpan" class="text-muted">
+                                0,00
                             </span>
                         </li>
                         <!-- Isso aqui serve para se for aplicado algum desconto -->
