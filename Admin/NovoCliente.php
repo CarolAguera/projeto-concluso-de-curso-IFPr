@@ -286,9 +286,7 @@ require_once("../menu.php");
             console.log(tag.value);
         }
     </script>
-    <?php
-    require_once("rodape.php");
-    ?>
+    
 </body>
 
 </html>

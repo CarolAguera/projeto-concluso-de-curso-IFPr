@@ -270,9 +270,6 @@ if (isset($_POST['atualizar'])) {
             console.log(tag.value);
         }
     </script>
-    <?php
-    require_once("rodape.php");
-    ?>
 </body>
 
 </html>

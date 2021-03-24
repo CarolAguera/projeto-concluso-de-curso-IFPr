@@ -158,7 +158,5 @@ if (!isset($_SESSION)) {
         </div>
     </div>
 </body>
-<?php
-require_once("./rodape.php");
-?>
+
 </html>

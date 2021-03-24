@@ -53,7 +53,7 @@ function getTabela()
     $retorno .= "<td>{$data['nome_categoria']} </td>";
     $retorno .= "<td>{$data['nome_marca']} </td>";
     $retorno .= "<td>{$data['nome_medida']} </td>";
-    $retorno .= "<td>{$data['valor_venda']} </td>";
+    $retorno .= "<td>".number_format($data['valor_venda'], 2, ',', ' ')."</td>";
   }
   $retorno .= "</table>";
   return $retorno;

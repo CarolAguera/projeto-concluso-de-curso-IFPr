@@ -167,8 +167,8 @@ mysqli_close($conexao);
                             <td><?= $statusProduto  ?></td>
                             <td><?= $data['nome']  ?></td>
                             <td><?= $data['codigo']  ?></td>
-                            <td><?= $data['valor_venda']  ?></td>
-                            <td> <?= $buscaCategoria['nome']  ?></td>
+                            <td><?= number_format($data['valor_venda'], 2, ',', ' ')  ?></td>
+                            <td><?= $buscaCategoria['nome']?></td>
                             <td><?= $buscaMarca['nome']  ?></td>
                             <td><?= $buscaMedida['nome']  ?></td>
                             <td><?= $data['quantidade']  ?></td>
@@ -242,7 +242,7 @@ mysqli_close($conexao);
                                                         <label for="fcodigo">Código: </label>
                                                         <input name="codigo" class="form-control" style="width: auto;" value="<?= $data['codigo']  ?> ">
                                                         <label for="fvalorvenda">Valor Venda: </label>
-                                                        <input name="valorvenda" class="form-control" style="width: auto;" value="<?= $data['valor_venda']  ?> ">
+                                                        <input name="valorvenda" class="form-control" style="width: auto;" value="<?= number_format($data['valor_venda'], 2, ',', ' ')    ?> ">
                                                         <label>Quantidade</label>
                                                         <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade'] ?>">
 
