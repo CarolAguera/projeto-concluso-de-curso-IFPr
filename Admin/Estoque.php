@@ -244,7 +244,7 @@ mysqli_close($conexao);
                                                         <label for="fvalorvenda">Valor Venda: </label>
                                                         <input name="valorvenda" class="form-control" style="width: auto;" value="<?= number_format($data['valor_venda'], 2, ',', ' ')    ?> ">
                                                         <label>Quantidade</label>
-                                                        <input class="form-control" name="quantidadeAtualizar" style="width: auto;" value="<?= $data['quantidade'] ?>">
+                                                        <input class="form-control" name="quantidadeAtualizar" style="width: auto;" min="1" type="number" value="<?= $data['quantidade'] ?>">
 
                                                         <label for="inputCategoria">Categoria: </label>
                                                         <select id="inputCategoria" class="form-control" name="categoria" style="width: auto;">
@@ -324,9 +324,6 @@ mysqli_close($conexao);
             console.log(tag.value);
         }
     </script>
-    <?php
-    require_once("rodape.php");
-    ?>
 </body>
 
 </html>

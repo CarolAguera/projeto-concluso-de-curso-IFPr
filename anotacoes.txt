@@ -7,5 +7,17 @@ header("Refresh:5");
 
 
 Colocar Validações no CPF
-Colocar Validações no Vendas para Quantidade
+Colocar Validações no Vendas para Quantidade --> Feito
+Fazer relatórios de vendas e itens de vendas
+Fazer listagem de vendas
+
+
+Validar quantidade negativo --> Feito
+
+Relatório de Vendas por dia / mes ou / ano
+Relatório de clientes por cidade
+Relatório de produtos com estoque menor ou igual a 5
+
+
+FILTROS NO RELATÓRIO
 

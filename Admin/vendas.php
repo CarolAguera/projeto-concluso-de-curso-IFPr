@@ -27,13 +27,13 @@ if (isset($_POST['finalizar'])) {
     // Criacao de Venda
     $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
          VALUES ('{$valorTotal1}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
-    
+
     mysqli_query($conexao, $sql);
-    
+
     // Obter o ultimo ID
     $sqlID = "SELECT LAST_INSERT_ID()";
     $ID = mysqli_query($conexao, $sqlID);
-    
+
     // Obter os dados dos Itens das Venda em Array
     $idProduto = $_POST['Produto_id'];
     $quantV = $_POST['quantV'];
@@ -47,9 +47,16 @@ if (isset($_POST['finalizar'])) {
         $valorTotalItensVenda = $valor[$i] * $quantV[$i];
         $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
         VALUES ('{$idDaVendaCriada}','{$idProduto[$i]}', '{$quantV[$i]}','{$valorTotalItensVenda}') ";
-        mysqli_query($conexao,$sql1);
+        mysqli_query($conexao, $sql1);
+
+        $sql2 = "SELECT quantidade FROM produto WHERE id = '{$idProduto[$i]}' ";
+        $quantidade = mysqli_fetch_array(mysqli_query($conexao, $sql2))["quantidade"];
+
+        $quantNova = $quantidade - $quantV[$i];
+        $sql3 = "UPDATE produto SET quantidade = '$quantNova' where id = '$idProduto[$i]' ";
+        mysqli_query($conexao, $sql3);
     }
-    
+
     mysqli_close($conexao);
 
     $mensagem = "Registro salvo com sucesso.";
@@ -75,6 +82,12 @@ if (isset($_POST['finalizar'])) {
 
         .teste {
             background-image: url("../img/textura2.jpg");
+        }
+
+        .btn-personalizado {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
         }
     </style>
 </head>
@@ -114,7 +127,7 @@ if (isset($_POST['finalizar'])) {
                                 </div>
                                 <input type="text" class="form-control text-right" name="desconto" id="desconto">
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" id="btnAplicarDesconto"><i class="fas fa-check"></i></button>
+                                    <button type="button" class="btn btn-personalizado" id="btnAplicarDesconto"><i class="fas fa-check"></i></button>
                                 </div>
                             </div>
                         </li>
@@ -170,7 +183,7 @@ if (isset($_POST['finalizar'])) {
                         </div>
                     </div>
                     <label>Quantidade Vendida</label>
-                    <input type="text" class="form-control input-sm" id="quantV" name="quantV">
+                    <input type="number" class="form-control input-sm" id="quantV" name="quantV">
                     <br>
                     <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">

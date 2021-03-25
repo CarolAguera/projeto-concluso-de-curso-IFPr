@@ -105,7 +105,7 @@ if (isset($_POST['salvar'])) {
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputQuantidade">Quantidade</label>
-                    <input type="text" class="form-control" id="inputQuantidade" name="quantidade">
+                    <input type="number" class="form-control" id="inputQuantidade" name="quantidade" min="1">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputUnidadedeMedida">Unidade de Medida</label>

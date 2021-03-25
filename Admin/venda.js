@@ -1,7 +1,7 @@
 $(function () {
 
     $('#Produto_id').change(function () {
-        console.log($('#Produto_id').val());
+        // console.log($('#Produto_id').val());
         $.ajax({
             type: "POST",
             data: "Produto_id=" + $('#Produto_id').val(),
@@ -10,45 +10,55 @@ $(function () {
                 let dado = jQuery.parseJSON(r);
                 $('#quantidade').val(dado['quantidade']);
                 $('#preco').val(Number(dado['valor_venda']).toFixed(2));
+                document.getElementById('quantV').max = Number(dado['quantidade']);
+
+                //$('#quantV').attr('max') = dado['quantidade'];
             }
         });
     });
 
     function Adicionar() {
 
-        var Produto_id = $("#Produto_id").val()
-        var produto_nome = $("#Produto_id option:selected").text()
-        var quantV = Number($("#quantV").val())
-        var preco = Number($("#preco").val())
-        var valorTotalDoItem = quantV * preco
+        if ($("#quantV").val() > document.getElementById('quantV').max || $("#quantV").val() <= 0 ) {
+            alert("Quantidade Indisponível");
+        } else {
 
-        //Troca de ponto pra vírgula para exibir os decimais no valor
-        var precoStr = formataValorStr(preco)
-        var valorTotalItemStr = formataValorStr(valorTotalDoItem)
+            var Produto_id = $("#Produto_id").val()
+            var produto_nome = $("#Produto_id option:selected").text()
+            var quantV = Number($("#quantV").val())
+            var preco = Number($("#preco").val())
+            var valorTotalDoItem = quantV * preco
+
+            //Troca de ponto pra vírgula para exibir os decimais no valor
+            var precoStr = formataValorStr(preco)
+            var valorTotalItemStr = formataValorStr(valorTotalDoItem)
 
 
-        //Adiciona linha na tabela dinâmica
-        $("#tabela").append(
-            "<tr>" +
-            "<input type=\"hidden\" name=\"Produto_id[]\" value='" + Produto_id + "' />" +
-            "<input type=\"hidden\" name=\"quantV[]\" value='" + quantV + "' />" +
-            "<input type=\"hidden\" name=\"valor[]\" value='" + preco + "' />" +
+            //Adiciona linha na tabela dinâmica
+            $("#tabela").append(
+                "<tr>" +
+                "<input type=\"hidden\" name=\"Produto_id[]\" value='" + Produto_id + "' />" +
+                "<input type=\"hidden\" name=\"quantV[]\" value='" + quantV + "' />" +
+                "<input type=\"hidden\" name=\"valor[]\" value='" + preco + "' />" +
 
-            "<td>" + Produto_id + "</td>" +
-            "<td>" + produto_nome + "</td>" + //"+ $Produto_id +"
-            "<td class=\"text-right\" id=\"quantV\">" + quantV + "</td>" + //"+ $quantV +"
-            "<td class=\"text-right\" id=\"preco\">" + precoStr + "</td>" + //"+ $valor +"
-            "<td class=\"text-right\" id=\"valorTotalItem\">" + valorTotalItemStr + "</td>" +
-            "<td class=\"text-center\">" +
-            "<button type=\"button\" class=\"btn btn-danger btn-sm excluir\">" +
-            "<i class=\"far fa-trash-alt\"></i>" +
-            "</button>" +
-            "</td>" +
-            "</tr>");
+                "<td>" + Produto_id + "</td>" +
+                "<td>" + produto_nome + "</td>" + //"+ $Produto_id +"
+                "<td class=\"text-right\" id=\"quantV\">" + quantV + "</td>" + //"+ $quantV +"
+                "<td class=\"text-right\" id=\"preco\">" + precoStr + "</td>" + //"+ $valor +"
+                "<td class=\"text-right\" id=\"valorTotalItem\">" + valorTotalItemStr + "</td>" +
+                "<td class=\"text-center\">" +
+                "<button type=\"button\" class=\"btn btn-danger btn-sm excluir\">" +
+                "<i class=\"far fa-trash-alt\"></i>" +
+                "</button>" +
+                "</td>" +
+                "</tr>");
 
-        $(".excluir").bind("click", Excluir);
+            $(".excluir").bind("click", Excluir);
 
-        recalculaValores()
+            recalculaValores()
+            $("#quantV").val("")
+            document.getElementById('quantV').max = ""
+        }
     };
 
     function Excluir() {
@@ -73,7 +83,7 @@ $(function () {
         }
 
         //document.getElementById("resumoSoma").textContent = formataValorStr(somaProdutos)
-        
+
         $("#resumoSoma").val(formataValorStr(somaProdutos)) //Substitui a linha acima, porém agora usando jQuery
         $("#resumoSomaSpan").text(formataValorStr(somaProdutos))
         var desconto = Number(form.desconto.value.replace(',', '.'))
