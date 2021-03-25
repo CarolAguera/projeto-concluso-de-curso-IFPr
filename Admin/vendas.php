@@ -163,7 +163,7 @@ if (isset($_POST['finalizar'])) {
                     <select class="js-example-basic-single js-states form-control" name="Produto_id" id="Produto_id" style="width: 100%">
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                        $sql = "select id,nome,quantidade from produto ";
+                        $sql = "select * from produto ";
                         $produto = mysqli_query($conexao, $sql);
                         mysqli_close($conexao); ?>
                         <option value="" disabled="disabled" selected>Escolher...</option>
@@ -175,7 +175,7 @@ if (isset($_POST['finalizar'])) {
                     <div class="row">
                         <div class="col-6">
                             <label>Quantidade Estoque</label>
-                            <input disabled type="text" class="form-control" id="quantidade" name="quantidade">
+                            <input disabled type="number" class="form-control" id="quantidade" name="quantidade">
                         </div>
                         <div class="col-6">
                             <label>Preço</label>

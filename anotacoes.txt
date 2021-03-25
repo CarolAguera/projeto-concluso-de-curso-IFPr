@@ -1,6 +1,6 @@
 Para comentar tudo de uma vez use: Ctrl + ;
 
-Perguntar para o professor porque meu menu quando resolução muda ele buga;
+Perguntar para o professor porque o menu quando resolução muda ele buga;
 
 ### Comando para regarregar a página em 5 segundos;
 header("Refresh:5");
@@ -21,3 +21,7 @@ Relatório de produtos com estoque menor ou igual a 5
 
 FILTROS NO RELATÓRIO
 
+Fazer quando ele excluir uma venda exclui da tabela venda e itens de venda
+
+
+quando estoque tiver 5 ou menos fica vermelha a letra 

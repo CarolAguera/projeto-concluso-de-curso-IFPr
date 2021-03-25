@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 require_once("../verificaSessao.php");
 include("../mpdf60/mpdf.php");
 require_once __DIR__ . '../../../vendor/autoload.php';
@@ -8,6 +9,7 @@ function getFooter()
   $retorno = "<table class=\"tbl_footer\" width=\"1000\">  
 			<tr> 
 			  <td align=\"left\"><a href='malito:carolaguerabr@gmail.com'>carolaguerabr@gmail.com</a></td>  
+        <td align=\"center\">".date('d/m/Y H:i:s')."</td>  
 			  <td align=\"right\">Página: {PAGENO}</td>  
 			</tr>  
 		  </table>";
@@ -46,7 +48,7 @@ function getTabela()
   mysqli_close($conexao);
   while ($data = mysqli_fetch_array($usuarios)) {
     $retorno .= "<tr class=\"zebra\">";
-    $retorno .=    "<td class='destaque'>{$data['id']} </td>";
+    $retorno .= "<td class='destaque'>{$data['id']} </td>";
     $retorno .= "<td>{$data['nome']} </td>";
     $retorno .= "<td>{$data['codigo']} </td>";
     $retorno .= "<td>{$data['quantidade']} </td>";

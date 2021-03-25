@@ -11,15 +11,12 @@ $(function () {
                 $('#quantidade').val(dado['quantidade']);
                 $('#preco').val(Number(dado['valor_venda']).toFixed(2));
                 document.getElementById('quantV').max = Number(dado['quantidade']);
-
-                //$('#quantV').attr('max') = dado['quantidade'];
             }
         });
     });
 
     function Adicionar() {
-
-        if ($("#quantV").val() > document.getElementById('quantV').max || $("#quantV").val() <= 0 ) {
+        if (Number($("#quantV").val()) > document.getElementById('quantV').max || $("#quantV").val() < 1) {
             alert("Quantidade Indisponível");
         } else {
 
@@ -56,9 +53,9 @@ $(function () {
             $(".excluir").bind("click", Excluir);
 
             recalculaValores()
-            $("#quantV").val("")
-            document.getElementById('quantV').max = ""
         }
+        $("#quantV").val("")
+        document.getElementById('quantV').max = ""
     };
 
     function Excluir() {

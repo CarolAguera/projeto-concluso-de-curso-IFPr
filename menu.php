@@ -78,6 +78,8 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="Produto.php">Produtos</a></li>
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="Estoque.php"><strong><i class="fas fa-boxes"></i> Estoque</strong></a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="./ListagemDeVendas.php">Consultar Vendas</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -98,10 +100,11 @@ require_once("dependencias.php");
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php"><i class='fas fa-user'></i> Relatório de Usuários</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioEstoque.php"><i class="fas fa-clipboard-list"></i> Relatório de Produtos</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioVendas.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a type="button" class="btn btn-light" href="vendas.php"><i class='fas fa-calculator'></i></span> Vendas</a>
+                    <li class="nav-item" style="margin-right: 2px;">
+                        <a type="button" class="btn btn-success" href="vendas.php"><i class="fas fa-dollar-sign"></i></span> Vendas</a>
                     </li>
 
                     <li class="nav-item dropdown">
