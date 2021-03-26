@@ -253,6 +253,19 @@ require_once("../menu.php");
         <br>
     </div>
     <script>
+        let dataAtual = new Date();
+        let dia = dataAtual.getDate();
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+        let mes = dataAtual.getMonth() + 1;
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+        let ano = dataAtual.getFullYear();
+        document.getElementById('inputNasc').max = `${ano}-${mes}-${dia}`
+                    
+
         function TestaCPF(strCPF) {
             var Soma;
             var Resto;

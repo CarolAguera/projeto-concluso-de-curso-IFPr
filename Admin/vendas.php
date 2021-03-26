@@ -175,7 +175,7 @@ if (isset($_POST['finalizar'])) {
                     <div class="row">
                         <div class="col-6">
                             <label>Quantidade Estoque</label>
-                            <input disabled type="number" class="form-control" id="quantidade" name="quantidade">
+                            <input disabled type="text" class="form-control" id="quantidade" name="quantidade">
                         </div>
                         <div class="col-6">
                             <label>Preço</label>
@@ -183,7 +183,7 @@ if (isset($_POST['finalizar'])) {
                         </div>
                     </div>
                     <label>Quantidade Vendida</label>
-                    <input type="number" class="form-control input-sm" id="quantV" name="quantV">
+                    <input type="text" class="form-control input-sm" id="quantV" name="quantV">
                     <br>
                     <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">

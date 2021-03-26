@@ -168,10 +168,19 @@ mysqli_close($conexao);
                             <td><?= $data['nome']  ?></td>
                             <td><?= $data['codigo']  ?></td>
                             <td><?= number_format($data['valor_venda'], 2, ',', ' ')  ?></td>
-                            <td><?= $buscaCategoria['nome']?></td>
+                            <td><?= $buscaCategoria['nome'] ?></td>
                             <td><?= $buscaMarca['nome']  ?></td>
                             <td><?= $buscaMedida['nome']  ?></td>
+                            <?php if ($data['quantidade'] <= 3) { ?>
+                            <td>
+                                <div class="alert alert-danger" role="alert">
+                                    Estoque baixo = <b><?= $data['quantidade'] ?></b>und.
+                                </div>
+                            </td>
+                            <?php } else { ?>
                             <td><?= $data['quantidade']  ?></td>
+                            <?php } ?>
+
 
 
 

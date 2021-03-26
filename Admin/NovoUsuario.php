@@ -101,7 +101,7 @@ if (isset($_POST['salvar'])) {
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputDemissao">Data de Demissão</label>
-                    <input type="date" class="form-control" id="inputDemissao" name="data_demissao" value="<?= $data['data_demissao']  ?>">
+                    <input type="date" class="form-control" id="inputDemissao" name="data_demissao">
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
@@ -129,6 +129,19 @@ if (isset($_POST['salvar'])) {
     </div>
 
     <script>
+        let dataAtual = new Date();
+        let dia = dataAtual.getDate();
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+        let mes = dataAtual.getMonth() + 1;
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+        let ano = dataAtual.getFullYear();
+        document.getElementById('inputNasc').max = `${ano}-${mes}-${dia}`;
+        document.getElementById('inputDemissao').max = `${ano}-${mes}-${dia}`;
+
         (function() {
             'use strict';
             window.addEventListener('load', function() {

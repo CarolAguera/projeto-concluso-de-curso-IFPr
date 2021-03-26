@@ -31,7 +31,7 @@ if (!isset($_SESSION)) {
                 flex-basis: auto;
             }
         }
-        
+
         .teste {
             background-image: url("../img/textura2.jpg");
         }
@@ -46,6 +46,11 @@ if (!isset($_SESSION)) {
         </div>
     </div>
     <div class="container">
+        <?php if (isset($_GET['mensagem'])) { ?>
+        <div class="alert alert-danger" style="text-align: center;" role="alert">
+            <?php echo $_GET['mensagem']; ?>
+        </div>
+        <?php } ?>
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
@@ -105,9 +110,17 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
         </div>
-        <!--<div class="row" style="margin-top: 10px;">
-            <iframe src="https://open.spotify.com/embed/playlist/6PXGjohvrsyrMIt7ZQMYIr" width="1122" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>-->
+        <div class="row " style="margin-top: 40px;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Vendas</h5>
+                        <a href="./vendas.php" class="btn btn-info">Efetuar Venda</a>
+                        <a href="./ListagemDeVendas.php" class="btn btn-info">Consultar Vendas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="dataHora" class="container" style=" margin-top: 40px; font-size: 32px; color: #000000; font-family: Arial, Helvetica, sans-serif; ">
         <div class="row">

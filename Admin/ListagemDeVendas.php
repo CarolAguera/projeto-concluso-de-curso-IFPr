@@ -5,12 +5,10 @@ require_once("../menu.php");
 
 if (isset($_POST['excluir'])) {
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-    $sql1 = "SELECT Venda_id,Produto_id FROM itensvenda";
-    //$sql = "delete from venda where id = " . $_POST['id'];
-    //$sql2 = "DELETE FROM `itensvenda` WHERE `itensvenda`.`Venda_id` = " . $_POST['id'] . " AND `itensvenda`.`Produto_id` =" . $_POST['id'];
-    $procurando = mysqli_query($conexao, $sql1);
-    var_dump(mysqli_fetch_array($procurando));
-    //mysqli_query($conexao, $sql2);
+    $sql1 = "DELETE FROM itensvenda WHERE  Venda_id =" . $_POST['id'];
+    mysqli_query($conexao, $sql1);
+    $sql = "DELETE FROM venda WHERE id = " . $_POST['id'];
+    mysqli_query($conexao, $sql);
     mysqli_close($conexao);
 }
 ?>
@@ -140,6 +138,10 @@ if (isset($_POST['excluir'])) {
                                         </div>
                                     </div>
                                 </div>
+                                <form action="ListagemDeItensVenda.php" method="post">
+                                    <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
+                                    <button type="submit" name="itemvenda" class="btn btn-warning">Itens</button>
+                                </form>
                             </td>
                         </tr>
 
