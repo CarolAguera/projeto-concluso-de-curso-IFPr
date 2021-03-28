@@ -6,7 +6,7 @@ $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
 if (!isset($_POST['itemvenda'])) {
     $mensagem = "Volte na Página Vendas e clique no botão Itens.";
-    header('location: ./IndexAdmin.php?mensagem='.$mensagem);
+    header('location: ./IndexAdmin.php?mensagem=' . $mensagem);
 } else {
     $sql = "SELECT * FROM itensvenda WHERE Venda_id = " . $_POST['idAtualizar'];
     $venda = mysqli_query($conexao, $sql);
@@ -76,10 +76,14 @@ require_once("../menu.php");
                         <?php
 
                         while ($data = mysqli_fetch_array($venda)) { ?>
-
+                        <?php
+                            $sqlProduto = "select id,nome from produto where id = '{$data['Produto_id']}' ";
+                            $produto = mysqli_query($conexao, $sqlProduto);
+                            $buscaproduto = mysqli_fetch_array($produto);
+                        ?>
                         <tr>
                             <td><?= $data['Venda_id']  ?></td>
-                            <td><?= $data['Produto_id']  ?></td>
+                            <td><?= $buscaproduto['nome']  ?></td>
                             <td><?= $data['quantidadeVendida']  ?></td>
                             <td><?= number_format($data['valorTotal'], 2, ',', '')  ?></td>
                         </tr>
@@ -88,7 +92,6 @@ require_once("../menu.php");
                         <?php
                         }
                         mysqli_close($conexao);
-
                         ?>
                     </tbody>
                 </table>

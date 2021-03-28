@@ -122,7 +122,7 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     </div>
-    <div id="dataHora" class="container" style=" margin-top: 40px; font-size: 32px; color: #000000; font-family: Arial, Helvetica, sans-serif; ">
+    <div id="dataHora" class="container" style=" margin-top: 20px; font-size: 32px; color: #000000; font-family: Arial, Helvetica, sans-serif; ">
         <div class="row">
             <div class="col data w-100">
                 <script language="JavaScript">

@@ -1,7 +1,6 @@
 $(function () {
 
     $('#Produto_id').change(function () {
-        // console.log($('#Produto_id').val());
         $.ajax({
             type: "POST",
             data: "Produto_id=" + $('#Produto_id').val(),
