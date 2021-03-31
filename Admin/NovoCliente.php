@@ -229,7 +229,7 @@ require_once("../menu.php");
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCPF">CPF</label>
-                    <input type="text" class="form-control" id="inputCPF" name="cpf" maxlength="11" required>
+                    <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" required>
                 </div>
                 <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
                     <div class="input-group" style="width: 200px !important;">
@@ -264,33 +264,23 @@ require_once("../menu.php");
         }
         let ano = dataAtual.getFullYear();
         document.getElementById('inputNasc').max = `${ano}-${mes}-${dia}`
-                    
 
-        function TestaCPF(strCPF) {
-            var Soma;
-            var Resto;
-            Soma = 0;
-            //strCPF  = RetiraCaracteresInvalidos(strCPF,11);
-            if (strCPF == "00000000000")
-                return false;
-            for (i = 1; i <= 9; i++)
-                Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-            Resto = (Soma * 10) % 11;
-            if ((Resto == 10) || (Resto == 11))
-                Resto = 0;
-            if (Resto != parseInt(strCPF.substring(9, 10)))
-                return false;
-            Soma = 0;
-            for (i = 1; i <= 10; i++)
-                Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-            Resto = (Soma * 10) % 11;
-            if ((Resto == 10) || (Resto == 11))
-                Resto = 0;
-            if (Resto != parseInt(strCPF.substring(10, 11)))
-                return false;
-            return true;
+
+        
+        function teste(tag) {
+            let labelAtivo = document.getElementById('labelstatus');
+            if (tag.value == '1') {
+                tag.value = 0;
+                labelAtivo.className = "text-danger";
+                labelAtivo.innerHTML = "Inativo";
+
+            } else {
+                tag.value = 1;
+                labelAtivo.className = "text-success";
+                labelAtivo.innerHTML = "Ativo";
+            }
+            console.log(tag.value);
         }
-
         (function() {
             'use strict';
             window.addEventListener('load', function() {
@@ -308,21 +298,7 @@ require_once("../menu.php");
                 });
             }, false);
         })();
-
-        function teste(tag) {
-            let labelAtivo = document.getElementById('labelstatus');
-            if (tag.value == '1') {
-                tag.value = 0;
-                labelAtivo.className = "text-danger";
-                labelAtivo.innerHTML = "Inativo";
-
-            } else {
-                tag.value = 1;
-                labelAtivo.className = "text-success";
-                labelAtivo.innerHTML = "Ativo";
-            }
-            console.log(tag.value);
-        }
+        
     </script>
 
 </body>

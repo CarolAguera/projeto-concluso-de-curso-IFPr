@@ -27,6 +27,10 @@ table, th, td {
  .destaque{  
    color: red;  
    font-weight: bold;  
+ }
+ .destaqueVenda{
+   color:blue;
+   font-weight: bold;  
  }  
  .imagem {
   display: block;

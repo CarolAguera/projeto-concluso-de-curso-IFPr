@@ -49,7 +49,7 @@ function getTabela()
     $retorno .= "<td>{$data['nome_usuario']} </td>";
     $retorno .= "<td>" . number_format($data['valorTotal'], 2, ',', '.') . "</td>";
     $retorno .= "<td> " . number_format($data['desconto'], 2, ',', '') . "</td>";
-    $retorno .= "<td>" . number_format($data['valorTotal'] - $data['desconto'], 2, ',', '.') . "</td>";
+    $retorno .= "<td class='destaqueVenda'>" . number_format($data['valorTotal'] - $data['desconto'], 2, ',', '.') . "</td>";
     $retorno .= "<td>" . (new DateTime($data['data_hora']))->format('d/m/Y') . "</td>";
     // $retorno .= "<td>". date('d/m/Y H:i:s',$data['data_hora']) ."</td>";
   }

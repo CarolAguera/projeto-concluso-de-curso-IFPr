@@ -78,8 +78,6 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="Produto.php">Produtos</a></li>
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="Estoque.php"><strong><i class="fas fa-boxes"></i> Estoque</strong></a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="./ListagemDeVendas.php">Consultar Vendas</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -101,6 +99,17 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php"><i class='fas fa-user'></i> Relatório de Usuários</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioEstoque.php"><i class="fas fa-clipboard-list"></i> Relatório de Produtos</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioVendas.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioVendaPorMes.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas Mês Atual</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-list-ol"></i>
+                            Consultar
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <center>
+                                <li><a class="dropdown-item" href="./ListagemDeVendas.php">Consultar Vendas</a></li>
+                            </center>
                         </ul>
                     </li>
                     <li class="nav-item" style="margin-right: 2px;">

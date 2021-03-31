@@ -113,11 +113,11 @@ if (isset($_POST['excluir'])) {
                             <td><?= $buscaCliente['nome_completo']  ?></td>
                             <td><?= number_format($data['valorTotal'], 2, ',', '')  ?></td>
                             <td><?= number_format($data['desconto'], 2, ',', '') ?></td>
-                            <?php $data_hora = strtotime($data[' data_hora']); ?>
+                            <?php $data_hora = strtotime($data['data_hora']); ?>
                             <td><?= date('d/m/Y H:i:s', $data_hora) ?></td>
 
 
-                            <td class="actions d-flex" style="width: 120px;">
+                            <td class="actions d-flex" style="width: auto;">
                                 <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#ExemploModalCentralizado<?= $data['id'] ?>"><i class="far fa-trash-alt" style="color: black;"></i></button>
                                 <div class="modal fade" id="ExemploModalCentralizado<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -138,9 +138,9 @@ if (isset($_POST['excluir'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <form action="ListagemDeItensVenda.php" method="post">
+                                <form action="ListagemDeItensVenda.php" method="post" style="height: 40px;">
                                     <input type="hidden" name="idAtualizar" value="<?= $data['id'] ?>">
-                                    <button type="submit" name="itemvenda" class="btn btn-warning">Itens</button>
+                                    <button type="submit" name="itemvenda" style="margin-left: 5px; height: 56px;" class="btn btn-warning btn-xs"><i class="fas fa-list-ol"></i></button>
                                 </form>
                             </td>
                         </tr>
