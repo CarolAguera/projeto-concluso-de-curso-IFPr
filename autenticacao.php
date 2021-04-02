@@ -3,7 +3,6 @@
 if (isset($_POST['email'])  && isset($_POST['senha'])) {
     $email = addslashes($_POST['email']);
     $senha = addslashes($_POST['senha']);
-
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
     $sql = "select * from usuario where email ='{$email}'";

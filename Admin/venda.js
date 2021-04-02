@@ -9,13 +9,13 @@ $(function () {
                 let dado = jQuery.parseJSON(r);
                 $('#quantidade').val(dado['quantidade']);
                 $('#preco').val(Number(dado['valor_venda']).toFixed(2));
-                document.getElementById('quantV').max = Number(dado['quantidade']);
             }
         });
     });
 
     function Adicionar() {
-        if (Number($("#quantV").val()) > document.getElementById('quantV').max || $("#quantV").val() < 1) {
+        if (Number(document.getElementById('quantidade').value) < Number(document.getElementById('quantV').value) ||
+            Number(document.getElementById('quantV').value) <= 0) {
             alert("Quantidade Indisponível");
         } else {
 
@@ -24,6 +24,17 @@ $(function () {
             var quantV = Number($("#quantV").val())
             var preco = Number($("#preco").val())
             var valorTotalDoItem = quantV * preco
+
+
+            let rows = document.querySelectorAll('tr');
+            rows.forEach(row => {
+                if (row.querySelector('#id')) {
+                    if (row.querySelector('#id') == Produto_id) {
+                        console.log('encontrado');
+                    }
+                }
+            });
+
 
             //Troca de ponto pra vírgula para exibir os decimais no valor
             var precoStr = formataValorStr(preco)
@@ -37,9 +48,9 @@ $(function () {
                 "<input type=\"hidden\" name=\"quantV[]\" value='" + quantV + "' />" +
                 "<input type=\"hidden\" name=\"valor[]\" value='" + preco + "' />" +
 
-                "<td>" + Produto_id + "</td>" +
+                "<td id=\"id\">" + Produto_id + "</td>" +
                 "<td>" + produto_nome + "</td>" + //"+ $Produto_id +"
-                "<td class=\"text-right\" id=\"quantV\">" + quantV + "</td>" + //"+ $quantV +"
+                "<td id=\"quantidade\" class=\"text-right\" id=\"quantV\">" + quantV + "</td>" + //"+ $quantV +"
                 "<td class=\"text-right\" id=\"preco\">" + precoStr + "</td>" + //"+ $valor +"
                 "<td class=\"text-right\" id=\"valorTotalItem\">" + valorTotalItemStr + "</td>" +
                 "<td class=\"text-center\">" +
