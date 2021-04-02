@@ -75,6 +75,7 @@ require_once("../verificaSessao.php");
 </head>
 <?php
 if (isset($_POST['salvar'])) {
+    include("validarCPF.php");
     $nome = $_POST['nome_completo'];
     $email = $_POST['email'];
     $rua = $_POST['rua'];
@@ -96,10 +97,22 @@ if (isset($_POST['salvar'])) {
         $statusAtualizar = 0;
     }
 
+    if (!validaCPF($cpf)) {
+        header("location: NovoCliente.php?error=CPF Inválido");
+        die();
+    }
+
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
+    $sql1 = "SELECT * FROM cliente WHERE cpf = '{$cpf}'";
+    $variavel =  mysqli_query($conexao, $sql1);
+    $totalcpf =  mysqli_num_rows($variavel);
 
-    $sql = "insert into cliente (nome_completo,email,rua,cep,bairro,numero,local_trabalho,telefone_trabalho,sexo,cidade,uf,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
+    if ($totalcpf > 0) {
+        header("location: NovoCliente.php?aviso=CPF Já Cadastrado no Sistema");
+        die();
+    }
+    $sql2 = "insert into cliente (nome_completo,email,rua,cep,bairro,numero,local_trabalho,telefone_trabalho,sexo,cidade,uf,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
         values ('{$nome}',
         '{$email}', 
         '{$rua}', 
@@ -118,13 +131,14 @@ if (isset($_POST['salvar'])) {
         '{$statusAtualizar}')";
 
     //Executar a SQL
-    mysqli_query($conexao, $sql);
+    mysqli_query($conexao, $sql2);
 
     //Fechar a conexão com o BD
     mysqli_close($conexao);
 
     //Mensagem de sucesso
     $mensagem = "Registro salvo com sucesso.";
+
     //header("Refresh:5");
 }
 require_once("../menu.php");
@@ -133,6 +147,7 @@ require_once("../menu.php");
 
 <head>
     <title>Novo Cliente</title>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <style>
         .centr {
             margin-left: 60px;
@@ -153,6 +168,16 @@ require_once("../menu.php");
         <?php if (isset($mensagem)) { ?>
         <div class="alert alert-success" role="alert">
             <?php echo $mensagem; ?>
+        </div>
+        <?php } ?>
+        <?php if (isset($_GET['error'])) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+        </div>
+        <?php } ?>
+        <?php if (isset($_GET['aviso'])) { ?>
+        <div class="alert alert-warning" role="alert">
+            <?php echo $_GET['aviso']; ?>
         </div>
         <?php } ?>
         <form name="form" id="form" method="post" action="NovoCliente.php" class="needs-validation" novalidate>
@@ -229,7 +254,7 @@ require_once("../menu.php");
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCPF">CPF</label>
-                    <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" required>
+                    <input type="text" class="cpf form-control" id="cpf" name="cpf" maxlength="11" required>
                 </div>
                 <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
                     <div class="input-group" style="width: 200px !important;">
@@ -253,6 +278,9 @@ require_once("../menu.php");
         <br>
     </div>
     <script>
+        $('.cpf').mask('000.000.000-00', {
+            reverse: true
+        });
         let dataAtual = new Date();
         let dia = dataAtual.getDate();
         if (dia < 10) {
@@ -266,7 +294,6 @@ require_once("../menu.php");
         document.getElementById('inputNasc').max = `${ano}-${mes}-${dia}`
 
 
-        
         function teste(tag) {
             let labelAtivo = document.getElementById('labelstatus');
             if (tag.value == '1') {
@@ -298,7 +325,6 @@ require_once("../menu.php");
                 });
             }, false);
         })();
-        
     </script>
 
 </body>
