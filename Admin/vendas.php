@@ -8,19 +8,18 @@ if (!isset($_SESSION)) {
 }
 
 if (isset($_POST['finalizar'])) {
+    if ($_POST['form'] == '') {
+        $mensagemErro = "O Formulário está vazio.";
+        die();
+    }
+
+    //está aparecendo as duas mensagens e  ele está deixando cadastrar
     $valorTotal = $_POST['resumoSoma'];
     $valorTotal1 = str_replace(",", ".", str_replace(".", "", $valorTotal));
     $desconto = $_POST['desconto'];
     $desconto1 = str_replace(",", ".", str_replace(".", "", $desconto));
     $Usuario_id = $_SESSION['id'];
     $Cliente_id = $_POST['cliente'];
-
-
-    //Array ( [resumoSoma] => 1517,10 [desconto] => 17,10 [finalizar] => finalizar [cliente] => 1 
-    //[Produto_id] => Array ( [0] => 8  [1] =>     7 ) 
-    //[quantV] =>     Array ( [0] => 30 [1] =>    30 ) 
-    //[valor] =>      Array ( [0] => 30 [1] => 20.57 ) )
-
 
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
@@ -103,7 +102,12 @@ if (isset($_POST['finalizar'])) {
             <?php echo $mensagem; ?>
         </div>
         <?php } ?>
-        <form name="form" method="POST" action="vendas.php">
+        <?php if (isset($mensagem)) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $mensagemErro; ?>
+        </div>
+        <?php } ?>
+        <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -125,7 +129,7 @@ if (isset($_POST['finalizar'])) {
                                 <div class="input-group-prepend">
                                     <div class="input-group-text font-weight-bold text-success">Desconto R$</div>
                                 </div>
-                                <input type="text" class="form-control text-right" name="desconto" id="desconto">
+                                <input type="text" class="form-control text-right" name="desconto" placeholder="0,00" id="desconto">
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-personalizado" id="btnAplicarDesconto"><i class="fas fa-check"></i></button>
                                 </div>
@@ -139,19 +143,19 @@ if (isset($_POST['finalizar'])) {
                         </li>
                     </ul>
                     <div class="input-group">
-                        <button class="btn btn-success btn-lg btn-block" style="margin-bottom: 50px;" name="finalizar" value="finalizar" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
+                        <button class="btn btn-success btn-lg btn-block" style="margin-bottom: 50px;" name="finalizar" id="finalizar" value="finalizar" type="submit"><i class="fas fa-arrow-circle-right"></i><b> Finalizar Venda</b></button>
                     </div>
                 </div>
                 <div class="col-md-8 order-md-1">
 
                     <h4 class="mb-3">Seleciona Cliente</h4>
-                    <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%">
+                    <select class="js-example-basic-single js-states form-control" name="cliente" style="width: 100%" required>
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         $sql = "select id,nome_completo from cliente ";
                         $cliente = mysqli_query($conexao, $sql);
                         mysqli_close($conexao); ?>
-                        <option value="" disabled="disabled" selected>Escolher...</option>
+                        <option  disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($cliente)) { ?>
                         <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
@@ -160,13 +164,13 @@ if (isset($_POST['finalizar'])) {
                     <hr class="mb-4">
                     <h4 class="mb-3">Seleciona Produtos</h4>
 
-                    <select class="js-example-basic-single js-states form-control" name="Produto_id" id="Produto_id" style="width: 100%">
+                    <select class="js-example-basic-single js-states form-control" name="Produto_id" id="Produto_id" style="width: 100%" required>
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
                         $sql = "select * from produto ";
                         $produto = mysqli_query($conexao, $sql);
                         mysqli_close($conexao); ?>
-                        <option value="" disabled="disabled" selected>Escolher...</option>
+                        <option  disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($produto)) { ?>
                         <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
@@ -183,7 +187,7 @@ if (isset($_POST['finalizar'])) {
                         </div>
                     </div>
                     <label>Quantidade Vendida</label>
-                    <input type="text" class="form-control input-sm" id="quantV" name="quantV">
+                    <input type="text" class="form-control input-sm" id="quantV" name="quantV" >
                     <br>
                     <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">
@@ -210,16 +214,6 @@ if (isset($_POST['finalizar'])) {
                             </table>
                         </div>
                     </div>
-
-                    <!-- <hr class="mb-4">
-                <h4 class="mb-3">Pagamento</h4>
-
-                <div class="d-block my-3">
-                    <div class="custom-control custom-radio">
-                        <input id="avista" name="dinheiro" type="radio" class="custom-control-input" checked >
-                        <label class="custom-control-label" for="avista">Dinheiro (À Vista)</label>
-                    </div>
-                </div> -->
                 </div>
             </div>
         </form>
@@ -228,6 +222,23 @@ if (isset($_POST['finalizar'])) {
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
         $('#desconto').mask('#.##0,00', {
             reverse: true
         });

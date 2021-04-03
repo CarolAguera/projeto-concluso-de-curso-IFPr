@@ -47,24 +47,20 @@ require_once("dependencias.php");
             border-color: transparent;
         }
 
-        .flex-container {
-            display: flex;
-            justify-content: center;
-            max-width: 100%;
-        }
+       
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark flex-container" style="background-color:  rgb(20, 141, 197);">
+    <nav class="navbar navbar-expand-lg navbar-dark d-flex justify-content-center" style="background-color:  rgb(20, 141, 197);">
         <div>
-            <a class=" navbar-brand float" href="../Admin/IndexAdmin.php"><img class="img-responsive img-thumbnail" src="../img/dpbrasillogo.png" alt="" width="100px" height="60px"></a>
+            <a class=" navbar-brand float" href="../Admin/IndexAdmin.php"><img class="img-responsive img-thumbnail" src="../img/dpbrasillogo.png" alt="" width="126px" height="70px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent" style="padding-top: 5px;">
                 <ul class="nav navbar-nav card-header">
                     <li class="nav-item"><a href="IndexAdmin.php" type="button" class="btn btn-light"><i class="fas fa-home"></i></span> Inicio</a></li>
                     <li class="nav-item dropdown">

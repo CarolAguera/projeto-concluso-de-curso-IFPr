@@ -48,11 +48,11 @@ $(function () {
                 "<input type=\"hidden\" name=\"quantV[]\" value='" + quantV + "' />" +
                 "<input type=\"hidden\" name=\"valor[]\" value='" + preco + "' />" +
 
-                "<td id=\"id\">" + Produto_id + "</td>" +
+                "<td class=\"text-danger font-weight-bold\" id=\"id\">" + Produto_id + "</td>" +
                 "<td>" + produto_nome + "</td>" + //"+ $Produto_id +"
                 "<td id=\"quantidade\" class=\"text-right\" id=\"quantV\">" + quantV + "</td>" + //"+ $quantV +"
                 "<td class=\"text-right\" id=\"preco\">" + precoStr + "</td>" + //"+ $valor +"
-                "<td class=\"text-right\" id=\"valorTotalItem\">" + valorTotalItemStr + "</td>" +
+                "<td class=\"text-right text-primary font-weight-bold\" id=\"valorTotalItem\">" + valorTotalItemStr + "</td>" +
                 "<td class=\"text-center\">" +
                 "<button type=\"button\" class=\"btn btn-danger btn-sm excluir\">" +
                 "<i class=\"far fa-trash-alt\"></i>" +
@@ -102,7 +102,13 @@ $(function () {
         return valor.toFixed(2).toString().replace('.', ',')
     }
 
+    // function Finalizar(){
+
+    // }
+
+
     $(".excluir").bind("click", Excluir);
     $("#adicionarProdutos").bind("click", Adicionar);
     $("#btnAplicarDesconto").bind("click", AplicarDesconto);
+    // $("#finalizar").bind("click", Finalizar);
 });
