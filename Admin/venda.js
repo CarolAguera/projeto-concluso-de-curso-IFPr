@@ -25,15 +25,22 @@ $(function () {
             var preco = Number($("#preco").val())
             var valorTotalDoItem = quantV * preco
 
-
+            let enterCondition = false;
             let rows = document.querySelectorAll('tr');
             rows.forEach(row => {
-                if (row.querySelector('#id')) {
-                    if (row.querySelector('#id') == Produto_id) {
-                        console.log('encontrado');
+                if (row.querySelector('#id') != null) {
+                    if (Number(row.querySelector('#id').innerHTML) == Number(Produto_id)) {
+                        alert('Produto já Presente na Lista de Compras, por favor, remova-o da lista para inclui-lo novamente');
+                        enterCondition = true;
                     }
                 }
             });
+            if (enterCondition) {
+                $("#quantV").val("");
+                document.getElementById('quantV').max = "";
+                return;
+            }
+
 
 
             //Troca de ponto pra vírgula para exibir os decimais no valor

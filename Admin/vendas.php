@@ -12,55 +12,70 @@ if (isset($_POST['finalizar'])) {
     $desconto = $_POST['desconto'];
     $desconto1 = str_replace(",", ".", str_replace(".", "", $desconto));
     $Usuario_id = $_SESSION['id'];
+    //$Cliente_id = $_POST['cliente'];
+
+    $errors = array();
+    if (!(isset($_POST['cliente']))) {
+        array_push($errors, 'Selecione um Cliente');
+    }
+    if (!(isset($_POST['Produto_id']))) {
+        array_push($errors, 'Selecione um Produto');
+    }
+    if ($_POST['quantV'] == null) {
+        array_push($errors, 'Preencha a Quantidade Vendida');
+    }
+
+    $messageError = '';
+    if (count($errors) > 0) {
+        foreach ($errors as $error) {
+            $messageError .= $error . '<br>';
+        }
+        header("Location: vendas.php?error={${messageError}}");
+        die();
+    }
+
+
     $Cliente_id = $_POST['cliente'];
+    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
-    if (!($valorTotal1 != null && $desconto1 != null)) {
-        if (!($Usuario_id != null && $Cliente_id != null)) {
-            header("location: vendas.php?error=Formulário Vazio! Tente novamente!");
-            die();
-        } else {
-
-            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-
-            // Criacao de Venda
-            $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
+    // Criacao de Venda
+    $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
              VALUES ('{$valorTotal1}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
 
-            mysqli_query($conexao, $sql);
+    mysqli_query($conexao, $sql);
 
-            // Obter o ultimo ID
-            $sqlID = "SELECT LAST_INSERT_ID()";
-            $ID = mysqli_query($conexao, $sqlID);
+    // Obter o ultimo ID
+    $sqlID = "SELECT LAST_INSERT_ID()";
+    $ID = mysqli_query($conexao, $sqlID);
 
-            // Obter os dados dos Itens das Venda em Array
-            $idProduto = $_POST['Produto_id'];
-            $quantV = $_POST['quantV'];
-            $valor = $_POST['valor'];
+    // Obter os dados dos Itens das Venda em Array
+    $idProduto = $_POST['Produto_id'];
+    $quantV = $_POST['quantV'];
+    $valor = $_POST['valor'];
 
-            // Obter o Ultimo ID do formato Mysql para a Variavel
-            $idDaVendaCriada = mysqli_fetch_array($ID)['LAST_INSERT_ID()'];
+    // Obter o Ultimo ID do formato Mysql para a Variavel
+    $idDaVendaCriada = mysqli_fetch_array($ID)['LAST_INSERT_ID()'];
 
-            // Criacao de Itens de Venda
-            for ($i = 0; $i < count($idProduto); $i++) {
-                $valorTotalItensVenda = $valor[$i] * $quantV[$i];
-                $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
+    // Criacao de Itens de Venda
+    for ($i = 0; $i < count($idProduto); $i++) {
+        $valorTotalItensVenda = $valor[$i] * $quantV[$i];
+        $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
             VALUES ('{$idDaVendaCriada}','{$idProduto[$i]}', '{$quantV[$i]}','{$valorTotalItensVenda}') ";
-                mysqli_query($conexao, $sql1);
+        mysqli_query($conexao, $sql1);
 
-                $sql2 = "SELECT quantidade FROM produto WHERE id = '{$idProduto[$i]}' ";
-                $quantidade = mysqli_fetch_array(mysqli_query($conexao, $sql2))["quantidade"];
+        $sql2 = "SELECT quantidade FROM produto WHERE id = '{$idProduto[$i]}' ";
+        $quantidade = mysqli_fetch_array(mysqli_query($conexao, $sql2))["quantidade"];
 
-                $quantNova = $quantidade - $quantV[$i];
-                $sql3 = "UPDATE produto SET quantidade = '$quantNova' where id = '$idProduto[$i]' ";
-                mysqli_query($conexao, $sql3);
-            }
-
-            mysqli_close($conexao);
-
-            $mensagem = "Registro salvo com sucesso.";
-        }
+        $quantNova = $quantidade - $quantV[$i];
+        $sql3 = "UPDATE produto SET quantidade = '$quantNova' where id = '$idProduto[$i]' ";
+        mysqli_query($conexao, $sql3);
     }
+
+    mysqli_close($conexao);
+
+    $mensagem = "Registro salvo com sucesso.";
 }
+
 require_once("../menu.php");
 
 ?>
