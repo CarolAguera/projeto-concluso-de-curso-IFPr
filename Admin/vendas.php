@@ -1,19 +1,12 @@
 <?php
 require_once("../dependencias.php");
 require_once("../verificaSessao.php");
-require_once("../menu.php");
+
 
 if (!isset($_SESSION)) {
     session_start();
 }
-
 if (isset($_POST['finalizar'])) {
-    if ($_POST['form'] == '') {
-        $mensagemErro = "O Formulário está vazio.";
-        die();
-    }
-
-    //está aparecendo as duas mensagens e  ele está deixando cadastrar
     $valorTotal = $_POST['resumoSoma'];
     $valorTotal1 = str_replace(",", ".", str_replace(".", "", $valorTotal));
     $desconto = $_POST['desconto'];
@@ -21,46 +14,54 @@ if (isset($_POST['finalizar'])) {
     $Usuario_id = $_SESSION['id'];
     $Cliente_id = $_POST['cliente'];
 
-    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+    if (!($valorTotal1 != null && $desconto1 != null)) {
+        if (!($Usuario_id != null && $Cliente_id != null)) {
+            header("location: vendas.php?error=Formulário Vazio! Tente novamente!");
+            die();
+        } else {
 
-    // Criacao de Venda
-    $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
-         VALUES ('{$valorTotal1}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
+            $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
-    mysqli_query($conexao, $sql);
+            // Criacao de Venda
+            $sql = "INSERT INTO venda (valorTotal,desconto,Usuario_id,Cliente_id) 
+             VALUES ('{$valorTotal1}','{$desconto1}' ,'{$Usuario_id}', '{$Cliente_id}') ";
 
-    // Obter o ultimo ID
-    $sqlID = "SELECT LAST_INSERT_ID()";
-    $ID = mysqli_query($conexao, $sqlID);
+            mysqli_query($conexao, $sql);
 
-    // Obter os dados dos Itens das Venda em Array
-    $idProduto = $_POST['Produto_id'];
-    $quantV = $_POST['quantV'];
-    $valor = $_POST['valor'];
+            // Obter o ultimo ID
+            $sqlID = "SELECT LAST_INSERT_ID()";
+            $ID = mysqli_query($conexao, $sqlID);
 
-    // Obter o Ultimo ID do formato Mysql para a Variavel
-    $idDaVendaCriada = mysqli_fetch_array($ID)['LAST_INSERT_ID()'];
+            // Obter os dados dos Itens das Venda em Array
+            $idProduto = $_POST['Produto_id'];
+            $quantV = $_POST['quantV'];
+            $valor = $_POST['valor'];
 
-    // Criacao de Itens de Venda
-    for ($i = 0; $i < count($idProduto); $i++) {
-        $valorTotalItensVenda = $valor[$i] * $quantV[$i];
-        $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
-        VALUES ('{$idDaVendaCriada}','{$idProduto[$i]}', '{$quantV[$i]}','{$valorTotalItensVenda}') ";
-        mysqli_query($conexao, $sql1);
+            // Obter o Ultimo ID do formato Mysql para a Variavel
+            $idDaVendaCriada = mysqli_fetch_array($ID)['LAST_INSERT_ID()'];
 
-        $sql2 = "SELECT quantidade FROM produto WHERE id = '{$idProduto[$i]}' ";
-        $quantidade = mysqli_fetch_array(mysqli_query($conexao, $sql2))["quantidade"];
+            // Criacao de Itens de Venda
+            for ($i = 0; $i < count($idProduto); $i++) {
+                $valorTotalItensVenda = $valor[$i] * $quantV[$i];
+                $sql1 = "INSERT INTO itensvenda (Venda_id,Produto_id,quantidadeVendida,valorTotal) 
+            VALUES ('{$idDaVendaCriada}','{$idProduto[$i]}', '{$quantV[$i]}','{$valorTotalItensVenda}') ";
+                mysqli_query($conexao, $sql1);
 
-        $quantNova = $quantidade - $quantV[$i];
-        $sql3 = "UPDATE produto SET quantidade = '$quantNova' where id = '$idProduto[$i]' ";
-        mysqli_query($conexao, $sql3);
+                $sql2 = "SELECT quantidade FROM produto WHERE id = '{$idProduto[$i]}' ";
+                $quantidade = mysqli_fetch_array(mysqli_query($conexao, $sql2))["quantidade"];
+
+                $quantNova = $quantidade - $quantV[$i];
+                $sql3 = "UPDATE produto SET quantidade = '$quantNova' where id = '$idProduto[$i]' ";
+                mysqli_query($conexao, $sql3);
+            }
+
+            mysqli_close($conexao);
+
+            $mensagem = "Registro salvo com sucesso.";
+        }
     }
-
-    mysqli_close($conexao);
-
-    $mensagem = "Registro salvo com sucesso.";
 }
-
+require_once("../menu.php");
 
 ?>
 
@@ -102,9 +103,9 @@ if (isset($_POST['finalizar'])) {
             <?php echo $mensagem; ?>
         </div>
         <?php } ?>
-        <?php if (isset($mensagem)) { ?>
+        <?php if (isset($_GET['error'])) { ?>
         <div class="alert alert-danger" role="alert">
-            <?php echo $mensagemErro; ?>
+            <?php echo $_GET['error']; ?>
         </div>
         <?php } ?>
         <form name="form" method="POST" action="vendas.php" class="needs-validation" novalidate>
@@ -155,7 +156,7 @@ if (isset($_POST['finalizar'])) {
                         $sql = "select id,nome_completo from cliente ";
                         $cliente = mysqli_query($conexao, $sql);
                         mysqli_close($conexao); ?>
-                        <option  disabled="disabled" selected>Escolher...</option>
+                        <option disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($cliente)) { ?>
                         <option value="<?= $data['id'] ?> "><?= $data['nome_completo']  ?></option>
@@ -170,7 +171,7 @@ if (isset($_POST['finalizar'])) {
                         $sql = "select * from produto ";
                         $produto = mysqli_query($conexao, $sql);
                         mysqli_close($conexao); ?>
-                        <option  disabled="disabled" selected>Escolher...</option>
+                        <option disabled="disabled" selected>Escolher...</option>
                         <?php
                         while ($data = mysqli_fetch_array($produto)) { ?>
                         <option value="<?= $data['id'] ?> "><?= $data['nome']  ?></option>
@@ -187,7 +188,7 @@ if (isset($_POST['finalizar'])) {
                         </div>
                     </div>
                     <label>Quantidade Vendida</label>
-                    <input type="text" class="form-control input-sm" id="quantV" name="quantV" >
+                    <input type="text" class="form-control input-sm" id="quantV" name="quantV">
                     <br>
                     <button class="btn btn-warning btn-lg btn-block" type="button" id="adicionarProdutos"><i class="far fa-plus-square"></i> Adicionar Produto</button>
                     <hr class="mb-4">

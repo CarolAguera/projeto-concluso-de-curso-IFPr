@@ -130,17 +130,6 @@ mysqli_close($conexao);
 
                         <?php
                         $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                        // if (isset($valorRetornadoSql)) {
-                        //     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                        //     $estoque = $valorRetornadoSql;
-
-
-                        // } else {
-                        //     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                        //     $sqlEstoque = "select * from produto ";
-                        //     $estoque = mysqli_query($conexao, $sqlEstoque);
-                        // }
-
                         while ($data = mysqli_fetch_array($estoque)) { ?>
                         <?php
                             $sqlCategoria = "select * from categoria where id = '{$data['Categoria_id']}' ";
