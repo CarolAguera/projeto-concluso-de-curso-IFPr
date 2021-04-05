@@ -256,7 +256,7 @@ require_once("../menu.php");
                     <label for="inputCPF">CPF</label>
                     <input type="text" class="cpf form-control" id="cpf" name="cpf" maxlength="11" required>
                 </div>
-                <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label>
                     <div class="input-group" style="width: 200px !important;">
                         <div class="input-group-prepend">
                             <div class="input-group-text">

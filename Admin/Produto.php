@@ -8,7 +8,7 @@ if (isset($_POST['salvar'])) {
     $nome = $_POST['nome'];
     $codigo = $_POST['codigo'];
     $valorvenda = $_POST['valorvenda'];
-    $venda = str_replace(",",".",str_replace(".","",$valorvenda));
+    $venda = str_replace(",", ".", str_replace(".", "", $valorvenda));
     $categoria = $_POST['categoria'];
     $marca = $_POST['marca'];
     $medida = $_POST['medida'];
@@ -121,13 +121,7 @@ if (isset($_POST['salvar'])) {
                         <?php  }    ?>
                     </select>
                 </div>
-                <!--
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" onclick="teste(this);" id="customCheck1" name="status">
-                    <label class="custom-control-label" for="customCheck1" id="labelstatus">Status</label>
-                </div>
-                        -->
-                <div class="form-group col-sm-12 col-md-6 col-lg-2 col-xl-2"><label class="control-label" for="status">Status</label><input type="hidden" name="status" value="0">
+                <div class="form-group col-sm-12 col-md-6 col-lg-2 col-xl-2"><label class="control-label" for="status">Status</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -144,13 +138,11 @@ if (isset($_POST['salvar'])) {
                 <a type="button" class="btn btn-warning" href="Estoque.php"><i class="fas fa-arrow-circle-right"></i><b> Ir para Estoque</b></a>
             </center>
         </form>
-
     </div>
     <script>
         $('.dinheiro').mask('#.##0,00', {
             reverse: true
         });
-
         function teste(tag) {
             let labelAtivo = document.getElementById('labelstatus');
             if (tag.value == '1') {
@@ -166,7 +158,5 @@ if (isset($_POST['salvar'])) {
             console.log(tag.value);
         }
     </script>
-    
 </body>
-
 </html>

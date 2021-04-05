@@ -104,7 +104,7 @@ if (isset($_POST['salvar'])) {
                     <input type="date" class="form-control" id="inputDemissao" name="data_demissao">
                 </div>
                 <div class="form-group col-md-3">
-                    <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                    <div class="form-group col-md-1"><label class="control-label" style="width: 200px !important;" for="status">Status</label>
                         <div class="input-group" style="width: 200px !important;">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">

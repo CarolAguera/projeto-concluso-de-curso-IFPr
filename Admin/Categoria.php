@@ -3,23 +3,21 @@ require_once("../dependencias.php");
 require_once("../verificaSessao.php");
 require_once("../menu.php");
 if (isset($_POST['salvar'])) {
-
-    //Pega os valores dos inputs do formulário
     $nome = $_POST['nome'];
+
     if (isset($_POST['status'])) {
-        $statusAtualizar = 1;
+        $status = 1;
     } else {
-        $statusAtualizar = 0;
+        $status = 0;
     }
-
-
 
     //Iniciar a conexão com o BD
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
     //Gerar a SQL
     $sql = "insert into categoria (nome, status) 
-        values ('{$nome}', '{$statusAtualizar}') ";
+        values ('{$nome}', '{$status}') ";
+
 
     //Executar a SQL
     mysqli_query($conexao, $sql);
@@ -86,11 +84,12 @@ if (isset($_POST['atualizar'])) {
                     Você deve colocar o NOME da nova Categoria!
                 </div>
                 <br>
-                <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label><input type="hidden" name="status" value="0">
+                <div class="form-group "><label class="control-label" style="width: 200px !important;" for="status">Status</label>
+
                     <div class="input-group" style="width: 200px !important;">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <input type="checkbox" name="status" value="1" id="status" onclick="teste(this);" checked>
+                                <input type="checkbox" name="status" value="1" id="status" onclick="teste1(this);" checked>
                             </div>
                         </div>
                         <div class="form-control"><strong class="text-success" id="statuscadastrar">Ativo</strong></div>
@@ -200,7 +199,7 @@ if (isset($_POST['atualizar'])) {
                                             </button>
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="Marca.php" method="post">
+                                            <form action="Categoria.php" method="post">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                 <input type="hidden" name="id" value="<?= $data['id'] ?>">
                                                 <button type="submit" class="btn btn-danger" name="excluir">Excluir</button>
@@ -222,6 +221,22 @@ if (isset($_POST['atualizar'])) {
         </div>
     </center>
     <script>
+        function teste1(tag) {
+            let labelStatus = document.getElementById('statuscadastrar');
+            if (tag.value == '1') {
+                tag.value = 0;
+                labelStatus.className = "text-danger";
+                labelStatus.innerHTML = "Inativo";
+
+
+            } else {
+                tag.value = 1;
+                labelStatus.className = "text-success";
+                labelStatus.innerHTML = "Ativo";
+
+            }
+            console.log(tag.value);
+        }
         (function() {
             'use strict';
             window.addEventListener('load', function() {
@@ -239,21 +254,6 @@ if (isset($_POST['atualizar'])) {
                 });
             }, false);
         })();
-
-        function teste1(tag) {
-            let labelStatus = document.getElementById('statuscadastrar');
-            if (tag.value == '1') {
-                tag.value = 0;
-                labelStatus.className = "text-danger";
-                labelStatus.innerHTML = "Inativo";
-
-            } else {
-                tag.value = 1;
-                labelStatus.className = "text-success";
-                labelStatus.innerHTML = "Ativo";
-            }
-            console.log(tag.value);
-        }
 
         function teste(tag, id) {
             let labelAtivo = document.getElementById('labelstatus' + id);
