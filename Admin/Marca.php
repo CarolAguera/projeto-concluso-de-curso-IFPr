@@ -54,6 +54,14 @@ if (isset($_POST['atualizar'])) {
 
     mysqli_close($conexao);
 }
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+$where = "";
+if (!empty($_POST['nomePesquisar'])) {
+    $where = " where nome like '%" . $_POST['nomePesquisar'] . "%'";
+}
+$sqlPesquisar = "select * from marca" . $where;
+$marcas = mysqli_query($conexao, $sqlPesquisar);
+mysqli_close($conexao);
 ?>
 
 
@@ -70,6 +78,14 @@ if (isset($_POST['atualizar'])) {
 <body class="teste">
     <h1 style="text-align: center; margin-top: 30px;">Marcas</h1>
     <center class="container">
+        <div class="col-sm-6">
+            <form action="Marca.php" method="post">
+                <div class="input-group ">
+                    <input type="text" class="form-control" placeholder="Pesquisar por Nome" name="nomePesquisar">
+                    <button class="btn btn-primary" type="submit" name="pesquisar"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
         <form name="form" method="POST" action="Marca.php" class="needs-validation" novalidate>
             <input type="text" class="form-control" name="nome" style="width: auto; margin-top: 30px;" placeholder="Digite a nova Marca" required>
             <div class="invalid-feedback">
@@ -102,9 +118,6 @@ if (isset($_POST['atualizar'])) {
                 <tbody style="color: black;">
                     <?php
                     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                    $sql = "select * from marca ";
-                    $marcas = mysqli_query($conexao, $sql);
-                    mysqli_close($conexao);
                     while ($data = mysqli_fetch_array($marcas)) {
                         if ($data['status'] == 1) {
                             $statusProduto = 'Ativo';
@@ -259,7 +272,7 @@ if (isset($_POST['atualizar'])) {
             console.log(tag.value);
         }
     </script>
-    
+
 </body>
 
 </html>

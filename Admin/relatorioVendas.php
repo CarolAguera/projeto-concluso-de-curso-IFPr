@@ -46,7 +46,7 @@ function getTabela()
         $retorno .= "<td class='destaque'>{$data['id']} </td>";
         $retorno .= "<td>{$data['nome_usuario']} </td>";
         $retorno .= "<td>{$data['nome_cliente']} </td>";
-        $retorno .= "<td>" . number_format($data['valorTotal'], 2, ',', ' ') . "</td>";
+        $retorno .= "<td>" . number_format($data['valorTotal'], 2, ',', '') . "</td>";
         $retorno .= "<td> " . number_format($data['desconto'], 2, ',', '') . "</td>";
     }
     $retorno .= "</table>";

@@ -55,7 +55,7 @@ require_once("../menu.php");
                     var script = document.createElement('script');
 
                     //Sincroniza com o callback.
-                    script.src = 'https://viacep.com.br/ws/' + cep +'/json/?callback=meu_callback';
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
 
                     //Insere script no documento e carrega o conteúdo.
                     document.body.appendChild(script);
@@ -135,9 +135,15 @@ if (isset($_POST['atualizar'])) {
 
     mysqli_close($conexao);
 }
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+$where = "";
+if (!empty($_POST['nomePesquisar'])) {
+    $where = " where nome_completo like '%" . $_POST['nomePesquisar'] . "%'";
+}
+$sqlPesquisar = "select * from cliente" . $where;
+$clientes = mysqli_query($conexao, $sqlPesquisar);
+mysqli_close($conexao);
 ?>
-
-
 
 <head>
     <title>Gestão de Cliente</title>
@@ -163,10 +169,18 @@ if (isset($_POST['atualizar'])) {
     <div class="container" style="margin-top: 30px;">
         <center>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <h3>Gestão de Clientes</h3>
                 </div>
                 <div class="col-sm-6">
+                    <form action="clientes.php" method="post">
+                        <div class="input-group ">
+                            <input type="text" class="form-control" placeholder="Pesquisar por Nome" name="nomePesquisar">
+                            <button class="btn btn-primary" type="submit" name="pesquisar"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3">
                     <a href="NovoCliente.php" type="button" class="btn btn-success">
                         <i class="far fa-plus-square"></i> Cadastrar Cliente
                     </a>
@@ -189,9 +203,6 @@ if (isset($_POST['atualizar'])) {
                 <tbody>
                     <?php
                     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                    $sql = "select * from cliente  ";
-                    $clientes = mysqli_query($conexao, $sql);
-                    mysqli_close($conexao);
                     while ($data = mysqli_fetch_array($clientes)) {
                         if ($data['status'] == 1) {
                             $statuscliente = 'Ativo';
@@ -341,7 +352,11 @@ if (isset($_POST['atualizar'])) {
                         </td>
                     </tr>
 
-                    <?php  }    ?>
+                    <?php  }
+
+                    mysqli_close($conexao);
+
+                    ?>
                 </tbody>
             </table>
         </div>

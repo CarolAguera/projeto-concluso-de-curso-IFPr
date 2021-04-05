@@ -94,8 +94,10 @@ require_once("dependencias.php");
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="../Admin/relatorioUsuario.php"><i class='fas fa-user'></i> Relatório de Usuários</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioEstoque.php"><i class="fas fa-clipboard-list"></i> Relatório de Produtos</a></li>
-                            <li><a class="dropdown-item" href="../Admin/relatorioVendas.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioVendas.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas Total</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioVendaPorMes.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas Mês Atual</a></li>
+                            <li><a class="dropdown-item" href="../Admin/relatorioEstoqueBaixo.php"><i class="fas fa-boxes"></i> Relatório de Estoque Baixo</a></li>
+                            
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

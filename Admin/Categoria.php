@@ -54,6 +54,14 @@ if (isset($_POST['atualizar'])) {
 
     mysqli_close($conexao);
 }
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
+$where = "";
+if (!empty($_POST['nomePesquisar'])) {
+    $where = " where nome like '%" . $_POST['nomePesquisar'] . "%'";
+}
+$sqlPesquisar = "select * from categoria" . $where;
+$categorias = mysqli_query($conexao, $sqlPesquisar);
+mysqli_close($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +84,14 @@ if (isset($_POST['atualizar'])) {
             <?php echo $mensagem; ?>
         </div>
         <?php } ?>
-
+        <div class="col-sm-6">
+            <form action="Categoria.php" method="post">
+                <div class="input-group ">
+                    <input type="text" class="form-control" placeholder="Pesquisar por Nome" name="nomePesquisar">
+                    <button class="btn btn-primary" type="submit" name="pesquisar"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
         <form name="form" method="POST" action="Categoria.php" class="needs-validation" novalidate>
             <center>
                 <input type="text" id="nome" name="nome" class="form-control" style="width: auto; margin-top: 30px;" placeholder="Digite a nova categoria" required>
@@ -114,9 +129,7 @@ if (isset($_POST['atualizar'])) {
                 <tbody style="color: black;">
                     <?php
                     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
-                    $sql = "select * from categoria ";
-                    $categorias = mysqli_query($conexao, $sql);
-                    mysqli_close($conexao);
+
                     while ($data = mysqli_fetch_array($categorias)) {
                         if ($data['status'] == 1) {
                             $statusProduto = 'Ativo';
