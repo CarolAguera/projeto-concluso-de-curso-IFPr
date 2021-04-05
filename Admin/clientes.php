@@ -13,7 +13,7 @@ require_once("../menu.php");
             document.getElementById('rua').value = ("");
             document.getElementById('bairro').value = ("");
             document.getElementById('cidade').value = ("");
-            document.getElementById('uf').value = ("");
+            document.getElementById('estado').value = ("");
         }
 
         function meu_callback(conteudo) {
@@ -22,7 +22,7 @@ require_once("../menu.php");
                 document.getElementById('rua').value = (conteudo.logradouro);
                 document.getElementById('bairro').value = (conteudo.bairro);
                 document.getElementById('cidade').value = (conteudo.localidade);
-                document.getElementById('uf').value = (conteudo.uf);
+                document.getElementById('estado').value = (conteudo.uf);
             } //end if.
             else {
                 //CEP não Encontrado.
@@ -49,7 +49,7 @@ require_once("../menu.php");
                     document.getElementById('rua').value = "...";
                     document.getElementById('bairro').value = "...";
                     document.getElementById('cidade').value = "...";
-                    document.getElementById('uf').value = "...";
+                    document.getElementById('estado').value = "...";
 
                     //Cria um elemento javascript.
                     var script = document.createElement('script');
@@ -100,7 +100,7 @@ if (isset($_POST['atualizar'])) {
     $telefone_trabalho = $_POST['telefone_trabalho'];
     $sexo = $_POST['sexo'];
     $cidade = $_POST['cidade'];
-    $uf = $_POST['uf'];
+    $estado = $_POST['estado'];
     $data_nascimento = $_POST['data_nascimento'];
     $telefone_celular = $_POST['telefone_celular'];
     $telefone_residencial = $_POST['telefone_residencial'];
@@ -125,7 +125,7 @@ if (isset($_POST['atualizar'])) {
         local_trabalho = '{$local_trabalho}', 
         telefone_trabalho = '{$telefone_trabalho}', 
         cidade = '{$cidade}',
-        uf = '{$uf}',
+        estado = '{$estado}',
         telefone_celular = '{$telefone_celular}',
         telefone_residencial = '{$telefone_residencial}',
         cpf = '{$cpf}'
@@ -302,7 +302,7 @@ mysqli_close($conexao);
                                                     <input name="cidade" type="text" id="cidade" class="form-control" size="40" required value="<?= $data['cidade']  ?>" required>
 
                                                     <label>Estado</label>
-                                                    <input name="uf" class="form-control" type="text" value="<?= $data['uf']  ?>" id="uf" size="2" required />
+                                                    <input name="estado" class="form-control" type="text" value="<?= $data['estado']  ?>" id="estado" size="2" required />
 
                                                     <label>Rua</label>
                                                     <input type="text" class="form-control" id="rua" size="60" placeholder="Digite seu Rua" name="rua" value="<?= $data['rua']  ?>" required>

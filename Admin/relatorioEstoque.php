@@ -4,6 +4,7 @@ require_once("../verificaSessao.php");
 include("../mpdf60/mpdf.php");
 require_once __DIR__ . '../../../vendor/autoload.php';
 
+
 function getFooter()
 {
   $retorno = "<table class=\"tbl_footer\" width=\"1000\">  

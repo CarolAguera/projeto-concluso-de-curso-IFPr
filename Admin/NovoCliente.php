@@ -12,7 +12,7 @@ require_once("../verificaSessao.php");
             document.getElementById('rua').value = ("");
             document.getElementById('bairro').value = ("");
             document.getElementById('cidade').value = ("");
-            document.getElementById('uf').value = ("");
+            document.getElementById('estado').value = ("");
         }
 
         function meu_callback(conteudo) {
@@ -21,7 +21,7 @@ require_once("../verificaSessao.php");
                 document.getElementById('rua').value = (conteudo.logradouro);
                 document.getElementById('bairro').value = (conteudo.bairro);
                 document.getElementById('cidade').value = (conteudo.localidade);
-                document.getElementById('uf').value = (conteudo.uf);
+                document.getElementById('estado').value = (conteudo.uf);
             } //end if.
             else {
                 //CEP não Encontrado.
@@ -48,7 +48,7 @@ require_once("../verificaSessao.php");
                     document.getElementById('rua').value = "...";
                     document.getElementById('bairro').value = "...";
                     document.getElementById('cidade').value = "...";
-                    document.getElementById('uf').value = "...";
+                    document.getElementById('estado').value = "...";
 
                     //Cria um elemento javascript.
                     var script = document.createElement('script');
@@ -85,7 +85,7 @@ if (isset($_POST['salvar'])) {
     $telefone_trabalho = $_POST['telefone_trabalho'];
     $sexo = $_POST['sexo'];
     $cidade = $_POST['cidade'];
-    $uf = $_POST['uf'];
+    $estado = $_POST['estado'];
     $data_nascimento = $_POST['data_nascimento'];
     $telefone_celular = $_POST['telefone_celular'];
     $telefone_residencial = $_POST['telefone_residencial'];
@@ -112,7 +112,7 @@ if (isset($_POST['salvar'])) {
         header("location: NovoCliente.php?aviso=CPF Já Cadastrado no Sistema");
         die();
     }
-    $sql2 = "insert into cliente (nome_completo,email,rua,cep,bairro,numero,local_trabalho,telefone_trabalho,sexo,cidade,uf,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
+    $sql2 = "insert into cliente (nome_completo,email,rua,cep,bairro,numero,local_trabalho,telefone_trabalho,sexo,cidade,estado,data_nascimento,telefone_celular,telefone_residencial,cpf,status) 
         values ('{$nome}',
         '{$email}', 
         '{$rua}', 
@@ -123,7 +123,7 @@ if (isset($_POST['salvar'])) {
         '{$telefone_trabalho}', 
         '{$sexo}',
         '{$cidade}',
-        '{$uf}',
+        '{$estado}',
         '{$data_nascimento}',
         '{$telefone_celular}',
         '{$telefone_residencial}',
@@ -236,7 +236,7 @@ require_once("../menu.php");
                 </div>
                 <div class="form-group col-md-4">
                     <label>Estado</label>
-                    <input name="uf" class="form-control" type="text" id="uf" required />
+                    <input name="estado" class="form-control" type="text" id="estado" required />
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNasc">Data de Nascimento</label>
