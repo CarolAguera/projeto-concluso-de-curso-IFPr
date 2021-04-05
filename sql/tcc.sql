@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Mar-2021 às 01:17
+-- Tempo de geração: 05-Abr-2021 às 03:18
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.3.27
 
@@ -38,7 +38,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `status`, `nome`) VALUES
-(1, 1, 'Sólidos');
+(1, 1, 'Sólidos'),
+(2, 1, 'Líquidos'),
+(3, 1, 'Ferro');
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `local_trabalho`, `telefone_trabalho`, `nome_completo`, `data_nascimento`, `cpf`, `email`, `sexo`, `telefone_residencial`, `telefone_celular`, `rua`, `bairro`, `cep`, `numero`, `cidade`, `uf`, `status`) VALUES
-(1, 'Depósito Brasil', '36397282', 'Flavio Fedechen Aguiar', '2002-01-12', '10628065906', 'flavio@gmail.com', 2, '4436398933', '44984594973', 'Rua Treze de Maio', 'Jardim Colibri', '87506340', 1829, 'Umuarama', 'PR', 1);
+(1, 'Depósito Brasil', '11212', 'Flavio Fedechen Aguiar', '2000-10-30', '662.975.290-27', 'flavio@gmail.com', 2, '444444', '444444', 'Rua Moacir Colognesi', 'Jardim Petrópolis', '87506190', 2211, 'Umuarama', 'PR', 1),
+(2, 'Depósito Brasil', '4444444', 'Marcia ', '1978-06-22', '020.729.959-57', 'marcia@gmail.com', 1, '555445', '444444', 'Rua Treze de Maio', 'Jardim Colibri', '87506340', 1829, 'Umuarama', 'PR', 1);
 
 -- --------------------------------------------------------
 
@@ -85,6 +88,13 @@ CREATE TABLE `itensvenda` (
   `quantidadeVendida` int(11) NOT NULL,
   `valorTotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `itensvenda`
+--
+
+INSERT INTO `itensvenda` (`Venda_id`, `Produto_id`, `quantidadeVendida`, `valorTotal`) VALUES
+(1, 1, 20, 700);
 
 -- --------------------------------------------------------
 
@@ -103,7 +113,9 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`id`, `status`, `nome`) VALUES
-(1, 1, 'Votorantim');
+(1, 1, 'Votorantim'),
+(2, 1, 'Suvinil'),
+(3, 1, 'Gerdau');
 
 -- --------------------------------------------------------
 
@@ -122,7 +134,9 @@ CREATE TABLE `medida` (
 --
 
 INSERT INTO `medida` (`id`, `status`, `nome`) VALUES
-(1, 1, 'Kilograma');
+(1, 1, 'Kilograma'),
+(2, 1, 'Grama'),
+(3, 1, 'Unidade');
 
 -- --------------------------------------------------------
 
@@ -147,10 +161,7 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `status`, `nome`, `valor_venda`, `codigo`, `quantidade`, `Categoria_id`, `Marca_id`, `Medida_id`) VALUES
-(1, 1, 'Cimento', 30, 321, 10, 1, 1, 1),
-(2, 1, 'Tinta ', 2.25, 4321, 10, 1, 1, 1),
-(3, 1, 'Parafuso', 2.25, 10987, 20, 1, 1, 1),
-(4, 1, 'Joelho ', 10.5, 9874, 30, 1, 1, 1);
+(1, 1, 'Cimento ', 35, 102030, 30, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -175,9 +186,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `status`, `nome_completo`, `data_nascimento`, `email`, `sexo`, `senha`, `data_admissao`, `data_demissao`) VALUES
-(1, 1, 'Carolina Aguera', '2002-01-12', 'carolaguerabr@gmail.com', 2, '$2y$10$G7iD6gDX8IEmMfuJbzvy6e5u0SbvGHlcq2yuKpStUI35V8CKTG93u', '2021-02-26', '0000-00-00'),
-(2, 1, 'Cleiton Santos', '2022-01-12', 'cleitonsantos591@gmail.com', 2, '$2y$10$HtYzf6ciOEUcJ1p6Jvei7.6v4I3S4TosfZyPI5EFZcOlY315.htEK', '2002-01-26', '0000-00-00'),
-(3, 1, 'Flavio Fedechen Aguiar', '1999-10-30', 'flavio@gmail.com', 1, '$2y$10$L8P5KcMzkRTy1QAjX.wIquUvGed1KwJERUkJnldzz6uOzoW389W76', '0000-00-00', '0000-00-00');
+(1, 1, 'Carolina Aguera', '2002-01-12', 'carolaguerabr@gmail.com', 2, '$2y$10$C3BF/11ozC1xWUvoSBmcLOpqWbhV626scd7VWV2vdtDGEUSmgwyEa', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -187,14 +196,20 @@ INSERT INTO `usuario` (`id`, `status`, `nome_completo`, `data_nascimento`, `emai
 
 CREATE TABLE `venda` (
   `id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  ` data_hora` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `data_hora` datetime NOT NULL DEFAULT current_timestamp(),
   `valorTotal` double NOT NULL,
   `desconto` double DEFAULT NULL,
-  `valorRecebido` double NOT NULL,
   `Usuario_id` int(11) NOT NULL,
   `Cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `venda`
+--
+
+INSERT INTO `venda` (`id`, `status`, `data_hora`, `valorTotal`, `desconto`, `Usuario_id`, `Cliente_id`) VALUES
+(1, 1, '2021-04-04 21:45:07', 700, 10, 1, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -263,43 +278,43 @@ ALTER TABLE `venda`
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `medida`
 --
 ALTER TABLE `medida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `venda`
 --
 ALTER TABLE `venda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
