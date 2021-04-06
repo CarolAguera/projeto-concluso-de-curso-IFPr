@@ -8,7 +8,7 @@ if (isset($_POST['atualizar'])) {
     $idAtualizar = $_POST['idAtualizar'];
     $nome_completo = $_POST['nome_completo'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $senhaCriptografada = password_hash($_POST['senha'], PASSWORD_DEFAULT);
     $data_nascimento = $_POST['data_nascimento'];
     $sexo = $_POST['sexo'];
     $data_admissao = $_POST['data_admissao'];
@@ -26,7 +26,7 @@ if (isset($_POST['atualizar'])) {
     set nome_completo     = '{$nome_completo}',
         status    = '{$statusAtualizar}',
         email = '{$email}',
-        senha = '{$senha}',
+        senha = '{$senhaCriptografada}',
         data_nascimento = '{$data_nascimento}',
         sexo = '{$sexo}',
         data_admissao = '{$data_admissao}',

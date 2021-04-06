@@ -160,7 +160,7 @@ mysqli_close($conexao);
                             <td><?= $buscaCategoria['nome'] ?></td>
                             <td><?= $buscaMarca['nome']  ?></td>
                             <td><?= $buscaMedida['nome']  ?></td>
-                            <?php if ($data['quantidade'] <= 3) { ?>
+                            <?php if ($data['quantidade'] <= 5) { ?>
                             <td>
                                 <div class="alert alert-danger" role="alert">
                                     Estoque baixo = <b><?= $data['quantidade'] ?></b>und.

@@ -19,12 +19,16 @@ if (isset($_POST['salvar'])) {
         $status = 0;
     }
 
+
+
     //Iniciar a conexão com o BD
     $conexao = mysqli_connect('127.0.0.1', 'root', '', 'tcc');
 
     //Gerar a SQL
     $sql = "insert into produto (nome,codigo,valor_venda,Categoria_id,Marca_id,medida_id,status,quantidade) 
         values ('{$nome}','{$codigo}', '{$venda}', '{$categoria}', '{$marca}', '{$medida}', '{$status}', '{$quantidade}') ";
+
+  
 
     //Executar a SQL
     mysqli_query($conexao, $sql);
@@ -143,6 +147,7 @@ if (isset($_POST['salvar'])) {
         $('.dinheiro').mask('#.##0,00', {
             reverse: true
         });
+
         function teste(tag) {
             let labelAtivo = document.getElementById('labelstatus');
             if (tag.value == '1') {
@@ -159,4 +164,5 @@ if (isset($_POST['salvar'])) {
         }
     </script>
 </body>
+
 </html>

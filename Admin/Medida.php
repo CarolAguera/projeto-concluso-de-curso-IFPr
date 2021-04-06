@@ -59,7 +59,7 @@ $where = "";
 if (!empty($_POST['nomePesquisar'])) {
     $where = " where nome like '%" . $_POST['nomePesquisar'] . "%'";
 }
-$sqlPesquisar = "select * from categoria" . $where;
+$sqlPesquisar = "select * from medida" . $where;
 $medidas = mysqli_query($conexao, $sqlPesquisar);
 mysqli_close($conexao);
 ?>

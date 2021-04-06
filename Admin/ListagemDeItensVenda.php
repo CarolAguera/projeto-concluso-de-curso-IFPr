@@ -65,8 +65,7 @@ require_once("../menu.php");
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Venda_id</th>
-                            <th scope="col">Produto_id</th>
+                            <th scope="col">Produto</th>
                             <th scope="col">Quantidade Vendida</th>
                             <th scope="col">Valor Total</th>
                         </tr>
@@ -82,7 +81,6 @@ require_once("../menu.php");
                             $buscaproduto = mysqli_fetch_array($produto);
                         ?>
                         <tr>
-                            <td><?= $data['Venda_id']  ?></td>
                             <td><?= $buscaproduto['nome']  ?></td>
                             <td><?= $data['quantidadeVendida']  ?></td>
                             <td><?= number_format($data['valorTotal'], 2, ',', '')  ?></td>

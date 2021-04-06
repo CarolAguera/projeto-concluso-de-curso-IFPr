@@ -115,8 +115,8 @@ if (!isset($_SESSION)) {
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Vendas</h5>
-                        <a href="./vendas.php" class="btn btn-info">Efetuar Venda</a>
-                        <a href="./ListagemDeVendas.php" class="btn btn-info">Consultar Vendas</a>
+                        <a href="./vendas.php" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Efetuar Venda</a>
+                        <a href="./ListagemDeVendas.php" class="btn btn-warning">Consultar Vendas</a>
                     </div>
                 </div>
             </div>

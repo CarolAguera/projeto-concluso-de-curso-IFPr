@@ -41,7 +41,7 @@ function getTabela()
     from produto
     inner join categoria on categoria.id = produto.Categoria_id
     inner join marca on marca.id = produto.Marca_id 
-    inner join medida on medida.id = produto.Medida_id where quantidade <= 3 ";
+    inner join medida on medida.id = produto.Medida_id where quantidade <= 5 ";
 
   $usuarios = mysqli_query($conexao, $sql);
   mysqli_close($conexao);

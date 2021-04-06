@@ -46,8 +46,6 @@ require_once("dependencias.php");
             background-color: transparent;
             border-color: transparent;
         }
-
-       
     </style>
 </head>
 
@@ -97,7 +95,8 @@ require_once("dependencias.php");
                             <li><a class="dropdown-item" href="../Admin/relatorioVendas.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas Total</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioVendaPorMes.php"><i class="fas fa-dollar-sign"></i> Relatório de Vendas Mês Atual</a></li>
                             <li><a class="dropdown-item" href="../Admin/relatorioEstoqueBaixo.php"><i class="fas fa-boxes"></i> Relatório de Estoque Baixo</a></li>
-                            
+                            <li><a class="dropdown-item" href="../Admin/relatorioCidade.php"><i class='fas fa-user'></i> Relatório de Clientes Por Cidade</a></li>
+
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
