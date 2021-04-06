@@ -22,7 +22,7 @@ function getTabela()
   $retorno = "";
   $retorno = "<img class='imagem' src=\"../img/dpbrasillogo.png\"> ";
   //$retorno .= "<h2 style=\"text-align:center\">Depósito Brasil</h2>";
-  $retorno .= "<h4 style=\"text-align:center\">Relatório de Estoque Menor ou Igual a 3</h4>";
+  $retorno .= "<h4 style=\"text-align:center\">Relatório de Estoque Menor ou Igual a 5</h4>";
   $retorno .= "<table border='1' width='1000' align='center'>  
 		 <tr class='header'>  
 			 <th>ID</th>

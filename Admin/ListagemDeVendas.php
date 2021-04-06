@@ -76,8 +76,9 @@ if (isset($_POST['excluir'])) {
                             <th scope="col">Status</th>
                             <th scope="col">Usuário</th>
                             <th scope="col">Cliente</th>
-                            <th scope="col">Valor Total</th>
+                            <th scope="col">Valor Venda</th>
                             <th scope="col">Desconto</th>
+                            <th scope="col">Valor Total </th>
                             <th scope="col">Data e Hora</th>
                             <th scope="col">Ações</th>
                         </tr>
@@ -113,6 +114,7 @@ if (isset($_POST['excluir'])) {
                             <td><?= $buscaCliente['nome_completo']  ?></td>
                             <td><?= number_format($data['valorTotal'], 2, ',', '')  ?></td>
                             <td><?= number_format($data['desconto'], 2, ',', '') ?></td>
+                            <td class='destaqueVenda' style="color:green; font-weight: bold;"> <?= number_format($data['valorTotal'] - $data['desconto'], 2, ',', '.') ?></td>
                             <?php $data_hora = strtotime($data['data_hora']); ?>
                             <td><?= date('d/m/Y H:i:s', $data_hora) ?></td>
 
