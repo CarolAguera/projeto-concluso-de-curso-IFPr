@@ -46,11 +46,7 @@ if (isset($_POST['excluir'])) {
                     <h2>Listagem de Vendas</h2>
                 </div>
                 <div class="col-sm-2">
-                    <?php if (isset($mensagem)) { ?>
-                    <div class="alert alert-success" role="alert">
-                        <?php echo $mensagem; ?>
-                    </div>
-                    <?php } ?>
+                
                     <!-- <div class="container">
                         <form action="ListagemDeVendas.php" method="post">
                             <div class="input-group ">

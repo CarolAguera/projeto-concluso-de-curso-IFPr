@@ -281,6 +281,8 @@ require_once("../menu.php");
         $('.cpf').mask('000.000.000-00', {
             reverse: true
         });
+
+        
         let dataAtual = new Date();
         let dia = dataAtual.getDate();
         if (dia < 10) {

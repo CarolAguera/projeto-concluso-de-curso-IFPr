@@ -9,7 +9,7 @@ function getFooter()
   $retorno = "<table class=\"tbl_footer\" width=\"1000\">  
 			<tr> 
 			  <td align=\"left\"><a href='malito:carolaguerabr@gmail.com'>carolaguerabr@gmail.com</a></td>  
-        <td align=\"center\">".date('d/m/Y H:i:s')."</td>  
+        <td align=\"center\">".date('d/m/Y H:i')."</td>  
 			  <td align=\"right\">Página: {PAGENO}</td>  
 			</tr>  
 		  </table>";
